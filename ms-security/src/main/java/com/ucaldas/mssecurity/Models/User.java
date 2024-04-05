@@ -6,6 +6,7 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
+
 @Document
 public class User {
     @Id
@@ -15,6 +16,9 @@ public class User {
     private String password;
     @DBRef
     private Role role;
+
+    @DBRef
+    private Session session; 
 
     public User() {
 
@@ -65,4 +69,12 @@ public class User {
     public void setRole(Role role) {
         this.role = role;
     }
+
+    // public void getSession() {
+    //     return session;
+    // }
+
+    // private void setSession(Session session){
+    //     this.session = session;
+    // }
 }
