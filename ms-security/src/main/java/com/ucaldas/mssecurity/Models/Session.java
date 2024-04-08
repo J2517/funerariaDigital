@@ -2,26 +2,28 @@
 package com.ucaldas.mssecurity.Models;
 
 import lombok.Data;
+import java.util.Date;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
 @Document
 
 public class Session {
+    
+    @DBRef
+    private User user;
+
+    public Session() {
+    }
+
     @Id
     private String _id;
+    private int token2FA;
     private String token;
-    private String expiration;
-    private String startAt;
-    private String endAt;
-
-    public Session(String token, String expiration, String startAt, String endAt) {
-        this.token = token;
-        this.expiration = expiration;
-        this.startAt = startAt;
-        this.endAt = endAt;
-    }
+    private Date startAt;
+    private Date endAt;
 
     public String get_id() {
         return _id;
@@ -35,28 +37,28 @@ public class Session {
         this.token = token;
     }
 
-    public String getExpiration() {
-        return expiration;
-    }
-
-    public void setExpiration(String expiration) {
-        this.expiration = expiration;
-    }
-
-    public String getStartAt() {
+    public Date getStartAt() {
         return startAt;
     }
 
-    public void setStartAt(String startAt) {
+    public void setStartAt(Date startAt) {
         this.startAt = startAt;
     }
 
-    public String getEndAt() {
+    public Date getEndAt() {
         return endAt;
     }
 
-    public void setEndAt(String endAt) {
+    public void setEndAt(Date endAt) {
         this.endAt = endAt;
+    }
+
+    public int getToken2FA() {
+        return token2FA;
+    }
+
+    public void setToken2FA(int token2FA) {
+        this.token2FA = token2FA;
     }
 
 }
