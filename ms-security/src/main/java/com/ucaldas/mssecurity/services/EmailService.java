@@ -1,40 +1,67 @@
-/*notificar al usuario el inico de sesion (SecurityController) */
-
 package com.ucaldas.mssecurity.services;
 
+import com.ucaldas.mssecurity.Models.Session;
+import com.ucaldas.mssecurity.Models.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import java.util.Random;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.stereotype.Service;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class EmailService {
-    private RestTemplate theRestTemplate;
 
     @Autowired
-    public EmailService(RestTemplate theRestTemplate) {
-        this.theRestTemplate = theRestTemplate;
+    private SessionService theSessionService;
+
+    @Value("${notifications.baseurl}")
+    private String emailServiceUrl;
+
+    // Método para enviar correo electrónico para la autenticación de dos factores (2FA)
+    public void send2FAEmail(User user, Session session) {
+        Map<String, Object> emailContent = new HashMap<>();
+        emailContent.put("address", user.getEmail());
+        emailContent.put("subject", "Su token de 2FA");
+        emailContent.put("plainText", "Su token es: " + session.getToken2FA());
+
+        sendEmail(emailContent);
     }
 
-    public void sendEmail(String email, String subject, String message) {
+    // Método para enviar correo electrónico para restablecimiento de contraseña
+    public void sendPasswordResetEmail(String email, String Token) {
+        Map<String, Object> emailContent = new HashMap<>();
+        emailContent.put("address", email);
+        emailContent.put("subject", "Restablecimiento de contraseña");
+        emailContent.put("plainText", "Hemos recibido una solicitud para restablecer tu contraseña. Por favor, copia el siguiente TOKEN para restablecer su contraseña:\n\n"
+                + "TOKEN = " + Token + "\n\n"
+                + "Si no solicitaste un restablecimiento de contraseña, ignora este mensaje o contactate con soporte.\n\n");
+
+        sendEmail(emailContent);
+    }
+
+    // Método genérico para enviar correo electrónico
+    public void sendEmail(Map<String, Object> emailContent) {
+        RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        String code = generateRandomCode(6);
-        String json = String.format("{\"email\":\"%s\", \"subject\":\"%s\", \"message\":\"%s\", \"code\":\"%s\"}", email, subject,
-                message, code);
-        HttpEntity<String> request = new HttpEntity<>(json, headers);
-        this.theRestTemplate.postForObject("http://127.0.0.1:5000/send-email", request, String.class);
+        HttpEntity<Map<String, Object>> entity = new HttpEntity<>(emailContent, headers);
+
+        restTemplate.postForObject(emailServiceUrl, entity, String.class);
     }
 
-    private String generateRandomCode(int length) {
-        Random random = new Random();
-        StringBuilder code = new StringBuilder();
-        for (int i = 0; i < length; i++) {
-            code.append(random.nextInt(10));
+    // Método para generar y enviar token de 2FA
+    public String generateAndSend2FA(User user, String token) {
+        Session theSession = theSessionService.createSession(user, token);
+
+        if (theSession != null) {
+            send2FAEmail(user, theSession);
+            return theSession.getToken();
+        } else {
+            return "";
         }
-        return code.toString();
     }
 }
