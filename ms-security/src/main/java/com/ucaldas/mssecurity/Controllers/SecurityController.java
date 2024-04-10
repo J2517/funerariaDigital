@@ -1,8 +1,12 @@
 package com.ucaldas.mssecurity.Controllers;
 
+import com.ucaldas.mssecurity.Models.Permission;
 import com.ucaldas.mssecurity.Models.User;
 import com.ucaldas.mssecurity.Repositories.UserRepository;
 import com.ucaldas.mssecurity.services.JwtService;
+import com.ucaldas.mssecurity.services.ValidatorsService;
+
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -23,9 +27,11 @@ public class SecurityController {
     @Autowired
     private JwtService theJwtService;
     @Autowired
+    private ValidatorsService theValidatorService;
+    @Autowired
     private EmailService theEmailService;
 
-    @PostMapping("login")
+    @PostMapping("login") 
     public String login(@RequestBody User theUser, final HttpServletResponse response) throws IOException {
         String token = "";
         User actualUser = this.theUserRepository.getUserByEmail(theUser.getEmail());
@@ -39,5 +45,11 @@ public class SecurityController {
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
         }
         return token;
+    }
+
+    @PostMapping("permissions-validator")
+    public boolean permissionsValidation(final HttpServletRequest request, @RequestBody Permission thePermission){
+       boolean succes =this.theValidatorService.validationRolePermission(request, thePermission.getUrl(), thePermission.getMethod());
+       return succes;
     }
 }
