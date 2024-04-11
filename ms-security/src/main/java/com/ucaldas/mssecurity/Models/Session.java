@@ -1,4 +1,3 @@
-/*acá se realizará la segunda parte de la autenticacion para el loguin donde se consumirá una API creada con python que se encarga de el envío de correos electronicos*/
 package com.ucaldas.mssecurity.Models;
 
 import lombok.Data;
@@ -11,7 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document
 
 public class Session {
-    
+
     @DBRef
     private User user;
 
@@ -20,7 +19,7 @@ public class Session {
 
     @Id
     private String _id;
-    private int token2FA;
+    private String token2FA;
     private String token;
     private Date startAt;
     private Date endAt;
@@ -53,11 +52,11 @@ public class Session {
         this.endAt = endAt;
     }
 
-    public int getToken2FA() {
+    public String getToken2FA() {
         return token2FA;
     }
 
-    public void setToken2FA(int token2FA) {
+    public void setToken2FA(String token2FA) {
         this.token2FA = token2FA;
     }
 
