@@ -16,6 +16,8 @@ public class User {
     private String password;
     @DBRef
     private Role role;
+    @DBRef
+    private Statistics statistics;
 
     @DBRef
     private Session session; 
@@ -68,6 +70,14 @@ public class User {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public Statistics getStatistics(){
+        return statistics;
+    }
+
+    public void setStatistics(Statistics statistics){
+        this.statistics = statistics;
     }
 
     // public void getSession() {

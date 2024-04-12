@@ -1,6 +1,7 @@
 package com.ucaldas.mssecurity.Controllers;
 
 import com.ucaldas.mssecurity.Models.Session;
+import com.ucaldas.mssecurity.Models.Statistics;
 import com.ucaldas.mssecurity.Models.User;
 import com.ucaldas.mssecurity.Repositories.SessionRepository;
 import com.ucaldas.mssecurity.Repositories.UserRepository;
@@ -58,6 +59,9 @@ public class SecurityController {
 
             return token2FA;
         } else {
+            // Almacenar en Statistics el error de autorización
+            // Statistics theStatistics = new Statistics();
+            // theStatistics.setAuthorizationErrors(1);
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Usuario o contraseña incorrecta");
             return null;
         }
@@ -77,6 +81,9 @@ public class SecurityController {
 
             return token;
         } else {
+            // // Almacenar en Statistics el error de autoriación
+            // Statistics theStatistics = new Statistics();
+            // theStatistics.setAuthorizationErrors(1);
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Código de verificación incorrecto");
             return null;
         }

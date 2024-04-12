@@ -142,4 +142,22 @@ public class UsersController {
             "Su nueva contraseña es: " + tokenPassword);
         }
     }
+
+    /*Endpoint que permite visualizar que usuario tiene mayor número de errores de seguridad 
+    (validación + autorización) la información se extrae de Statistics. no es necesaria una consulta de mongo
+    */
+    @GetMapping("/statistics")
+    public User mostSecureUser() {
+        List<User> theUsers = this.theUserRepository.findAll();
+        User theMostSecureUser = null;
+        int theMostErrors = 0;
+        for (User theUser : theUsers) {
+            int theErrors = theUser.getStatistics().getValidationErrors() + theUser.getStatistics().getAuthorizationErrors();
+            if (theErrors > theMostErrors) {
+                theMostErrors = theErrors;
+                theMostSecureUser = theUser;
+            }
+        }
+        return theMostSecureUser;
+    }   
 }
