@@ -49,7 +49,7 @@ public class SecurityController {
             // Crear y guardar la sesión
             Session theUserSession = new Session();
             theUserSession.setUser(theActualUser); // Establece el usuario para la sesión
-            theUserSession.setToken2FA(theEncryptionService.convertSHA256(token2FA)); // Guarda el token 2FA
+            theUserSession.setToken2FA(token2FA); // Guarda el token 2FA
             theUserSession.setStartAt(new Date()); // Establece el tiempo actual como inicio
             theUserSession.setEndAt(new Date(System.currentTimeMillis() + (1000 * 60 * 60))); // Establece el tiempo de
                                                                                               // fin, podría ser una

@@ -85,7 +85,7 @@ public class UsersController {
                 .orElse(null);
         if (theUser != null) {
             this.theUserRepository.delete(theUser);
-        }
+        } 
     }
 
     @PutMapping("{userId}/role/{roleId}")
