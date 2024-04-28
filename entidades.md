@@ -27,8 +27,10 @@ Entidades para la creación de ms-negocio
   - method
 
 - cliente - se extiende de usuario
+
   -idCliente
   -tipoCliente
+  
 - beneficiario - se extiende de cliente
 
   - idBeneficiario
@@ -40,6 +42,7 @@ Entidades para la creación de ms-negocio
   - tipoPlan
 
 - conductor - se extiende de usuario
+
   - idConductor (fk de idUsuario)
   - idServicio
 
@@ -55,10 +58,55 @@ suscripción
 
 ## Juan Manuel
 
-administrador
-plan
-servicio
-traslado
-ejecucionservicio
-sepultura
-cremacion
+- administrador (administrator):
+
+ - idAdministrador (PK)
+ - nombres
+ - apellidos
+ - email
+ - password
+ - celular
+ 
+- plan (plan):
+
+ - idPlan (PK)
+ - nombre
+ - descripción
+ - costo
+ - duración
+ 
+- servicio (service):
+
+ - idServicio (PK)
+ - nombre
+ - descripción
+ - costo
+ 
+- traslado (transfer):
+
+ - idTraslado (PK)
+ - origen
+ - destino
+ - fecha
+ - costo
+ 
+- ejecución de Servicio (service execution):
+
+ - idEjecucionServicio (PK)
+ - idServicio (FK)
+ - fechaInicio
+ - fechaFin
+ - estado
+ 
+- sepultura (grave):
+
+ - idSepultura (PK)
+ - ubicación
+ - costo
+ - ocupada (booleano)
+ 
+- cremación (cremation):
+ 
+- idCremacion (PK)
+- fecha
+- costo

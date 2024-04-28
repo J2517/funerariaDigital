@@ -1,0 +1,39 @@
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+</div>
+<!-- Page content -->
+<div class="container-fluid mt--7">
+  <!-- Table -->
+  <div class="row">
+    <div class="col">
+      <div class="card shadow">
+        <div class="card-header bg-transparent">
+          <h3 class="mb-0">Sepultura</h3>
+        </div>
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <tr class="col-1">ID</tr>
+                        <tr class="col-2">Ubicación</tr>
+                        <tr class="col-3">Costo</tr>
+                        <tr class="col-4">Ocupada</tr>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngfor="let actual of theaters">
+                        <td>{{actual.id}}</td>
+                        <td>{{actual.ubicacion}}</td>
+                        <td>{{actual.costo}}</td>
+                        <td>{{actual.ocupada}}</td>
+                        <td>
+                            <button type="button" class="btn btn-primary">Ver</button>
+                            <button type="button" class="btn btn-primary">Editar</button>
+                            <button type="button" class="btn btn-danger" (click)="delete(actual.id)">Eliminar</button>
+                        </td>
+                    </tr>
+                </tbody>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
