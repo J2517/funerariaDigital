@@ -16,4 +16,13 @@ export class CampusService {
   delete(id:string){
     return this.http.delete<Campus>(`${environment.url_ms_negocio}/campus/${id}`);
   }
+  view(id:string):Observable<Campus> {
+    return this.http.get<Campus>(`${environment.url_ms_negocio}/campus/${id}`);
+  }
+  create(newCampus: Campus): Observable<Campus> {
+    return this.http.post<Campus>(`${environment.url_ms_negocio}/campus`, newCampus);
+  }
+  update(theCampus: Campus): Observable<Campus> {
+    return this.http.put<Campus>(`${environment.url_ms_negocio}/campus/${theCampus.id}`, theCampus);
+  }
 }

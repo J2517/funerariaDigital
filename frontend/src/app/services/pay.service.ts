@@ -16,4 +16,13 @@ export class PayService {
   delete(id:string){
     return this.http.delete<Pay>(`${environment.url_ms_negocio}/pay/${id}`);
   }
+  view(id:string):Observable<Pay> {
+    return this.http.get<Pay>(`${environment.url_ms_negocio}/pay/${id}`);
+  }
+  create(newPay: Pay): Observable<Pay> {
+    return this.http.post<Pay>(`${environment.url_ms_negocio}/pay`, newPay);
+  }
+  update(thePay: Pay): Observable<Pay> {
+    return this.http.put<Pay>(`${environment.url_ms_negocio}/campus/${thePay.id}`, thePay);
+  }
 }

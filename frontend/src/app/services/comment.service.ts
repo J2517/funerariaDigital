@@ -16,4 +16,13 @@ export class CommentService {
   delete(id:string){
     return this.http.delete<Comment>(`${environment.url_ms_negocio}/comment/${id}`);
   }
+  view(id:string):Observable<Comment> {
+    return this.http.get<Comment>(`${environment.url_ms_negocio}/comment/${id}`);
+  }
+  create(newComment: Comment): Observable<Comment> {
+    return this.http.post<Comment>(`${environment.url_ms_negocio}/comment`, newComment);
+  }
+  update(theComment: Comment): Observable<Comment> {
+    return this.http.put<Comment>(`${environment.url_ms_negocio}/campus/${theComment.id}`, theComment);
+  }
 }

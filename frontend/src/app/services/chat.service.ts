@@ -16,4 +16,13 @@ export class ChatService {
   delete(id:string){
     return this.http.delete<Chat>(`${environment.url_ms_negocio}/chat/${id}`);
   }
+  view(id:string):Observable<Chat> {
+    return this.http.get<Chat>(`${environment.url_ms_negocio}/chat/${id}`);
+  }
+  create(newChat: Chat): Observable<Chat> {
+    return this.http.post<Chat>(`${environment.url_ms_negocio}/chat`, newChat);
+  }
+  update(theChat: Chat): Observable<Chat> {
+    return this.http.put<Chat>(`${environment.url_ms_negocio}/chat/${theChat.id}`, theChat);
+  }
 }

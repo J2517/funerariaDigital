@@ -16,4 +16,13 @@ export class MessageService {
   delete(id:string){
     return this.http.delete<Message>(`${environment.url_ms_negocio}/message/${id}`);
   }
+  view(id:string):Observable<Message> {
+    return this.http.get<Message>(`${environment.url_ms_negocio}/message/${id}`);
+  }
+  create(newMessage: Message): Observable<Message> {
+    return this.http.post<Message>(`${environment.url_ms_negocio}/message`, newMessage);
+  }
+  update(theMessage: Message): Observable<Message> {
+    return this.http.put<Message>(`${environment.url_ms_negocio}/message/${theMessage.id}`, theMessage);
+  }
 }

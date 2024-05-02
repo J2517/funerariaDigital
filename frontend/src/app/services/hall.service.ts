@@ -16,4 +16,13 @@ export class HallService {
   delete(id:string){
     return this.http.delete<Hall>(`${environment.url_ms_negocio}/hall/${id}`);
   }
+  view(id:string):Observable<Hall> {
+    return this.http.get<Hall>(`${environment.url_ms_negocio}/hall/${id}`);
+  }
+  create(newHall: Hall): Observable<Hall> {
+    return this.http.post<Hall>(`${environment.url_ms_negocio}/hall`, newHall);
+  }
+  update(theHall: Hall): Observable<Hall> {
+    return this.http.put<Hall>(`${environment.url_ms_negocio}/campus/${theHall.id}`, theHall);
+  }
 }
