@@ -12,10 +12,10 @@ export class GraveService {
   constructor(private http: HttpClient) { }
 
   list(): Observable<Grave[]> { // Esto es como una promesa
-    return this.http.get<Grave[]>(`${environment.url_ms_cinema}/graves`);
+    return this.http.get<Grave[]>(`${environment.url_ms_negocio}/graves`);
     }
     delete(id:string){
-    return this.http.delete<Grave>(`${environment.url_ms_cinema}/graves/${id}`,
+    return this.http.delete<Grave>(`${environment.url_ms_negocio}/graves/${id}`,
     );
   }
 }

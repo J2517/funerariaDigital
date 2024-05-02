@@ -11,10 +11,9 @@ export class AdministratorService {
 
   constructor(private http: HttpClient) { }
   list(): Observable<Administrator[]> { // Esto es como una promesa
-    return this.http.get<Administrator[]>(`${environment.url_ms_cinema}/administrators`);
-    }
-    delete(id:string){
-    return this.http.delete<Administrator>(`${environment.url_ms_cinema}/administrators/${id}`,
-    );
+    return this.http.get<Administrator[]>(`${environment.url_ms_negocio}/administrators`);
+  }
+  delete(id:string){
+    return this.http.delete<Administrator>(`${environment.url_ms_negocio}/administrators/${id}`,);
   }
 }

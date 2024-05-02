@@ -12,10 +12,10 @@ export class PlanService {
   constructor(private http: HttpClient) { }
 
   list(): Observable<Plan[]> { // Esto es como una promesa
-    return this.http.get<Plan[]>(`${environment.url_ms_cinema}/plans`);
+    return this.http.get<Plan[]>(`${environment.url_ms_negocio}/plans`);
     }
     delete(id:string){
-    return this.http.delete<Plan>(`${environment.url_ms_cinema}/plans/${id}`,
+    return this.http.delete<Plan>(`${environment.url_ms_negocio}/plans/${id}`,
     );
   }
 }

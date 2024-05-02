@@ -12,10 +12,10 @@ export class TheaterService {
   constructor(private http: HttpClient) { }
 
   list(): Observable<Theater[]> { // Esto es como una promesa
-    return this.http.get<Theater[]>(`${environment.url_ms_cinema}/theaters`);
+    return this.http.get<Theater[]>(`${environment.url_ms_negocio}/theaters`);
     }
     delete(id:string){
-    return this.http.delete<Theater>(`${environment.url_ms_cinema}/theaters/${id}`,
+    return this.http.delete<Theater>(`${environment.url_ms_negocio}/theaters/${id}`,
     );
   }
 }

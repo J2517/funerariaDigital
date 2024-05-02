@@ -12,10 +12,10 @@ export class TransferService {
   constructor(private http: HttpClient) { }
 
   list(): Observable<Transfer[]> { // Esto es como una promesa
-    return this.http.get<Transfer[]>(`${environment.url_ms_cinema}/transfers`);
+    return this.http.get<Transfer[]>(`${environment.url_ms_negocio}/transfers`);
     }
     delete(id:string){
-    return this.http.delete<Transfer>(`${environment.url_ms_cinema}/transfers/${id}`,
+    return this.http.delete<Transfer>(`${environment.url_ms_negocio}/transfers/${id}`,
     );
   }
 }
