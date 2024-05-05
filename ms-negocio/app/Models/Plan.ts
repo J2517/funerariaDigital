@@ -6,16 +6,16 @@ export default class Plan extends BaseModel {
   public id: number
 
   @column()
-  public nombre: string
+  public name: string
 
   @column()
-  public precio: number
+  public price: number
 
   @column()
-  public descripcion: string
+  public description: string
 
   @column()
-  public duracion: number
+  public duration: number
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

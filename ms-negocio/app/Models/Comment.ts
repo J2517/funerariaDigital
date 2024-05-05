@@ -1,12 +1,12 @@
 import { DateTime } from 'luxon'
 import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
 
-export default class Chat extends BaseModel {
+export default class Comment extends BaseModel {
   @column({ isPrimary: true })
   public id: number
 
   @column()
-  public message: string
+  public content: string
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
