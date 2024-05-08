@@ -1,31 +1,45 @@
-import { DateTime } from 'luxon'
-import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
+import { DateTime } from "luxon";
+import {
+  BaseModel,
+  ManyToMany,
+  column,
+  manyToMany,
+} from "@ioc:Adonis/Lucid/Orm";
+import User from "./User";
 
 export default class Service extends BaseModel {
   @column({ isPrimary: true })
-  public id: number
+  public id: number;
 
   @column()
-  public name: string
+  public name: string;
 
   @column()
-  public description: string
+  public description: string;
 
   @column()
-  public price: number
+  public price: number;
 
   @column()
-  public duration: number
+  public duration: number;
 
   @column()
-  public status: boolean
+  public status: boolean;
 
   @column()
-  public type: string
+  public type: string;
+
+  @manyToMany(() => User, {
+    pivotTable: "servicesExecutions",
+    pivotForeignKey: "service_id",
+    pivotRelatedForeignKey: "user_id",
+    pivotColumns: ["date", "description", "price"],
+  })
+  public users: ManyToMany<typeof User>;
 
   @column.dateTime({ autoCreate: true })
-  public createdAt: DateTime
+  public createdAt: DateTime;
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
-  public updatedAt: DateTime
+  public updatedAt: DateTime;
 }
