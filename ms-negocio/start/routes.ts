@@ -24,23 +24,23 @@ Route.get("/", async () => {
   return { hello: "world" };
 });
 
-Route.get("/usuarios", "UsuariosController.index");
-Route.post("/usuarios", "UsuariosController.store");
-Route.get("/usuarios/:id", "UsuariosController.show");
-Route.put("/usuarios/:id", "UsuariosController.update");
-Route.delete("/usuarios/:id", "UsuariosController.destroy");
+Route.get("/users","UsersController.index");
+Route.post("/users","UsersController.store");
+Route.get("/users/:id","UsersController.show");
+Route.put("/users/:id","UsersController.update");
+Route.delete("/users/:id","UsersController.destroy");
 
-Route.get("/administradores", "AdministradoresController.index");
-Route.post("/administradores", "AdministradoresController.store");
-Route.get("/administradores/:id", "AdministradoresController.show");
-Route.put("/administradores/:id", "AdministradoresController.update");
-Route.delete("/administradores/:id", "AdministradoresController.destroy");
+Route.get("/administrators","AdministratorsController.index");
+Route.post("/administrators","AdministratorsController.store");
+Route.get("/administrators/:id","AdministratorsController.show");
+Route.put("/administrators/:id","AdministratorsController.update");
+Route.delete("/administrators/:id","AdministratorsController.destroy");
 
-Route.get("/beneficiarios", "BeneficiariosController.index");
-Route.post("/beneficiarios", "BeneficiariosController.store");
-Route.get("/beneficiarios/:id", "BeneficiariosController.show");
-Route.put("/beneficiarios/:id", "BeneficiariosController.update");
-Route.delete("/beneficiarios/:id", "BeneficiariosController.destroy");
+Route.get("/beneficiaries","BeneficiarysController.index");
+Route.post("/beneficiaries","BeneficiarysController.store");
+Route.get("/beneficiaries/:id","BeneficiarysController.show");
+Route.put("/beneficiaries/:id","BeneficiarysController.update");
+Route.delete("/beneficiaries/:id","BeneficiarysController.destroy");
 
 Route.get("/chats", "ChatsController.index");
 Route.post("/chats", "ChatsController.store");
@@ -48,59 +48,59 @@ Route.get("/chats/:id", "ChatsController.show");
 Route.put("/chats/:id", "ChatsController.update");
 Route.delete("/chats/:id", "ChatsController.destroy");
 
-Route.get("/clientes", "ClientesController.index");
-Route.post("/clientes", "ClientesController.store");
-Route.get("/clientes/:id", "ClientesController.show");
-Route.put("/clientes/:id", "ClientesController.update");
-Route.delete("/clientes/:id", "ClientesController.destroy");
+Route.get("/customers","CustomersController.index");
+Route.post("/customers","CustomersController.store");
+Route.get("/customers/:id","CustomersController.show");
+Route.put("/customers/:id","CustomersController.update");
+Route.delete("/customers/:id","CustomersController.destroy");
 
-Route.get("/comentarios", "ComentariosController.index");
-Route.post("/comentarios", "ComentariosController.store");
-Route.get("/comentarios/:id", "ComentariosController.show");
-Route.put("/comentarios/:id", "ComentariosController.update");
-Route.delete("/comentarios/:id", "ComentariosController.destroy");
+Route.get("/comments","CommentsController.index");
+Route.post("/comments","CommentsController.store");
+Route.get("/comments/:id","CommentsController.show");
+Route.put("/comments/:id","CommentsController.update");
+Route.delete("/comments/:id","CommentsController.destroy");
 
-Route.get("/conductores", "ConductoresController.index");
-Route.post("/conductores", "ConductoresController.store");
-Route.get("/conductores/:id", "ConductoresController.show");
-Route.put("/conductores/:id", "ConductoresController.update");
-Route.delete("/conductores/:id", "cremacionesController.destroy");
+Route.get("/drivers","DriversController.index");
+Route.post("/drivers","DriversController.store");
+Route.get("/drivers/:id","DriversController.show");
+Route.put("/drivers/:id","DriversController.update");
+Route.delete("/drivers/:id","DriversController.destroy");
 
-Route.get("/cremaciones", "CremacionesController.index");
-Route.post("/cremaciones", "CremacionesController.store");
-Route.get("/cremaciones/:id", "CremacionesController.show");
-Route.put("/cremaciones/:id", "CremacionesController.update");
-Route.delete("/cremaciones/:id", "CremacionesController.destroy");
+Route.get("/cremations","CremationsController.index");
+Route.post("/cremations","CremationsController.store");
+Route.get("/cremations/:id","CremationsController.show");
+Route.put("/cremations/:id","CremationsController.update");
+Route.delete("/cremations/:id","CremationsController.destroy");
 
-Route.get("/ejecucionServicios", "EjecucionServiciosController.index");
-Route.post("/ejecucionServicios", "EjecucionServiciosController.store");
-Route.get("/ejecucionServicios/:id", "EjecucionServiciosController.show");
-Route.put("/ejecucionServicios/:id", "EjecucionServiciosController.update");
-Route.delete("/ejecucionServicios/:id", "EjecucionServiciosController.destroy");
+Route.get("/service_executions","ServiceExecutionsController.index");
+Route.post("/service_executions","ServiceExecutionsController.store");
+Route.get("/service_executions/:id","ServiceExecutionsController.show");
+Route.put("/service_executions/:id","ServiceExecutionsController.update");
+Route.delete("/service_executions/:id","ServiceExecutionsController.destroy");
 
-Route.get("/mensajes", "MensajesController.index");
-Route.post("/mensajes", "MensajesController.store");
-Route.get("/mensajes/:id", "MensajesController.show");
-Route.put("/mensajes/:id", "MensajesController.update");
-Route.delete("/mensajes/:id", "MensajesController.destroy");
+Route.get("/messages","MessagesController.index");
+Route.post("/messages","MessagesController.store");
+Route.get("/messages/:id","MessagesController.show");
+Route.put("/messages/:id","MessagesController.update");
+Route.delete("/messages/:id","MessagesController.destroy");
 
-Route.get("/pagos", "PagosController.index");
-Route.post("/pagos", "PagosController.store");
-Route.get("/pagos/:id", "PagosController.show");
-Route.put("/pagos/:id", "PagosController.update");
-Route.delete("/pagos/:id", "PagosController.destroy");
+Route.get("/payments","PaymentsController.index");
+Route.post("/payments","PaymentsController.store");
+Route.get("/payments/:id","PaymentsController.show");
+Route.put("/payments/:id","PaymentsController.update");
+Route.delete("/payments/:id","PaymentsController.destroy");
 
-Route.get("/permisos", "PermisosController.index");
-Route.post("/permisos", "PermisosController.store");
-Route.get("/permisos/:id", "PermisosController.show");
-Route.put("/permisos/:id", "PermisosController.update");
-Route.delete("/permisos/:id", "PermisosController.destroy");
+Route.get("/permissions","PermissionsController.index");
+Route.post("/permissions","PermissionsController.store");
+Route.get("/permissions/:id","PermissionsController.show");
+Route.put("/permissions/:id","PermissionsController.update");
+Route.delete("/permissions/:id","PermissionsController.destroy");
 
-Route.get("/planes", "PlanesController.index");
-Route.post("/planes", "PlanesController.store");
-Route.get("/planes/:id", "PlanesController.show");
-Route.put("/planes/:id", "PlanesController.update");
-Route.delete("/planes/:id", "PlanesController.destroy");
+Route.get("/plans","PlansController.index");
+Route.post("/plans","PlansController.store");
+Route.get("/plans/:id","PlansController.show");
+Route.put("/plans/:id","PlansController.update");
+Route.delete("/plans/:id","PlansController.destroy");
 
 Route.get("/roles", "RolesController.index");
 Route.post("/roles", "RolesController.store");
@@ -108,44 +108,44 @@ Route.get("/roles/:id", "RolesController.show");
 Route.put("/roles/:id", "RolesController.update");
 Route.delete("/roles/:id", "RolesController.destroy");
 
-Route.get("/salas", "SalasController.index");
-Route.post("/salas", "SalasController.store");
-Route.get("/salas/:id", "SalasController.show");
-Route.put("/salas/:id", "SalasController.update");
-Route.delete("/salas/:id", "SalasController.destroy");
+Route.get("/rooms","RoomsController.index");
+Route.post("/rooms","RoomsController.store");
+Route.get("/rooms/:id","RoomsController.show");
+Route.put("/rooms/:id","RoomsController.update");
+Route.delete("/rooms/:id","RoomsController.destroy");
 
-Route.get("/sedes", "SedesController.index");
-Route.post("/sedes", "SedesController.store");
-Route.get("/sedes/:id", "SedesController.show");
-Route.put("/sedes/:id", "SedesController.update");
-Route.delete("/sedes/:id", "SedesController.destroy");
+Route.get("/headquarters","HeadquartersController.index");
+Route.post("/headquarters","HeadquartersController.store");
+Route.get("/headquarters/:id","HeadquartersController.show");
+Route.put("/headquarters/:id","HeadquartersController.update");
+Route.delete("/headquarters/:id","HeadquartersController.destroy");
 
-Route.get("/sepulturas", "SepulturasController.index");
-Route.post("/sepulturas", "SepulturasController.store");
-Route.get("/sepulturas/:id", "SepulturasController.show");
-Route.put("/sepulturas/:id", "SepulturasController.update");
-Route.delete("/sepulturas/:id", "SepulturasController.destroy");
+Route.get("/headlines","HeadlinesController.index");
+Route.post("/headlines","HeadlinesController.store");
+Route.get("/headlines/:id","HeadlinesController.show");
+Route.put("/headlines/:id","HeadlinesController.update");
+Route.delete("/headlines/:id","HeadlinesController.destroy");
 
-Route.get("/servicios", "ServiciosController.index");
-Route.post("/servicios", "ServiciosController.store");
-Route.get("/servicios/:id", "ServiciosController.show");
-Route.put("/servicios/:id", "ServiciosController.update");
-Route.delete("/servicios/:id", "ServiciosController.destroy");
+Route.get("/services","ServicesController.index");
+Route.post("/services","ServicesController.store");
+Route.get("/services/:id","ServicesController.show");
+Route.put("/services/:id","ServicesController.update");
+Route.delete("/services/:id","ServicesController.destroy");
 
-Route.get("/suscripciones", "SuscripcionesController.index");
-Route.post("/suscripciones", "SuscripcionesController.store");
-Route.get("/suscripciones/:id", "SuscripcionesController.show");
-Route.put("/suscripciones/:id", "SuscripcionesController.update");
-Route.delete("/suscripciones/:id", "SuscripcionesController.destroy");
+Route.get("/subscriptions","SubscriptionsController.index");
+Route.post("/subscriptions","SubscriptionsController.store");
+Route.get("/subscriptions/:id","SubscriptionsController.show");
+Route.put("/subscriptions/:id","SubscriptionsController.update");
+Route.delete("/subscriptions/:id","SubscriptionsController.destroy");
 
-Route.get("/titulares", "TitularesController.index");
-Route.post("/titulares", "TitularesController.store");
-Route.get("/titulares/:id", "TitularesController.show");
-Route.put("/titulares/:id", "TitularesController.update");
-Route.delete("/titulares/:id", "TitularesController.destroy");
+Route.get("/graves","GravesController.index");
+Route.post("/graves","GravesController.store");
+Route.get("/graves/:id","GravesController.show");
+Route.put("/graves/:id","GravesController.update");
+Route.delete("/graves/:id","GravesController.destroy");
 
-Route.get("/traslados", "TrasladosController.index");
-Route.post("/traslados", "TrasladosController.store");
-Route.get("/traslados/:id", "TrasladosController.show");
-Route.put("/traslados/:id", "TrasladosController.update");
-Route.delete("/traslados/:id", "TrasladosController.destroy");
+Route.get("/transfers","TransfersController.index");
+Route.post("/transfers","TransfersController.store");
+Route.get("/transfers/:id","TransfersController.show");
+Route.put("/transfers/:id","TransfersController.update");
+Route.delete("/transfers/:id","TransfersController.destroy");

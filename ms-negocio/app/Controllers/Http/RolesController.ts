@@ -22,7 +22,7 @@ export default class RolesController {
    * Muestra la información de un solo rol
    */
   public async show({ params }: HttpContextContract) {
-    return Rol.query().where("id", params.id).preload("usuarios");
+    return Rol.query().where("id", params.id).preload("users");
     // return Rol.findOrFail(params.id);
   }
 

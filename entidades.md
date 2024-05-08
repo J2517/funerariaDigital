@@ -30,7 +30,7 @@ Entidades para la creación de ms-negocio
 
   -idCliente
   -tipoCliente
-  
+
 - beneficiario - se extiende de cliente
 
   - idBeneficiario
@@ -60,53 +60,53 @@ suscripción
 
 - administrador (administrator):
 
- - idAdministrador (PK)
- - nombres
- - apellidos
- - email
- - password
- - celular
- 
+- idAdministrador (PK)
+- nombres
+- apellidos
+- email
+- password
+- celular
+
 - plan (plan):
 
- - idPlan (PK)
- - nombre
- - descripción
- - costo
- - duración
- 
+- idPlan (PK)
+- nombre
+- descripción
+- costo
+- duración
+
 - servicio (service):
 
- - idServicio (PK)
- - nombre
- - descripción
- - costo
- 
+- idServicio (PK)
+- nombre
+- descripción
+- costo
+
 - traslado (transfer):
 
- - idTraslado (PK)
- - origen
- - destino
- - fecha
- - costo
- 
+- idTraslado (PK)
+- origen
+- destino
+- fecha
+- costo
+
 - ejecución de Servicio (service execution):
 
- - idEjecucionServicio (PK)
- - idServicio (FK)
- - fechaInicio
- - fechaFin
- - estado
- 
+- idEjecucionServicio (PK)
+- idServicio (FK)
+- fechaInicio
+- fechaFin
+- estado
+
 - sepultura (grave):
 
- - idSepultura (PK)
- - ubicación
- - costo
- - ocupada (booleano)
- 
+- idSepultura (PK)
+- ubicación
+- costo
+- ocupada (booleano)
+
 - cremación (cremation):
- 
+
 - idCremacion (PK)
 - fecha
 - costo

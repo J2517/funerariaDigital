@@ -85,7 +85,7 @@ public class UsersController {
                 .orElse(null);
         if (theUser != null) {
             this.theUserRepository.delete(theUser);
-        } 
+        }
     }
 
     @PutMapping("{userId}/role/{roleId}")
@@ -96,6 +96,8 @@ public class UsersController {
         Role theActualRole = this.theRoleRepository
                 .findById(roleId)
                 .orElse(null);
+        System.out.println("User found: " + theActualUser);
+        System.out.println("Role found: " + theActualRole);
 
         if (theActualUser != null && theActualRole != null) {
             theActualUser.setRole(theActualRole);
@@ -123,10 +125,16 @@ public class UsersController {
             return null;
         }
     }
-    /*Recuperar contraseña: por medio de una petición POST donde solo se recibe como cuerpo del JSON 
-    el correo del usuario se debe enviar un correo con la contraseña del usuario, dicha contraseña se 
-    genera en el servicio de PasswordService y se guarda en la base de datos encriptada con SHA256.
-    se deben actualizar los datos del usuario en la base de datos con la nueva contraseña generada.*/
+    /*
+     * Recuperar contraseña: por medio de una petición POST donde solo se recibe
+     * como cuerpo del JSON
+     * el correo del usuario se debe enviar un correo con la contraseña del usuario,
+     * dicha contraseña se
+     * genera en el servicio de PasswordService y se guarda en la base de datos
+     * encriptada con SHA256.
+     * se deben actualizar los datos del usuario en la base de datos con la nueva
+     * contraseña generada.
+     */
 
     @PostMapping("/recover-password")
     public void recoverPassword(@RequestBody User theUser) {
@@ -139,25 +147,29 @@ public class UsersController {
             this.theUserRepository.save(theActualUser);
             // Enviar contraseña por correo
             this.theEmailService.sendEmail(theActualUser.getEmail(), "Recuperación de contraseña",
-            "Su nueva contraseña es: " + tokenPassword);
+                    "Su nueva contraseña es: " + tokenPassword);
         }
     }
 
-    /*Endpoint que permite visualizar que usuario tiene mayor número de errores de seguridad 
-    (validación + autorización) la información se extrae de Statistics. no es necesaria una consulta de mongo
-    */
+    /*
+     * Endpoint que permite visualizar que usuario tiene mayor número de errores de
+     * seguridad
+     * (validación + autorización) la información se extrae de Statistics. no es
+     * necesaria una consulta de mongo
+     */
     @GetMapping("/statistics")
     public User mostSecureUser() {
         List<User> theUsers = this.theUserRepository.findAll();
         User theMostSecureUser = null;
         int theMostErrors = 0;
         for (User theUser : theUsers) {
-            int theErrors = theUser.getStatistics().getValidationErrors() + theUser.getStatistics().getAuthorizationErrors();
+            int theErrors = theUser.getStatistics().getValidationErrors()
+                    + theUser.getStatistics().getAuthorizationErrors();
             if (theErrors > theMostErrors) {
                 theMostErrors = theErrors;
                 theMostSecureUser = theUser;
             }
         }
         return theMostSecureUser;
-    }   
+    }
 }

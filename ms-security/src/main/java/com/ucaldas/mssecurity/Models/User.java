@@ -14,13 +14,13 @@ public class User {
     private String name;
     private String email;
     private String password;
+
     @DBRef
     private Role role;
     @DBRef
     private Statistics statistics;
-
     @DBRef
-    private Session session; 
+    private Session session;
 
     public User() {
 
@@ -72,19 +72,19 @@ public class User {
         this.role = role;
     }
 
-    public Statistics getStatistics(){
+    public Statistics getStatistics() {
         return statistics;
     }
 
-    public void setStatistics(Statistics statistics){
+    public void setStatistics(Statistics statistics) {
         this.statistics = statistics;
     }
 
-    // public void getSession() {
-    //     return session;
-    // }
+    public Session getSession() {
+        return session;
+    }
 
-    // private void setSession(Session session){
-    //     this.session = session;
-    // }
+    public void setSession(Session session) {
+        this.session = session;
+    }
 }
