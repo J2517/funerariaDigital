@@ -1,7 +1,7 @@
 import BaseSchema from '@ioc:Adonis/Lucid/Schema'
 
 export default class extends BaseSchema {
-  protected tableName = 'subcriptions'
+  protected tableName = 'subscriptions'
 
   public async up () {
     this.schema.createTable(this.tableName, (table) => {
@@ -11,10 +11,10 @@ export default class extends BaseSchema {
       table.dateTime('end_date').notNullable()
       table.boolean('status').defaultTo(false)
       table.integer('customer_id').unsigned()
-                                  .references('movie.id')
+                                  .references('customers.id')
                                   .onDelete('CASCADE')
       table.integer('plan_id').unsigned()
-                                  .references('plan.id')
+                                  .references('plans.id')
                                   .onDelete('CASCADE')
 
       table.timestamp('created_at', { useTz: true })
