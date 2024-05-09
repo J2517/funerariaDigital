@@ -1,7 +1,7 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Transfer from 'App/Models/Transfer'
 
-export default class TrasfersController {
+export default class TransfersController {
     /**
     * Lista todos los traslados
     */
@@ -14,8 +14,8 @@ export default class TrasfersController {
     */
     public async store({ request }: HttpContextContract) {
         const body = request.body();
-        const nuevo_traslado = await Transfer.create(body);
-        return nuevo_traslado;
+        const theTransfer = await Transfer.create(body);
+        return theTransfer;
     }
 
     /**
@@ -30,18 +30,18 @@ export default class TrasfersController {
     */
     public async update({ params, request }: HttpContextContract) {
         const body = request.body();
-        const el_traslado = await Transfer.findOrFail(params.id);
-        el_traslado.merge(body);
-        await el_traslado.save();
-        return el_traslado;
+        const theTransfer = await Transfer.findOrFail(params.id);
+        theTransfer.merge(body);
+        await theTransfer.save();
+        return theTransfer;
     }
 
     /**
     * Elimina un traslado basado en el identificador
     */
     public async destroy({ params }: HttpContextContract) {
-        const el_traslado = await Transfer.findOrFail(params.id);
-        return el_traslado.delete();
+        const theTransfer = await Transfer.findOrFail(params.id);
+        return theTransfer.delete();
     }
 }
 

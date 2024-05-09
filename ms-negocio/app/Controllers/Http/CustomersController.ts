@@ -1,7 +1,7 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Customer from 'App/Models/Customer'
 
-export default class CustomerController {
+export default class CustomersController {
     /**
     * Lista todos los clientes
     */
@@ -14,8 +14,8 @@ export default class CustomerController {
     */
     public async store({ request }: HttpContextContract) {
         const body = request.body();
-        const nuevo_customer = await Customer.create(body);
-        return nuevo_customer;
+        const theCustomer = await Customer.create(body);
+        return theCustomer;
     }
 
     /**
@@ -30,18 +30,18 @@ export default class CustomerController {
     */
     public async update({ params, request }: HttpContextContract) {
         const body = request.body();
-        const el_cliente = await Customer.findOrFail(params.id);
-        el_cliente.merge(body);
-        await el_cliente.save();
-        return el_cliente;
+        const theCustomer = await Customer.findOrFail(params.id);
+        theCustomer.merge(body);
+        await theCustomer.save();
+        return theCustomer;
     }
 
     /**
     * Elimina a un cliente basado en el identificador
     */
     public async destroy({ params }: HttpContextContract) {
-        const el_cliente = await Customer.findOrFail(params.id);
-        return el_cliente.delete();
+        const theCustomer = await Customer.findOrFail(params.id);
+        return theCustomer.delete();
     }
 }
 

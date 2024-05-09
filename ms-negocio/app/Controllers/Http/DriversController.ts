@@ -14,8 +14,8 @@ export default class DriversController {
     */
     public async store({ request }: HttpContextContract) {
         const body = request.body();
-        const nuevo_conductor = await Driver.create(body);
-        return nuevo_conductor;
+        const theDriver = await Driver.create(body);
+        return theDriver;
     }
 
     /**
@@ -30,18 +30,18 @@ export default class DriversController {
     */
     public async update({ params, request }: HttpContextContract) {
         const body = request.body();
-        const el_conductor = await Driver.findOrFail(params.id);
-        el_conductor.merge(body);
-        await el_conductor.save();
-        return el_conductor;
+        const theDriver = await Driver.findOrFail(params.id);
+        theDriver.merge(body);
+        await theDriver.save();
+        return theDriver;
     }
 
     /**
     * Elimina a un conductor basado en el identificador
     */
     public async destroy({ params }: HttpContextContract) {
-        const el_conductor = await Driver.findOrFail(params.id);
-        return el_conductor.delete();
+        const theDriver = await Driver.findOrFail(params.id);
+        return theDriver.delete();
     }
 }
 

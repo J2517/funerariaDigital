@@ -1,7 +1,7 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Comment from 'App/Models/Comment'
 
-export default class CommentController {
+export default class CommentsController {
     /**
     * Lista todos los comentarios
     */
@@ -14,8 +14,8 @@ export default class CommentController {
     */
     public async store({ request }: HttpContextContract) {
         const body = request.body();
-        const nuevo_comentario = await Comment.create(body);
-        return nuevo_comentario;
+        const theComment = await Comment.create(body);
+        return theComment;
     }
 
     /**
@@ -30,18 +30,18 @@ export default class CommentController {
     */
     public async update({ params, request }: HttpContextContract) {
         const body = request.body();
-        const el_comentario = await Comment.findOrFail(params.id);
-        el_comentario.merge(body);
-        await el_comentario.save();
-        return el_comentario;
+        const theComment = await Comment.findOrFail(params.id);
+        theComment.merge(body);
+        await theComment.save();
+        return theComment;
     }
 
     /**
     * Elimina un comentario basado en el identificador
     */
     public async destroy({ params }: HttpContextContract) {
-        const el_comentario = await Comment.findOrFail(params.id);
-        return el_comentario.delete();
+        const theComment = await Comment.findOrFail(params.id);
+        return theComment.delete();
     }
 }
 

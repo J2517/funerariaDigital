@@ -14,8 +14,8 @@ export default class MessagesController {
     */
     public async store({ request }: HttpContextContract) {
         const body = request.body();
-        const nuevo_mensaje = await Message.create(body);
-        return nuevo_mensaje;
+        const theMessage = await Message.create(body);
+        return theMessage;
     }
 
     /**
@@ -30,17 +30,17 @@ export default class MessagesController {
     */
     public async update({ params, request }: HttpContextContract) {
         const body = request.body();
-        const el_mensaje = await Message.findOrFail(params.id);
-        el_mensaje.merge(body);
-        await el_mensaje.save();
-        return el_mensaje;
+        const theMessage = await Message.findOrFail(params.id);
+        theMessage.merge(body);
+        await theMessage.save();
+        return theMessage;
     }
 
     /**
     * Elimina un mensaje basado en el identificador
     */
     public async destroy({ params }: HttpContextContract) {
-        const el_mensaje = await Message.findOrFail(params.id);
-        return el_mensaje.delete();
+        const theMessage = await Message.findOrFail(params.id);
+        return theMessage.delete();
     }
 }

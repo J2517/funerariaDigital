@@ -14,8 +14,8 @@ export default class PlansController {
     */
     public async store({ request }: HttpContextContract) {
         const body = request.body();
-        const nuevo_plan = await Plan.create(body);
-        return nuevo_plan;
+        const thePlan = await Plan.create(body);
+        return thePlan;
     }
 
     /**
@@ -30,18 +30,18 @@ export default class PlansController {
     */
     public async update({ params, request }: HttpContextContract) {
         const body = request.body();
-        const el_plan = await Plan.findOrFail(params.id);
-        el_plan.merge(body);
-        await el_plan.save();
-        return el_plan;
+        const thePlan = await Plan.findOrFail(params.id);
+        thePlan.merge(body);
+        await thePlan.save();
+        return thePlan;
     }
 
     /**
     * Elimina un plan basado en el identificador
     */
     public async destroy({ params }: HttpContextContract) {
-        const el_plan = await Plan.findOrFail(params.id);
-        return el_plan.delete();
+        const thePlan = await Plan.findOrFail(params.id);
+        return thePlan.delete();
     }
 }
 

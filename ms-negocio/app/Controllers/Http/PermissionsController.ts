@@ -14,8 +14,8 @@ export default class PermissionsController {
     */
     public async store({ request }: HttpContextContract) {
         const body = request.body();
-        const nuevo_permiso = await Permission.create(body);
-        return nuevo_permiso;
+        const thePermission = await Permission.create(body);
+        return thePermission;
     }
 
     /**
@@ -30,18 +30,18 @@ export default class PermissionsController {
     */
     public async update({ params, request }: HttpContextContract) {
         const body = request.body();
-        const el_permiso = await Permission.findOrFail(params.id);
-        el_permiso.merge(body);
-        await el_permiso.save();
-        return el_permiso;
+        const thePermission = await Permission.findOrFail(params.id);
+        thePermission.merge(body);
+        await thePermission.save();
+        return thePermission;
     }
 
     /**
     * Elimina a un permiso basado en el identificador
     */
     public async destroy({ params }: HttpContextContract) {
-        const el_permiso = await Permission.findOrFail(params.id);
-        return el_permiso.delete();
+        const thePermission = await Permission.findOrFail(params.id);
+        return thePermission.delete();
     }
 }
 

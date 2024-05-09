@@ -1,7 +1,7 @@
 import { HttpContextContract } from "@ioc:Adonis/Core/HttpContext";
 import Headline from "App/Models/Headline";
 
-export default class HeadlineSController {
+export default class HeadlinesController {
   /**
    * Lista todos los titulares
    */
@@ -14,8 +14,8 @@ export default class HeadlineSController {
    */
   public async store({ request }: HttpContextContract) {
     const body = request.body();
-    const nuevo_titular = await Headline.create(body);
-    return nuevo_titular;
+    const newHeadline = await Headline.create(body);
+    return newHeadline;
   }
 
   /**
@@ -30,17 +30,17 @@ export default class HeadlineSController {
    */
   public async update({ params, request }: HttpContextContract) {
     const body = request.body();
-    const el_titular = await Headline.findOrFail(params.id);
-    el_titular.merge(body);
-    await el_titular.save();
-    return el_titular;
+    const newHeadline = await Headline.findOrFail(params.id);
+    newHeadline.merge(body);
+    await newHeadline.save();
+    return newHeadline;
   }
 
   /**
    * Elimina a un titular basado en el identificador
    */
   public async destroy({ params }: HttpContextContract) {
-    const el_titular = await Headline.findOrFail(params.id);
-    return el_titular.delete();
+    const newHeadline = await Headline.findOrFail(params.id);
+    return newHeadline.delete();
   }
 }

@@ -14,8 +14,8 @@ export default class SubscriptionsController {
     */
     public async store({ request }: HttpContextContract) {
         const body = request.body();
-        const nueva_suscripcion = await Subcription.create(body);
-        return nueva_suscripcion;
+        const theSubcription = await Subcription.create(body);
+        return theSubcription;
     }
 
     /**
@@ -30,18 +30,18 @@ export default class SubscriptionsController {
     */
     public async update({ params, request }: HttpContextContract) {
         const body = request.body();
-        const la_suscripcion = await Subcription.findOrFail(params.id);
-        la_suscripcion.merge(body);
-        await la_suscripcion.save();
-        return la_suscripcion;
+        const theSubcription = await Subcription.findOrFail(params.id);
+        theSubcription.merge(body);
+        await theSubcription.save();
+        return theSubcription;
     }
 
     /**
     * Elimina una suscripción basada en el identificador
     */
     public async destroy({ params }: HttpContextContract) {
-        const la_suscripcion = await Subcription.findOrFail(params.id);
-        return la_suscripcion.delete();
+        const theSubcription = await Subcription.findOrFail(params.id);
+        return theSubcription.delete();
     }
 }
 

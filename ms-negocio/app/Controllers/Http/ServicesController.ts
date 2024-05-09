@@ -14,8 +14,8 @@ export default class ServicesController {
    */
   public async store({ request }: HttpContextContract) {
     const body = request.body();
-    const nuevo_servicio = await Service.create(body);
-    return nuevo_servicio;
+    const theService = await Service.create(body);
+    return theService;
   }
 
   /**
@@ -43,17 +43,17 @@ export default class ServicesController {
    */
   public async update({ params, request }: HttpContextContract) {
     const body = request.body();
-    const el_servicio = await Service.findOrFail(params.id);
-    el_servicio.merge(body);
-    await el_servicio.save();
-    return el_servicio;
+    const theService = await Service.findOrFail(params.id);
+    theService.merge(body);
+    await theService.save();
+    return theService;
   }
 
   /**
    * Elimina un servicio basado en el identificador
    */
   public async destroy({ params }: HttpContextContract) {
-    const el_servicio = await Service.findOrFail(params.id);
-    return el_servicio.delete();
+    const theService = await Service.findOrFail(params.id);
+    return theService.delete();
   }
 }

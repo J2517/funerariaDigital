@@ -11,6 +11,7 @@ export default class extends BaseSchema {
       table.integer('capacity').notNullable()
       table.boolean('status').defaultTo(true)
       table.string('description').nullable()
+      table.integer("headquarter_id").unsigned().references("headquarters.id");
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
     })

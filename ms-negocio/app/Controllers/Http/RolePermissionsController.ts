@@ -1,28 +1,28 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import ServiceExecution from 'App/Models/ServiceExecution'
+import RolePermission from 'App/Models/RolePermission'
 
 export default class ServiceExecutionsController {
     /**
     * Lista todas las ejecuciones de servicios
     */
     public async index() {
-        return ServiceExecution.all();
-    } 
+        return RolePermission.all();
+    }
 
     /**
     * Almacena la información de una ejecución de servicio
     */
     public async store({ request }: HttpContextContract) {
         const body = request.body();
-        const theExecution = await ServiceExecution.create(body);
-        return theExecution;
+        const theRolePermission = await RolePermission.create(body);
+        return theRolePermission;
     }
 
     /**
     * Muestra la información de una sola ejecución de servicio
     */
     public async show({ params }: HttpContextContract) {
-        return ServiceExecution.findOrFail(params.id);
+        return RolePermission.findOrFail(params.id);
     }
 
     /**
@@ -30,18 +30,18 @@ export default class ServiceExecutionsController {
     */
     public async update({ params, request }: HttpContextContract) {
         const body = request.body();
-        const theExecution = await ServiceExecution.findOrFail(params.id);
-        theExecution.merge(body);
-        await theExecution.save();
-        return theExecution;
+        const theRolePermission = await RolePermission.findOrFail(params.id);
+        theRolePermission.merge(body);
+        await theRolePermission.save(); 
+        return theRolePermission;
     }
 
     /**
     * Elimina una ejecución de servicio basada en el identificador
     */
     public async destroy({ params }: HttpContextContract) {
-        const theExecution = await ServiceExecution.findOrFail(params.id);
-        return theExecution.delete();
+        const theRolePermission = await RolePermission.findOrFail(params.id);
+        return theRolePermission.delete();
     }
 }
 

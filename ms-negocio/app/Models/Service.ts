@@ -6,11 +6,12 @@ import {
   manyToMany,
 } from "@ioc:Adonis/Lucid/Orm";
 import User from "./User";
+import Plan from "./Plan";
 
 export default class Service extends BaseModel {
   @column({ isPrimary: true })
   public id: number;
-
+ 
   @column()
   public name: string;
 
@@ -36,6 +37,14 @@ export default class Service extends BaseModel {
     pivotColumns: ["date", "description", "price"],
   })
   public users: ManyToMany<typeof User>;
+
+  @manyToMany(() => Plan, {
+    pivotTable: "planServices",
+    pivotForeignKey: "service_id",
+    pivotRelatedForeignKey: "plan_id",
+    pivotColumns: [],
+  })
+  public plans: ManyToMany<typeof Plan>;
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime;
