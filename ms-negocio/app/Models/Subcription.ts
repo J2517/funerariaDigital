@@ -6,12 +6,6 @@ export default class Subcription extends BaseModel {
   public id: number
 
   @column()
-  public userId: number
-
-  @column()
-  public planId: number
-
-  @column()
   public start_date: DateTime
 
   @column()
@@ -19,6 +13,12 @@ export default class Subcription extends BaseModel {
 
   @column()
   public status: boolean
+
+  @column()
+  public customer_id: number
+
+  @column()
+  public plan_id: number
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

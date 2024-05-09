@@ -371,6 +371,31 @@
           "type": "boolean",
           "description": "Disable locks acquired to run migrations safely"
         }
+      ],
+      "files": [
+        "database/migrations/1712757194918_administrators.ts",
+        "database/migrations/1712757222805_cremations.ts",
+        "database/migrations/1712757251459_plans.ts",
+        "database/migrations/1712757258974_graves.ts",
+        "database/migrations/1712757266632_services.ts",
+        "database/migrations/1712757275907_transfers.ts",
+        "database/migrations/1712801933537_roles.ts",
+        "database/migrations/1712801946072_permissions.ts",
+        "database/migrations/1712801999092_beneficiaries.ts",
+        "database/migrations/1712802013311_headlines.ts",
+        "database/migrations/1712802036851_drivers.ts",
+        "database/migrations/1712802060765_comments.ts",
+        "database/migrations/1712802071668_chats.ts",
+        "database/migrations/1712802079340_messages.ts",
+        "database/migrations/1712802091834_headquarters.ts",
+        "database/migrations/1712802105464_rooms.ts",
+        "database/migrations/1712802113515_payments.ts",
+        "database/migrations/1712802138960_subscriptions.ts",
+        "database/migrations/1714930815671_customers.ts",
+        "database/migrations/1715054841241_users.ts",
+        "database/migrations/1715229522679_plan_services.ts",
+        "database/migrations/1715229689440_role_permissions.ts",
+        "database/migrations/1712757240411_servicesExecutions.ts"
       ]
     },
     "migration:rollback": {
