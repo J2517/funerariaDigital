@@ -20,6 +20,9 @@ export default class Payment extends BaseModel {
   @column()
   public date: DateTime
 
+  @column()
+  public suscription_id: number
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 

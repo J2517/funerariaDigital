@@ -1,28 +1,34 @@
-import { DateTime } from 'luxon'
-import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
+import { DateTime } from "luxon";
+import { BaseModel, HasMany, column, hasMany } from "@ioc:Adonis/Lucid/Orm";
+import Payment from "./Payment";
 
 export default class Subcription extends BaseModel {
   @column({ isPrimary: true })
-  public id: number
+  public id: number;
 
   @column()
-  public start_date: DateTime
+  public userId: number;
 
   @column()
-  public end_date: DateTime
+  public planId: number;
 
   @column()
-  public status: boolean
+  public start_date: DateTime;
 
   @column()
-  public customer_id: number
+  public end_date: DateTime;
 
   @column()
-  public plan_id: number
+  public status: boolean;
+
+  @hasMany(() => Payment, {
+    foreignKey: "suscription_id",
+  })
+  public payments: HasMany<typeof Payment>;
 
   @column.dateTime({ autoCreate: true })
-  public createdAt: DateTime
+  public createdAt: DateTime;
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
-  public updatedAt: DateTime
+  public updatedAt: DateTime;
 }
