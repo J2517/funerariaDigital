@@ -19,10 +19,10 @@ export default class BeneficiarysController {
     }
 
     /**
-    * Muestra la información de un solo Beneficiarios
+    * Muestra la información de un solo Beneficiario
     */
     public async show({ params }: HttpContextContract) {
-        return Beneficiary.findOrFail(params.id);
+        return Beneficiary.query().where("id", params.id).preload('headquater');
     }
 
     /**

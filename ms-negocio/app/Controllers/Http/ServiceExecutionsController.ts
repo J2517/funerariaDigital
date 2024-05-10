@@ -6,7 +6,8 @@ export default class ServiceExecutionsController {
     * Lista todas las ejecuciones de servicios
     */
     public async index() {
-        return ServiceExecution.all();
+        let serviceExecutions: ServiceExecution[] = await ServiceExecution.query().preload('chat')
+        return serviceExecutions
     } 
 
     /**
@@ -22,7 +23,8 @@ export default class ServiceExecutionsController {
     * Muestra la información de una sola ejecución de servicio
     */
     public async show({ params }: HttpContextContract) {
-        return ServiceExecution.findOrFail(params.id);
+        return ServiceExecution.query().where("id", params.id).preload('chat')
+                                                              .preload('comments');
     }
 
     /**

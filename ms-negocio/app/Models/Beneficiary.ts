@@ -1,5 +1,6 @@
 import { DateTime } from "luxon";
-import { BaseModel, column } from "@ioc:Adonis/Lucid/Orm";
+import { BaseModel, HasMany, column, hasMany } from "@ioc:Adonis/Lucid/Orm";
+import Headquarter from "./Headquarter";
 
 export default class Beneficiary extends BaseModel {
   @column({ isPrimary: true })
@@ -22,4 +23,9 @@ export default class Beneficiary extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime;
+
+  @hasMany(()=> Headquarter,{
+    foreignKey: 'beneficiary_id',
+  })
+  public headquater: HasMany<typeof Headquarter>
 }

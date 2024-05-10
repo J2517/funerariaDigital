@@ -21,6 +21,9 @@ export default class Headquarter extends BaseModel {
   @column()
   public description: string
 
+  @column()
+  public beneficiary_id:number
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 

@@ -22,7 +22,10 @@ export default class CustomersController {
     * Muestra la información de un solo cliente
     */
     public async show({ params }: HttpContextContract) {
-        return Customer.findOrFail(params.id);
+        let theCustomer: Customer = await Customer.query().where("id", params.id)
+                                                         .preload('plans')
+                                                         .firstOrFail();
+        return theCustomer
     }
 
     /**
