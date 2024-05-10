@@ -14,8 +14,8 @@ export default class ChatsController {
     */
     public async store({ request }: HttpContextContract) {
         const body = request.body();
-        const nuevo_chat = await Chat.create(body);
-        return nuevo_chat;
+        const theChat = await Chat.create(body);
+        return theChat;
     }
 
     /**
@@ -30,18 +30,18 @@ export default class ChatsController {
     */
     public async update({ params, request }: HttpContextContract) {
         const body = request.body();
-        const el_chat = await Chat.findOrFail(params.id);
-        el_chat.merge(body);
-        await el_chat.save();
-        return el_chat;
+        const theChat = await Chat.findOrFail(params.id);
+        theChat.merge(body);
+        await theChat.save();
+        return theChat;
     }
 
     /**
     * Elimina un chat basado en el identificador
     */
     public async destroy({ params }: HttpContextContract) {
-        const el_chat = await Chat.findOrFail(params.id);
-        return el_chat.delete();
+        const theChat = await Chat.findOrFail(params.id);
+        return theChat.delete();
     }
 }
 

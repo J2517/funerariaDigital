@@ -9,14 +9,14 @@ export default class SubscriptionsController {
     return Subcription.all();
   }
 
-  /**
-   * Almacena la información de una suscripción
-   */
-  public async store({ request }: HttpContextContract) {
-    const body = request.body();
-    const nueva_suscripcion = await Subcription.create(body);
-    return nueva_suscripcion;
-  }
+    /**
+    * Almacena la información de una suscripción
+    */
+    public async store({ request }: HttpContextContract) {
+        const body = request.body();
+        const theSubcription = await Subcription.create(body);
+        return theSubcription;
+    }
 
   /**
    * Muestra la información de una sola suscripción
@@ -36,11 +36,11 @@ export default class SubscriptionsController {
     return la_suscripcion;
   }
 
-  /**
-   * Elimina una suscripción basada en el identificador
-   */
-  public async destroy({ params }: HttpContextContract) {
-    const la_suscripcion = await Subcription.findOrFail(params.id);
-    return la_suscripcion.delete();
-  }
+    /**
+    * Elimina una suscripción basada en el identificador
+    */
+    public async destroy({ params }: HttpContextContract) {
+        const theSubcription = await Subcription.findOrFail(params.id);
+        return theSubcription.delete();
+    }
 }

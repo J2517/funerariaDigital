@@ -1,28 +1,28 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import ServiceExecution from 'App/Models/ServiceExecution'
+import PlanService from 'App/Models/PlanService'
 
 export default class ServiceExecutionsController {
     /**
     * Lista todas las ejecuciones de servicios
     */
     public async index() {
-        return ServiceExecution.all();
-    } 
+        return PlanService.all();
+    }
 
     /**
     * Almacena la información de una ejecución de servicio
     */
     public async store({ request }: HttpContextContract) {
         const body = request.body();
-        const theExecution = await ServiceExecution.create(body);
-        return theExecution;
+        const thePlanService = await PlanService.create(body);
+        return thePlanService;
     }
 
     /**
     * Muestra la información de una sola ejecución de servicio
     */
     public async show({ params }: HttpContextContract) {
-        return ServiceExecution.findOrFail(params.id);
+        return PlanService.findOrFail(params.id);
     }
 
     /**
@@ -30,18 +30,18 @@ export default class ServiceExecutionsController {
     */
     public async update({ params, request }: HttpContextContract) {
         const body = request.body();
-        const theExecution = await ServiceExecution.findOrFail(params.id);
-        theExecution.merge(body);
-        await theExecution.save();
-        return theExecution;
+        const thePlanService = await PlanService.findOrFail(params.id);
+        thePlanService.merge(body);
+        await thePlanService.save(); 
+        return thePlanService;
     }
 
     /**
     * Elimina una ejecución de servicio basada en el identificador
     */
     public async destroy({ params }: HttpContextContract) {
-        const theExecution = await ServiceExecution.findOrFail(params.id);
-        return theExecution.delete();
+        const thePlanService = await PlanService.findOrFail(params.id);
+        return thePlanService.delete();
     }
 }
 

@@ -102,11 +102,23 @@ Route.get("/plans/:id","PlansController.show");
 Route.put("/plans/:id","PlansController.update");
 Route.delete("/plans/:id","PlansController.destroy");
 
+Route.get("/plan_services","PlanServicesController.index");
+Route.post("/plan_services","PlanServicesController.store");
+Route.get("/plan_services/:id","PlanServicesController.show");
+Route.put("/plan_services/:id","PlanServicesController.update");
+Route.delete("/plan_services/:id","PlanServicesController.destroy");
+
 Route.get("/roles", "RolesController.index");
 Route.post("/roles", "RolesController.store");
 Route.get("/roles/:id", "RolesController.show");
 Route.put("/roles/:id", "RolesController.update");
 Route.delete("/roles/:id", "RolesController.destroy");
+
+Route.get("/role_permissions", "RolePermissionsController.index");
+Route.post("/role_permissions", "RolePermissionsController.store");
+Route.get("/role_permissions/:id", "RolePermissionsController.show");
+Route.put("/role_permissions/:id", "RolePermissionsController.update");
+Route.delete("/role_permissions/:id", "RolePermissionsController.destroy");
 
 Route.get("/rooms","RoomsController.index");
 Route.post("/rooms","RoomsController.store");

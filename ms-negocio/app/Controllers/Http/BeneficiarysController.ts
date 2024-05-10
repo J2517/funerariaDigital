@@ -1,7 +1,7 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Beneficiary from 'App/Models/Beneficiary'
 
-export default class BeneficiaryController {
+export default class BeneficiarysController {
     /**
     * Lista todos los Beneficiarios
     */
@@ -14,8 +14,8 @@ export default class BeneficiaryController {
     */
     public async store({ request }: HttpContextContract) {
         const body = request.body();
-        const nuevo_Beneficiary = await Beneficiary.create(body);
-        return nuevo_Beneficiary;
+        const theBeneficiary = await Beneficiary.create(body);
+        return theBeneficiary;
     }
 
     /**
@@ -30,18 +30,18 @@ export default class BeneficiaryController {
     */
     public async update({ params, request }: HttpContextContract) {
         const body = request.body();
-        const el_Beneficiary = await Beneficiary.findOrFail(params.id);
-        el_Beneficiary.merge(body);
-        await el_Beneficiary.save();
-        return el_Beneficiary;
+        const theBeneficiary = await Beneficiary.findOrFail(params.id);
+        theBeneficiary.merge(body);
+        await theBeneficiary.save();
+        return theBeneficiary;
     }
 
     /**
     * Elimina a un Beneficiarios basado en el identificador
     */
     public async destroy({ params }: HttpContextContract) {
-        const el_Beneficiary = await Beneficiary.findOrFail(params.id);
-        return el_Beneficiary.delete();
+        const theBeneficiary = await Beneficiary.findOrFail(params.id);
+        return theBeneficiary.delete();
     }
 }
 

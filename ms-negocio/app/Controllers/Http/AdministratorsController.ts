@@ -1,12 +1,12 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import Administrador from 'App/Models/Administrator'
+import Administrator from 'App/Models/Administrator'
 
-export default class AdministradorsController {
+export default class AdministratorsController {
     /**
     * Lista todos los administradores
     */
     public async index() {
-        return Administrador.all();
+        return Administrator.all();
     }
 
     /**
@@ -14,15 +14,15 @@ export default class AdministradorsController {
     */
     public async store({ request }: HttpContextContract) {
         const body = request.body();
-        const nuevo_administrador = await Administrador.create(body);
-        return nuevo_administrador;
+        const theAdministrator = await Administrator.create(body);
+        return theAdministrator;
     }
 
     /**
     * Muestra la información de un solo administrador
     */
     public async show({ params }: HttpContextContract) {
-        return Administrador.findOrFail(params.id);
+        return Administrator.findOrFail(params.id);
     }
 
     /**
@@ -30,18 +30,18 @@ export default class AdministradorsController {
     */
     public async update({ params, request }: HttpContextContract) {
         const body = request.body();
-        const el_administrador = await Administrador.findOrFail(params.id);
-        el_administrador.merge(body);
-        await el_administrador.save();
-        return el_administrador;
+        const theAdministrator = await Administrator.findOrFail(params.id);
+        theAdministrator.merge(body);
+        await theAdministrator.save();
+        return theAdministrator;
     }
 
     /**
     * Elimina a un administrador basado en el identificador
     */
     public async destroy({ params }: HttpContextContract) {
-        const el_administrador = await Administrador.findOrFail(params.id);
-        return el_administrador.delete();
+        const theAdministrator = await Administrator.findOrFail(params.id);
+        return theAdministrator.delete();
     }
 }
 

@@ -14,8 +14,8 @@ export default class PaymentsController {
     */
     public async store({ request }: HttpContextContract) {
         const body = request.body();
-        const nuevo_pago = await Payment.create(body);
-        return nuevo_pago;
+        const thePayment = await Payment.create(body);
+        return thePayment;
     }
 
     /**
@@ -30,17 +30,17 @@ export default class PaymentsController {
     */
     public async update({ params, request }: HttpContextContract) {
         const body = request.body();
-        const el_pago = await Payment.findOrFail(params.id);
-        el_pago.merge(body);
-        await el_pago.save();
-        return el_pago;
+        const thePayment = await Payment.findOrFail(params.id);
+        thePayment.merge(body);
+        await thePayment.save();
+        return thePayment;
     }
 
     /**
     * Elimina un pago basado en el identificador
     */
     public async destroy({ params }: HttpContextContract) {
-        const el_pago = await Payment.findOrFail(params.id);
-        return el_pago.delete();
+        const thePayment = await Payment.findOrFail(params.id);
+        return thePayment.delete();
     }
 }

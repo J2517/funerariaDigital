@@ -1,7 +1,7 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Cremation from 'App/Models/Cremation'
 
-export default class CremationController {
+export default class CremationsController {
     /**
     * Lista todas las cremaciones
     */
@@ -14,8 +14,8 @@ export default class CremationController {
     */
     public async store({ request }: HttpContextContract) {
         const body = request.body();
-        const nueva_cremacion = await Cremation.create(body);
-        return nueva_cremacion;
+        const theCremation = await Cremation.create(body);
+        return theCremation;
     }
 
     /**
@@ -30,17 +30,17 @@ export default class CremationController {
     */
     public async update({ params, request }: HttpContextContract) {
         const body = request.body();
-        const la_cremacion = await Cremation.findOrFail(params.id);
-        la_cremacion.merge(body);
-        await la_cremacion.save();
-        return la_cremacion;
+        const theCremation = await Cremation.findOrFail(params.id);
+        theCremation.merge(body);
+        await theCremation.save();
+        return theCremation;
     }
 
     /**
     * Elimina una cremación basada en el identificador
     */
     public async destroy({ params }: HttpContextContract) {
-        const la_cremacion = await Cremation.findOrFail(params.id);
-        return la_cremacion.delete();
+        const theCremation = await Cremation.findOrFail(params.id);
+        return theCremation.delete();
     }
 }

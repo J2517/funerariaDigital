@@ -29,7 +29,7 @@ export default class User extends BaseModel {
     pivotRelatedForeignKey: "service_id",
     pivotColumns: ["date", "description", "price"],
   })
-  public services: ManyToMany<typeof Service>;
+  public services: ManyToMany<typeof Service>; 
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime;

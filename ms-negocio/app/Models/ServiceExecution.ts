@@ -20,7 +20,7 @@ export default class ServiceExecution extends BaseModel {
   @column()
   public user_id: number;
 
-  @column.dateTime({ autoCreate: true })
+  @column.dateTime({ autoCreate: true }) 
   public createdAt: DateTime;
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
