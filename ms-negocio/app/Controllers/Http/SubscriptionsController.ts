@@ -1,5 +1,5 @@
 import { HttpContextContract } from "@ioc:Adonis/Core/HttpContext";
-import Subcription from "App/Models/Subcription";
+import Subcription from "App/Models/Subscription";
 
 export default class SubscriptionsController {
   /**

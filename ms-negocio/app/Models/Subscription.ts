@@ -22,7 +22,7 @@ export default class Subcription extends BaseModel {
   public status: boolean;
 
   @hasMany(() => Payment, {
-    foreignKey: "suscription_id",
+    foreignKey: "subscription_id",
   })
   public payments: HasMany<typeof Payment>;
 

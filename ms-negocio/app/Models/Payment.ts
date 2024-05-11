@@ -21,7 +21,7 @@ export default class Payment extends BaseModel {
   public date: DateTime
 
   @column()
-  public suscription_id: number
+  public subscription_id: number
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

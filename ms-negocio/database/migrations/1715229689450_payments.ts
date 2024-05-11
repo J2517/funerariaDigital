@@ -12,7 +12,7 @@ export default class extends BaseSchema {
       table.string("reference").notNullable();
       table.string("description").nullable();
       table.dateTime("date").notNullable();
-      table.integer("suscription_id").unsigned().references("suscriptions.id");
+      table.integer("subscrition_id").unsigned().references("subscriptions.id");
       table.timestamp("created_at", { useTz: true });
       table.timestamp("updated_at", { useTz: true });
     });
