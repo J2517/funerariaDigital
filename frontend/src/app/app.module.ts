@@ -10,6 +10,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
 import { ListComponent } from "./pages/service-execution/list/list.component";
+import { ManageComponent } from './pages/accountHolder/manage/manage.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { ListComponent } from "./pages/service-execution/list/list.component";
     AppComponent,
     AdminLayoutComponent,
     AuthLayoutComponent,
-    ListComponent
+    ListComponent,
+    ManageComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
