@@ -1,31 +1,31 @@
-import { DateTime } from 'luxon'
-import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
+import { DateTime } from "luxon";
+import { BaseModel, column } from "@ioc:Adonis/Lucid/Orm";
 
 export default class Payment extends BaseModel {
   @column({ isPrimary: true })
-  public id: number
+  public id: number;
 
   @column()
-  public amount: number
+  public amount: number;
 
   @column()
-  public method: string
+  public method: string;
 
   @column()
-  public reference: string
+  public reference: string;
 
   @column()
-  public description: string
+  public description: string;
 
   @column()
-  public date: DateTime
+  public date: DateTime;
 
   @column()
-  public suscription_id: number
+  public subscription_id: number;
 
   @column.dateTime({ autoCreate: true })
-  public createdAt: DateTime
+  public createdAt: DateTime;
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
-  public updatedAt: DateTime
+  public updatedAt: DateTime;
 }

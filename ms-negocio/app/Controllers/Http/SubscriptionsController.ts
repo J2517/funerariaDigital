@@ -1,5 +1,5 @@
 import { HttpContextContract } from "@ioc:Adonis/Core/HttpContext";
-import Subcription from "App/Models/Subcription";
+import Subcription from "App/Models/Subscription";
 
 export default class SubscriptionsController {
   /**
@@ -9,14 +9,14 @@ export default class SubscriptionsController {
     return Subcription.all();
   }
 
-    /**
-    * Almacena la información de una suscripción
-    */
-    public async store({ request }: HttpContextContract) {
-        const body = request.body();
-        const theSubcription = await Subcription.create(body);
-        return theSubcription;
-    }
+  /**
+   * Almacena la información de una suscripción
+   */
+  public async store({ request }: HttpContextContract) {
+    const body = request.body();
+    const theSubcription = await Subcription.create(body);
+    return theSubcription;
+  }
 
   /**
    * Muestra la información de una sola suscripción
@@ -36,11 +36,11 @@ export default class SubscriptionsController {
     return la_suscripcion;
   }
 
-    /**
-    * Elimina una suscripción basada en el identificador
-    */
-    public async destroy({ params }: HttpContextContract) {
-        const theSubcription = await Subcription.findOrFail(params.id);
-        return theSubcription.delete();
-    }
+  /**
+   * Elimina una suscripción basada en el identificador
+   */
+  public async destroy({ params }: HttpContextContract) {
+    const theSubcription = await Subcription.findOrFail(params.id);
+    return theSubcription.delete();
+  }
 }
