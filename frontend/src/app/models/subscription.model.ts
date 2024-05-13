@@ -1,2 +1,1 @@
-export class Subscription {
-}
+export class Subscription {}

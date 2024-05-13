@@ -23,6 +23,6 @@ export class SubscriptionService {
     return this.http.post<Subscription>(`${environment.url_ms_negocio}/subscription`, newSubscription);
   }
   update(theSubscription: Subscription): Observable<Subscription> {
-    return this.http.put<Subscription>(`${environment.url_ms_negocio}/subscription/${theSubscription.id}`, theSubscription);
+    return this.http.put<Subscription>(`${environment.url_ms_negocio}/subscription/${theSubscription.}`, theSubscription);
   }
 }
