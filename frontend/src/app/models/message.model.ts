@@ -1,8 +1,8 @@
-import { Usuario } from "./user.model";
+import { User } from "./user.model";
 import { Chat } from "./chat.model";
 export class Message {
   id?: string;
   information: string;
-  usuario: Usuario;
+  usuario: User;
   chat: Chat;
 }
