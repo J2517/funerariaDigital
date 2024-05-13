@@ -23,6 +23,6 @@ export class CommentService {
     return this.http.post<Comment>(`${environment.url_ms_negocio}/comment`, newComment);
   }
   update(theComment: Comment): Observable<Comment> {
-    return this.http.put<Comment>(`${environment.url_ms_negocio}/campus/${theComment.id}`, theComment);
+    return this.http.put<Comment>(`${environment.url_ms_negocio}/comment/${theComment.id}`, theComment);
   }
 }
