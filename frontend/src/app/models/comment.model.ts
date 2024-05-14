@@ -3,5 +3,5 @@ export class Comment {
   id?:string;
   message:string;
   sendDate:Date;
-  execution:ServiceExecution;
+  serviceExecution:ServiceExecution;
 }

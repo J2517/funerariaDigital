@@ -4,11 +4,7 @@ export class Campus {
   id?: string;
   name: string;
   location: string;
-  Email: string;
+  email: string;
   city: string;
-  salas: ListComponent;
-
-  public addHall(): void {}
-
-  public deleteHall(): void {}
+  hall: ListComponent;
 }

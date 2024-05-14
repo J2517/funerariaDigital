@@ -6,7 +6,7 @@ export class Hall {
   id?:string;
   name:string;
   capacity:number;
-  disponible:boolean;
+  disponibility:boolean;
   campus:Campus;
   cremations:ListComponent;
   graves:ListComponentGrave;

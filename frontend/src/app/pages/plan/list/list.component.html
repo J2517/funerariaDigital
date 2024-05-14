@@ -21,12 +21,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngfor="let actual of theaters">
+                    <tr *ngfor="let actual of plan">
                         <td>{{actual.id}}</td>
-                        <td>{{actual.nombre}}</td>
-                        <td>{{actual.descripcion}}</td>
-                        <td>{{actual.costo}}</td>
-                        <td>{{actual.duracion}}</td>
+                        <td>{{actual.name}}</td>
+                        <td>{{actual.description}}</td>
+                        <td>{{actual.price}}</td>
+                        <td>{{actual.duration}}</td>
                         <td>
                             <button type="button" class="btn btn-primary">Ver</button>
                             <button type="button" class="btn btn-primary">Editar</button>

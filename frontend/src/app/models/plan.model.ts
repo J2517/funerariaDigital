@@ -1,7 +1,7 @@
 export class Plan {
     id?: number;
-    nombre: string;
-    descripcion: string;
-    costo: number;
-    duracion: number;
+    name: string;
+    description: string;
+    price: number;
+    duration: number;
 }

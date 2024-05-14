@@ -22,12 +22,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let actual of serviceExecutions">
+                    <tr *ngFor="let actual of serviceExecution">
                         <td>{{actual.id}}</td>
-                        <td>{{actual.idServicio}}</td>
-                        <td>{{actual.fechaInicio | date: 'dd/MM/yyyy'}}</td>
-                        <td>{{actual.fechaFin | date: 'dd/MM/yyyy'}}</td>
-                        <td>{{actual.estado}}</td>
+                        <td>{{actual.idService}}</td>
+                        <td>{{actual.startDate | date: 'dd/MM/yyyy'}}</td>
+                        <td>{{actual.endDate | date: 'dd/MM/yyyy'}}</td>
+                        <td>{{actual.state}}</td>
                         <td>
                             <button type="button" class="btn btn-primary">Ver</button>
                             <button type="button" class="btn btn-primary">Editar</button>

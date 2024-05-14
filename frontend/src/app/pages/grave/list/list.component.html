@@ -20,11 +20,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngfor="let actual of graves">
+                    <tr *ngfor="let actual of grave">
                         <td>{{actual.id}}</td>
-                        <td>{{actual.ubicacion}}</td>
-                        <td>{{actual.costo}}</td>
-                        <td>{{actual.ocupada}}</td>
+                        <td>{{actual.location}}</td>
+                        <td>{{actual.price}}</td>
+                        <td>{{actual.busy}}</td>
                         <td>
                             <button type="button" class="btn btn-primary">Ver</button>
                             <button type="button" class="btn btn-primary">Editar</button>

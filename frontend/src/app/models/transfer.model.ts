@@ -1,8 +1,8 @@
 export class Transfer {
     id?: number;
-    idTraslado: number;
-    origen: string;
-    destino: string;
-    fecha: Date;
-    costo: number;
+    idTraslate: number;
+    origin: string;
+    destination: string;
+    date: Date;
+    price: number;
 }
