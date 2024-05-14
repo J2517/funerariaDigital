@@ -1,0 +1,24 @@
+[33m0947fed[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m HEAD@{0}: checkout: moving from main to main
+[33m0947fed[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m HEAD@{1}: reset: moving to origin/main
+[33mb257d7a[m HEAD@{2}: reset: moving to HEAD
+[33mb257d7a[m HEAD@{3}: commit: Guardar cambios en entidades.md antes de fusionar con la rama remota
+[33m5a926b7[m HEAD@{4}: commit: migraciones, models y controlers
+[33md2ccd1f[m HEAD@{5}: commit: atributos finales
+[33m17e4935[m HEAD@{6}: commit: No que no
+[33m8258ec1[m HEAD@{7}: commit: Implementación de los Validadores
+[33m714b0f8[m HEAD@{8}: pull: Fast-forward
+[33md4f79a1[m HEAD@{9}: pull: Fast-forward
+[33m2f514d4[m HEAD@{10}: pull: Fast-forward
+[33m58e8ad7[m HEAD@{11}: pull: Fast-forward
+[33m91d5dc2[m HEAD@{12}: pull: Fast-forward
+[33m81e9ceb[m HEAD@{13}: commit: Ultimos ajustes a las relaciones
+[33m52e5f28[m HEAD@{14}: commit (merge): Implementación de ultimas relaciones
+[33ma3e0107[m HEAD@{15}: commit: Implementación de ultimas relaciones
+[33m604db79[m HEAD@{16}: commit: ajustes a las migraciones
+[33m6ab0315[m HEAD@{17}: commit: Implementación de relación n-n de plan-customer(suscripcion) y reorganización de las migraciones para que funcionen correctamente
+[33mab0dab2[m HEAD@{18}: pull: Fast-forward
+[33m3154557[m HEAD@{19}: commit: Correción de las entidades de ms-negocio de español a ingles y ajuste a los CRUDS de cada entidad
+[33m773eb85[m HEAD@{20}: pull: Fast-forward
+[33m9793690[m HEAD@{21}: commit: Inicio de implementación del frontend
+[33m827be00[m HEAD@{22}: pull: Fast-forward
+[33me51af84[m HEAD@{23}: clone: from https://github.com/J2517/funerariaDigital.git
