@@ -2,59 +2,59 @@ Entidades para la creación de ms-negocio
 
 ## Jackeline
 
-- usuario
+- usuario - user  
 
-  - idUsuario
+  - idUsuario- user
   - email
   - password
-  - nombres
-  - apellidos
-  - celular
-  - ciudadResidencia
-  - direccion
-  - idRol fk
+  - nombres- name
+  - apellidos- lastName
+  - celular- number
+  - ciudadResidencia- city
+  - direccion- address
+  - idRol fk- role
 
-- rol
+- rol - role
 
-  - idRol
-  - nombre
-  - detalles
+  - idRol- idrole
+  - nombre- name
+  - detalles-
 
-- permiso
+- permiso- permission
 
   - idPermiso
   - url
   - method
 
-- cliente - se extiende de usuario
+- cliente - se extiende de usuario- customer
 
   -idCliente
   -tipoCliente
 
-- beneficiario - se extiende de cliente
+- beneficiario - se extiende de cliente- beneficiary
 
   - idBeneficiario
   - idTitular
 
-- titular - se extiende de cliente
+- titular - se extiende de cliente- headline
 
   - idTitular
   - tipoPlan
 
-- conductor - se extiende de usuario
+- conductor - se extiende de usuario- driver
 
   - idConductor (fk de idUsuario)
   - idServicio
 
 ## Daniel
 
-comentario
-chat
-mensajes
-sede
-sala
-pago
-suscripción
+comentario- comment
+chat- chat
+mensajes- message
+sede- headquarter
+sala- room
+pago- payment
+suscripción- subscription
 
 ## Juan Manuel
 
@@ -90,7 +90,7 @@ suscripción
 - fecha
 - costo
 
-- ejecución de Servicio (service execution):
+- ejecución de Servicio (service-execution):
 
 - idEjecucionServicio (PK)
 - idServicio (FK)
