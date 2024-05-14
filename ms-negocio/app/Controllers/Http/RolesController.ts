@@ -32,6 +32,7 @@ export default class RolesController {
             const role = await Role.create(payload);
             return role;
         } catch (error) {
+            console.error("Error al crear el rol:", error); // Imprimir el error en la consola
             return response.status(400).send(error.messages);
         }
     }
@@ -66,6 +67,7 @@ export default class RolesController {
             await role.save();
             return role;
         } catch (error) {
+            console.error("Error al actualizar el rol:", error); // Imprimir el error en la consola
             return response.status(400).send(error.messages);
         }
     }
@@ -78,3 +80,4 @@ export default class RolesController {
         return role.delete();
     }
 }
+
