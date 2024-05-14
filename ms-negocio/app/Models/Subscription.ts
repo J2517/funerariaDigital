@@ -7,19 +7,16 @@ export default class Subcription extends BaseModel {
   public id: number;
 
   @column()
-  public userId: number;
-
-  @column()
-  public planId: number;
-
-  @column()
   public start_date: DateTime;
 
   @column()
   public end_date: DateTime;
 
   @column()
-  public status: boolean;
+  public customer_id: number;
+
+  @column()
+  public plan_id: number;
 
   @hasMany(() => Payment, {
     foreignKey: "subscription_id",

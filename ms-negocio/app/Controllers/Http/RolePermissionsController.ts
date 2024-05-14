@@ -1,47 +1,54 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import RolePermission from 'App/Models/RolePermission'
+import { schema, rules } from '@ioc:Adonis/Core/Validator'
 
-export default class ServiceExecutionsController {
+export default class RolePermissionsController {
     /**
-    * Lista todas las ejecuciones de servicios
+    * Lista todos los permisos asociados a un rol
     */
     public async index() {
         return RolePermission.all();
     }
 
     /**
-    * Almacena la información de una ejecución de servicio
+    * Almacena la relación entre un rol y un permiso
     */
-    public async store({ request }: HttpContextContract) {
-        const body = request.body();
-        const theRolePermission = await RolePermission.create(body);
-        return theRolePermission;
+    public async store({ request, response }: HttpContextContract) {
+        try {
+            // Validar los datos de entrada
+            await request.validate({
+                schema: schema.create({
+                    role_id: schema.number([
+                        rules.required(),
+                        rules.unsigned(),
+                    ]),
+                    permission_id: schema.number([
+                        rules.required(),
+                        rules.unsigned(),
+                    ]),
+                }),
+            })
+
+            // Crear la relación si la validación pasa
+            const theRolePermission = await RolePermission.create(request.body());
+            return theRolePermission;
+        } catch (error) {
+            return response.status(400).send(error.messages)
+        }
     }
 
     /**
-    * Muestra la información de una sola ejecución de servicio
+    * Muestra la información de una relación rol-permiso
     */
     public async show({ params }: HttpContextContract) {
         return RolePermission.findOrFail(params.id);
     }
 
     /**
-    * Actualiza la información de una ejecución de servicio basada en el identificador y nuevos parámetros
-    */
-    public async update({ params, request }: HttpContextContract) {
-        const body = request.body();
-        const theRolePermission = await RolePermission.findOrFail(params.id);
-        theRolePermission.merge(body);
-        await theRolePermission.save(); 
-        return theRolePermission;
-    }
-
-    /**
-    * Elimina una ejecución de servicio basada en el identificador
+    * Elimina una relación rol-permiso basada en el identificador
     */
     public async destroy({ params }: HttpContextContract) {
         const theRolePermission = await RolePermission.findOrFail(params.id);
         return theRolePermission.delete();
     }
 }
-

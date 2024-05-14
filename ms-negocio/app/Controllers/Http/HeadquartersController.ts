@@ -1,47 +1,95 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import Headquarter from 'App/Models/Headquarter'
+import Headquarters from 'App/Models/Headquarter'
+import { schema, rules } from '@ioc:Adonis/Core/Validator'
 
 export default class HeadquartersController {
     /**
-    * Lista todas las sedes
-    */
+     * Lista todas las sedes.
+     */
     public async index() {
-        return Headquarter.all();
+        return Headquarters.all();
     }
 
     /**
-    * Almacena la información de una sede
-    */
-    public async store({ request }: HttpContextContract) {
-        const body = request.body();
-        const theHeadquarter = await Headquarter.create(body);
-        return theHeadquarter;
+     * Almacena una nueva sede.
+     */
+    public async store({ request, response }: HttpContextContract) {
+        try {
+            // Validar los datos de entrada
+            await request.validate({
+                schema: schema.create({
+                    name: schema.string({}, [
+                        rules.required(),
+                    ]),
+                    address: schema.string({}, [
+                        rules.required(),
+                    ]),
+                    telephone: schema.string({}, [
+                        rules.required(),
+                    ]),
+                    email: schema.string({}, [
+                        rules.required(),
+                        rules.email(),
+                    ]),
+                    description: schema.string.optional(),
+                    beneficiary_id: schema.number([
+                        rules.required(),
+                        rules.unsigned(),
+                    ]),
+                }),
+            })
+
+            // Crear la sede si la validación pasa
+            const headquarter = await Headquarters.create(request.body());
+            return headquarter;
+        } catch (error) {
+            return response.status(400).send(error.messages)
+        }
     }
 
     /**
-    * Muestra la información de una sola sede
-    */
+     * Muestra una sola sede.
+     */
     public async show({ params }: HttpContextContract) {
-        return Headquarter.findOrFail(params.id);
+        return Headquarters.findOrFail(params.id);
     }
 
     /**
-    * Actualiza la información de una sede basada en el identificador y nuevos parámetros
-    */
-    public async update({ params, request }: HttpContextContract) {
-        const body = request.body();
-        const theHeadquarter = await Headquarter.findOrFail(params.id);
-        theHeadquarter.merge(body);
-        await theHeadquarter.save();
-        return theHeadquarter;
+     * Actualiza una sede basada en el identificador y nuevos parámetros.
+     */
+    public async update({ params, request, response }: HttpContextContract) {
+        try {
+            // Validar los datos de entrada
+            await request.validate({
+                schema: schema.create({
+                    name: schema.string.optional(),
+                    address: schema.string.optional(),
+                    telephone: schema.string.optional(),
+                    email: schema.string.optional(),
+                    description: schema.string.optional(),
+                    beneficiary_id: schema.number.optional([
+                        rules.unsigned(),
+                    ]),
+                }),
+            })
+
+            // Actualizar la sede si la validación pasa
+            const headquarter = await Headquarters.findOrFail(params.id);
+            headquarter.merge(request.body());
+            await headquarter.save();
+            return headquarter;
+        } catch (error) {
+            return response.status(400).send(error.messages)
+        }
     }
 
     /**
-    * Elimina una sede basada en el identificador
-    */
+     * Elimina una sede basada en el identificador.
+     */
     public async destroy({ params }: HttpContextContract) {
-        const theHeadquarter = await Headquarter.findOrFail(params.id);
-        return theHeadquarter.delete();
+        const headquarter = await Headquarters.findOrFail(params.id);
+        return headquarter.delete();
     }
 }
+
 

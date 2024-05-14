@@ -1,47 +1,54 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import PlanService from 'App/Models/PlanService'
+import { schema, rules } from '@ioc:Adonis/Core/Validator'
 
-export default class ServiceExecutionsController {
+export default class PlanServicesController {
     /**
-    * Lista todas las ejecuciones de servicios
+    * Lista todos los servicios asociados a un plan
     */
     public async index() {
         return PlanService.all();
     }
 
     /**
-    * Almacena la información de una ejecución de servicio
+    * Almacena la relación entre un plan y un servicio
     */
-    public async store({ request }: HttpContextContract) {
-        const body = request.body();
-        const thePlanService = await PlanService.create(body);
-        return thePlanService;
+    public async store({ request, response }: HttpContextContract) {
+        try {
+            // Validar los datos de entrada
+            await request.validate({
+                schema: schema.create({
+                    plan_id: schema.number([
+                        rules.required(),
+                        rules.unsigned(),
+                    ]),
+                    service_id: schema.number([
+                        rules.required(),
+                        rules.unsigned(),
+                    ]),
+                }),
+            })
+
+            // Crear la relación si la validación pasa
+            const thePlanService = await PlanService.create(request.body());
+            return thePlanService;
+        } catch (error) {
+            return response.status(400).send(error.messages)
+        }
     }
 
     /**
-    * Muestra la información de una sola ejecución de servicio
+    * Muestra la información de una relación plan-servicio
     */
     public async show({ params }: HttpContextContract) {
         return PlanService.findOrFail(params.id);
     }
 
     /**
-    * Actualiza la información de una ejecución de servicio basada en el identificador y nuevos parámetros
-    */
-    public async update({ params, request }: HttpContextContract) {
-        const body = request.body();
-        const thePlanService = await PlanService.findOrFail(params.id);
-        thePlanService.merge(body);
-        await thePlanService.save(); 
-        return thePlanService;
-    }
-
-    /**
-    * Elimina una ejecución de servicio basada en el identificador
+    * Elimina una relación plan-servicio basada en el identificador
     */
     public async destroy({ params }: HttpContextContract) {
         const thePlanService = await PlanService.findOrFail(params.id);
         return thePlanService.delete();
     }
 }
-
