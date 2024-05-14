@@ -30,17 +30,17 @@ export const AdminLayoutRoutes: Routes = [
   {
     path: "campus",
     loadChildren: () =>
-      import("../../pages/campus/campus.module").then((m) => m.CampusModule),
+      import("../../pages/head-quarter/head-quarter.module").then((m) => m.HeadQuarterModule),
   },
   {
     path: "hall",
     loadChildren: () =>
-      import("../../pages/hall/hall.module").then((m) => m.HallModule),
+      import("../../pages/room/room.module").then((m) => m.RoomModule),
   },
   {
     path: "pay",
     loadChildren: () =>
-      import("../../pages/pay/pay.module").then((m) => m.PayModule),
+      import("../../pages/payment/payment.module").then((m) => m.PaymentModule),
   },
   {
     path: "subscription",
@@ -69,7 +69,7 @@ export const AdminLayoutRoutes: Routes = [
   {
     path: "client",
     loadChildren: () =>
-      import("../../pages/client/client.module").then((m) => m.ClientModule),
+      import("../../pages/customer/customer.module").then((m) => m.CustomerModule),
   },
   {
     path: "beneficiary",
@@ -81,8 +81,8 @@ export const AdminLayoutRoutes: Routes = [
   {
     path: "account-holder",
     loadChildren: () =>
-      import("../../pages/account-holder/account-holder.module").then(
-        (m) => m.AccountHolderModule
+      import("../../pages/head-line/head-line.module").then(
+        (m) => m.HeadLineModule
       ),
   },
   {
