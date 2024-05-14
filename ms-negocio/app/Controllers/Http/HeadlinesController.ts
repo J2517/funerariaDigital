@@ -18,7 +18,7 @@ export default class HeadlinesController {
             // Validar los datos de entrada
             const payload = await request.validate({
                 schema: schema.create({
-                    tipoPlan: schema.string({ trim: true }, [
+                    tipo_plan: schema.string({ trim: true }, [
                         rules.required(),
                         rules.maxLength(255),
                     ]),
@@ -33,6 +33,7 @@ export default class HeadlinesController {
             const headline = await Headline.create(payload);
             return headline;
         } catch (error) {
+            console.log(error);
             return response.status(400).send(error.messages);
         }
     }

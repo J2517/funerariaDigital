@@ -7,7 +7,7 @@ export default class Headline extends BaseModel {
   public id: number;
 
   @column()
-  public tipoPlan: string;
+  public tipo_plan: string;
 
   @column()
   public user_id: number;
