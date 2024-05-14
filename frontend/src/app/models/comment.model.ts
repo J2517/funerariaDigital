@@ -1,7 +1,6 @@
-import {ServiceExecution} from "./service-execution.model";
 export class Comment {
-  id?:string;
+  id?:number;
   message:string;
   sendDate:Date;
-  serviceExecution:ServiceExecution;
+  serviceExecution_id?:number;
 }

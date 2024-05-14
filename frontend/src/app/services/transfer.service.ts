@@ -14,7 +14,7 @@ export class TransferService {
   list(): Observable<Transfer[]> { // Esto es como una promesa
     return this.http.get<Transfer[]>(`${environment.url_ms_negocio}/transfers`);
     }
-    delete(id:string){
+    delete(id:number){
     return this.http.delete<Transfer>(`${environment.url_ms_negocio}/transfers/${id}`,
     );
   }

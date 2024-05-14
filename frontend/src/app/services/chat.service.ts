@@ -13,10 +13,10 @@ export class ChatService {
   list(): Observable<Chat[]> { // Esto es como una promesa
     return this.http.get<Chat[]>(`${environment.url_ms_negocio}/chat`);
   }
-  delete(id:string){
+  delete(id:number){
     return this.http.delete<Chat>(`${environment.url_ms_negocio}/chat/${id}`);
   }
-  view(id:string):Observable<Chat> {
+  view(id:number):Observable<Chat> {
     return this.http.get<Chat>(`${environment.url_ms_negocio}/chat/${id}`);
   }
   create(newChat: Chat): Observable<Chat> {

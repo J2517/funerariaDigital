@@ -14,7 +14,7 @@ export class PlanService {
   list(): Observable<Plan[]> { // Esto es como una promesa
     return this.http.get<Plan[]>(`${environment.url_ms_negocio}/plans`);
     }
-    delete(id:string){
+    delete(id:number){
     return this.http.delete<Plan>(`${environment.url_ms_negocio}/plans/${id}`,
     );
   }

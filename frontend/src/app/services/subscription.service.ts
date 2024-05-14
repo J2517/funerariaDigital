@@ -13,10 +13,10 @@ export class SubscriptionService {
   list(): Observable<Subscription[]> { // Esto es como una promesa
     return this.http.get<Subscription[]>(`${environment.url_ms_negocio}/subscription`);
   }
-  delete(id:string){
+  delete(id:number){
     return this.http.delete<Subscription>(`${environment.url_ms_negocio}/subscription/${id}`);
   }
-  view(id:string):Observable<Subscription> {
+  view(id:number):Observable<Subscription> {
     return this.http.get<Subscription>(`${environment.url_ms_negocio}/subscription/${id}`);
   }
   create(newSubscription: Subscription): Observable<Subscription> {

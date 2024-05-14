@@ -22,7 +22,7 @@ export class ListComponent implements OnInit {
       this.chat=data;
     })
   }
-  delete(id: string) {
+  delete(id: number) {
     Swal.fire({
       title: "Eliminar registro",
       text: "Está seguro que quiere eliminar el registro?",

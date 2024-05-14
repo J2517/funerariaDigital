@@ -11,7 +11,7 @@ import Swal from 'sweetalert2';
 export class ListComponent implements OnInit {
   theaters:Theater[]
 
-  constructor(private service:TheaterService) { 
+  constructor(private service:TheaterService) {
     this.theaters=[]
   }
 
@@ -26,7 +26,7 @@ export class ListComponent implements OnInit {
     })
   }
 
-  delete(id: string) {
+  delete(id: number) {
     Swal.fire({
       title: "Eliminar registro",
       text: "Está seguro que quiere eliminar el registro?",
@@ -49,4 +49,3 @@ export class ListComponent implements OnInit {
     });
   }
 }
-  

@@ -13,7 +13,7 @@ export class AdministratorService {
   list(): Observable<Administrator[]> { // Esto es como una promesa
     return this.http.get<Administrator[]>(`${environment.url_ms_negocio}/administrators`);
   }
-  delete(id:string){
+  delete(id:number){
     return this.http.delete<Administrator>(`${environment.url_ms_negocio}/administrators/${id}`,);
   }
 }

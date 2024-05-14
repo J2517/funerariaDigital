@@ -1,8 +1,8 @@
 export class Administrator {
-    id?:string;
+    id?:number;
     name:string;
     lastName:string;
     email:string;
     password:string;
-    number:string
+    number:string;
 }

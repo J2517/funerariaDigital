@@ -1,10 +1,8 @@
-import { ListComponent } from "../pages/hall/list/list.component";
-
 export class Campus {
-  id?: string;
+  id?: number;
   name: string;
   location: string;
   email: string;
   city: string;
-  hall: ListComponent;
+  hall_id?: number;
 }

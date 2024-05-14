@@ -14,7 +14,7 @@ export class ServiceExecutionService {
   list(): Observable<ServiceExecution[]> { // Esto es como una promesa
     return this.http.get<ServiceExecution[]>(`${environment.url_ms_negocio}/serviceExecutions`);
     }
-    delete(id:string){
+    delete(id:number){
     return this.http.delete<ServiceExecution>(`${environment.url_ms_negocio}/serviceExecutions/${id}`,
     );
   }

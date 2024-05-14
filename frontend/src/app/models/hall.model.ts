@@ -1,13 +1,9 @@
-import {Campus} from "./campus.model";
-import {ListComponent} from "../pages/campus/list/list.component"
-import {ListComponentGrave} from "../pages/grave/list/list.component"
-
 export class Hall {
-  id?:string;
+  id?:number;
   name:string;
   capacity:number;
   disponibility:boolean;
-  campus:Campus;
-  cremations:ListComponent;
-  graves:ListComponentGrave;
+  campus_id?:number;
+  cremations_id?:number;
+  graves_id?:number;
 }

@@ -13,10 +13,10 @@ export class HallService {
   list(): Observable<Hall[]> { // Esto es como una promesa
     return this.http.get<Hall[]>(`${environment.url_ms_negocio}/hall`);
   }
-  delete(id:string){
+  delete(id:number){
     return this.http.delete<Hall>(`${environment.url_ms_negocio}/hall/${id}`);
   }
-  view(id:string):Observable<Hall> {
+  view(id:number):Observable<Hall> {
     return this.http.get<Hall>(`${environment.url_ms_negocio}/hall/${id}`);
   }
   create(newHall: Hall): Observable<Hall> {

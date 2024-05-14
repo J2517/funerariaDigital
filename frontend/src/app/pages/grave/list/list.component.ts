@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss']
 })
-export class ListComponentGrave implements OnInit {
+export class ListComponent implements OnInit {
   grave:Grave[];
   constructor(private service:GraveService) {
     this.grave=[];
@@ -22,7 +22,7 @@ export class ListComponentGrave implements OnInit {
       this.grave=data;
     })
   }
-  delete(id: string) {
+  delete(id: number) {
     Swal.fire({
       title: "Eliminar registro",
       text: "Está seguro que quiere eliminar el registro?",

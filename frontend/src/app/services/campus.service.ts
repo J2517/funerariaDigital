@@ -13,10 +13,10 @@ export class CampusService {
   list(): Observable<Campus[]> { // Esto es como una promesa
     return this.http.get<Campus[]>(`${environment.url_ms_negocio}/campus`);
   }
-  delete(id:string){
+  delete(id:number){
     return this.http.delete<Campus>(`${environment.url_ms_negocio}/campus/${id}`);
   }
-  view(id:string):Observable<Campus> {
+  view(id:number):Observable<Campus> {
     return this.http.get<Campus>(`${environment.url_ms_negocio}/campus/${id}`);
   }
   create(newCampus: Campus): Observable<Campus> {

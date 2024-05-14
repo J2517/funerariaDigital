@@ -13,10 +13,10 @@ export class MessageService {
   list(): Observable<Message[]> { // Esto es como una promesa
     return this.http.get<Message[]>(`${environment.url_ms_negocio}/message`);
   }
-  delete(id:string){
+  delete(id:number){
     return this.http.delete<Message>(`${environment.url_ms_negocio}/message/${id}`);
   }
-  view(id:string):Observable<Message> {
+  view(id:number):Observable<Message> {
     return this.http.get<Message>(`${environment.url_ms_negocio}/message/${id}`);
   }
   create(newMessage: Message): Observable<Message> {

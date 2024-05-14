@@ -14,7 +14,7 @@ export class CremationService {
     list(): Observable<Cremation[]> { // Esto es como una promesa
       return this.http.get<Cremation[]>(`${environment.url_ms_negocio}/cremations`);
       }
-      delete(id:string){
+      delete(id:number){
       return this.http.delete<Cremation>(`${environment.url_ms_negocio}/Cremations/${id}`,
       );
   }

@@ -1,9 +1,7 @@
-import {Subscription} from "./subscription.model";
-
 export class Pay {
-  id?: String;
+  id?: number;
   amount: number;
   description: string;
   date: Date;
-  subscription: Subscription;
+  subscription_id?: number;
 }
