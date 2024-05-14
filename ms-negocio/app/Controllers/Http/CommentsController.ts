@@ -4,78 +4,77 @@ import { schema, rules } from '@ioc:Adonis/Core/Validator'
 
 export default class CommentsController {
     /**
-     * Lista todos los comentarios.
-     */
-    public async index() {
+    * Lista todos los comentarios
+    */
+    public async index(){
         return Comment.all();
     }
 
     /**
-     * Almacena la información de un comentario.
-     */
-    public async store({ request, response }: HttpContextContract) {
+    * Almacena la información de un comentario
+    */
+    public async store({ request, response }: HttpContextContract){
         try {
             // Validar los datos de entrada
-            await request.validate({
+            const payload = await request.validate({
                 schema: schema.create({
-                    content: schema.string({}, [
+                    content: schema.string([
                         rules.required(),
-                        rules.maxLength(120),
-                    ]),
+                        rules.maxLength(60)]),
                     service_execute_id: schema.number([
                         rules.required(),
-                        rules.unsigned(),
+                    ]),
+                    user_id: schema.number([
+                        rules.required(),
                     ]),
                 }),
-            })
+            });
 
             // Crear el comentario si la validación pasa
-            const theComment = await Comment.create(request.body());
-            return theComment;
+            const comment = await Comment.create(payload);
+            return comment;
         } catch (error) {
-            return response.status(400).send(error.messages)
+            return response.status(400).send(error.messages);
         }
     }
 
     /**
-     * Muestra la información de un solo comentario.
-     */
+    * Muestra la información de un solo comentario
+    */
     public async show({ params }: HttpContextContract) {
         return Comment.findOrFail(params.id);
     }
 
     /**
-     * Actualiza la información de un comentario basado en el identificador y nuevos parámetros.
-     */
+    * Actualiza la información de un comentario basado
+    * en el identificador y nuevos parámetros
+    */
     public async update({ params, request, response }: HttpContextContract) {
         try {
             // Validar los datos de entrada
-            await request.validate({
+            const payload = await request.validate({
                 schema: schema.create({
-                    content: schema.string.optional({}, [
-                        rules.maxLength(120),
-                    ]),
-                    service_execute_id: schema.number.optional([
-                        rules.unsigned(),
-                    ]),
+                    content: schema.string.optional(),
+                    service_execute_id: schema.number.optional(),
+                    user_id: schema.number.optional(),
                 }),
-            })
+            });
 
             // Actualizar el comentario si la validación pasa
-            const theComment = await Comment.findOrFail(params.id);
-            theComment.merge(request.body());
-            await theComment.save();
-            return theComment;
+            const comment = await Comment.findOrFail(params.id);
+            comment.merge(payload);
+            await comment.save();
+            return comment;
         } catch (error) {
-            return response.status(400).send(error.messages)
+            return response.status(400).send(error.messages);
         }
     }
 
     /**
-     * Elimina un comentario basado en el identificador.
-     */
+    * Elimina un comentario basado en el identificador
+    */
     public async destroy({ params }: HttpContextContract) {
-        const theComment = await Comment.findOrFail(params.id);
-        return theComment.delete();
+        const comment = await Comment.findOrFail(params.id);
+        return comment.delete();
     }
 }

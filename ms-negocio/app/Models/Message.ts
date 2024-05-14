@@ -8,6 +8,9 @@ export default class Message extends BaseModel {
   @column()
   public content: string
 
+  @column()
+  public user_id: number;
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 

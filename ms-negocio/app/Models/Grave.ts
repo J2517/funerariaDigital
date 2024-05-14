@@ -29,6 +29,9 @@ export default class Grave extends BaseModel {
   @column()
   public capacity: number
 
+  @column()
+  public service_id: number;
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 

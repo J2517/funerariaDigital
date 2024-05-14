@@ -20,7 +20,6 @@ export default class extends BaseSchema {
       table.timestamp("updated_at", { useTz: true });
     });
   }
-
   public async down() {
     this.schema.dropTable(this.tableName);
   }

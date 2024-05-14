@@ -4,15 +4,15 @@ import { schema, rules } from '@ioc:Adonis/Core/Validator'
 
 export default class GravesController {
     /**
-    * Lista todas las tumbas
-    */
+     * Lista todas las tumbas
+     */
     public async index() {
         return Grave.all();
     }
 
     /**
-    * Almacena la información de una tumba
-    */
+     * Almacena la información de una tumba
+     */
     public async store({ request, response }: HttpContextContract) {
         try {
             // Validar los datos de entrada
@@ -62,15 +62,15 @@ export default class GravesController {
     }
 
     /**
-    * Muestra la información de una sola tumba
-    */
+     * Muestra la información de una sola tumba
+     */
     public async show({ params }: HttpContextContract) {
         return Grave.findOrFail(params.id);
     }
 
     /**
-    * Actualiza la información de una tumba basada en el identificador y nuevos parámetros
-    */
+     * Actualiza la información de una tumba basada en el identificador y nuevos parámetros
+     */
     public async update({ params, request, response }: HttpContextContract) {
         try {
             // Validar los datos de entrada
@@ -114,8 +114,8 @@ export default class GravesController {
     }
 
     /**
-    * Elimina una tumba basada en el identificador
-    */
+     * Elimina una tumba basada en el identificador
+     */
     public async destroy({ params }: HttpContextContract) {
         const theGrave = await Grave.findOrFail(params.id);
         return theGrave.delete();

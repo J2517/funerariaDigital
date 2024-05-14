@@ -30,6 +30,12 @@ export default class Service extends BaseModel {
   @column()
   public type: string;
 
+  @column()
+  public user_id: number;
+
+  @column()
+  public headquarter_id: number;
+
   @manyToMany(() => User, {
     pivotTable: "servicesExecutions",
     pivotForeignKey: "service_id",

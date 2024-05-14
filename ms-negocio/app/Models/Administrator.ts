@@ -5,6 +5,9 @@ export default class Administrator extends BaseModel {
   @column({ isPrimary: true })
   public id: number
 
+  @column()
+  public user_id: number;
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 

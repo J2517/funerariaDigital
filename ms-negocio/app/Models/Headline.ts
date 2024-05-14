@@ -7,13 +7,10 @@ export default class Headline extends BaseModel {
   public id: number;
 
   @column()
-  public name: string;
+  public tipoPlan: string;
 
   @column()
-  public email: string;
-
-  @column()
-  public password: string;
+  public userId: number;
 
   @hasMany(() => Beneficiary, {
     foreignKey: "accountHolder_id",

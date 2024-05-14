@@ -10,7 +10,10 @@ export default class Headquarter extends BaseModel {
   public name: string
 
   @column()
-  public address: string
+  public city: string;
+
+  @column()
+  public department: string;
 
   @column()
   public telephone: string

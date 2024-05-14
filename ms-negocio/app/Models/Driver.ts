@@ -3,10 +3,16 @@ import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
 
 export default class Driver extends BaseModel {
   @column({ isPrimary: true })
-  public id: number
+  public id: number;
 
   @column()
-  public servicioId: string
+  public licencia: string;
+
+  @column()
+  public user_id: number;
+
+  @column()
+  public service_id: number;
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

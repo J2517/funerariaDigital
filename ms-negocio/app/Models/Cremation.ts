@@ -17,6 +17,9 @@ export default class Cremation extends BaseModel {
   @column()
   public description: string
 
+  @column()
+  public service_id: number;
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 

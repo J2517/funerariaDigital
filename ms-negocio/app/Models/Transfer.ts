@@ -20,6 +20,9 @@ export default class Transfer extends BaseModel {
   @column()
   public price: number
 
+  @column()
+  public service_id: number;
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 

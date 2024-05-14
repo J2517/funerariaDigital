@@ -4,79 +4,76 @@ import { schema, rules } from '@ioc:Adonis/Core/Validator'
 
 export default class ChatsController {
     /**
-     * Lista todos los mensajes de chat.
-     */
-    public async index() {
+    * Lista todos los chats
+    */
+    public async index(){
         return Chat.all();
     }
 
     /**
-     * Almacena un nuevo mensaje de chat.
-     */
-    public async store({ request, response }: HttpContextContract) {
+    * Almacena la información de un chat
+    */
+    public async store({ request, response }: HttpContextContract){
         try {
             // Validar los datos de entrada
-            await request.validate({
+            const payload = await request.validate({
                 schema: schema.create({
-                    message: schema.string({}, [
+                    message: schema.string([
                         rules.required(),
-                        rules.maxLength(300),
-                    ]),
+                        rules.maxLength(254)]),
                     service_execute_id: schema.number([
                         rules.required(),
-                        rules.unsigned(),
                     ]),
                 }),
-            })
+            });
 
-            // Crear el mensaje de chat si la validación pasa
-            const chatMessage = await Chat.create(request.body());
-            return chatMessage;
+            // Crear el chat si la validación pasa
+            const chat = await Chat.create(payload);
+            return chat;
         } catch (error) {
-            return response.status(400).send(error.messages)
+            return response.status(400).send(error.messages);
         }
     }
 
     /**
-     * Muestra un solo mensaje de chat.
-     */
+    * Muestra la información de un solo chat
+    */
     public async show({ params }: HttpContextContract) {
         return Chat.findOrFail(params.id);
     }
 
     /**
-     * Actualiza un mensaje de chat basado en el identificador y nuevos parámetros.
-     */
+    * Actualiza la información de un chat basado
+    * en el identificador y nuevos parámetros
+    */
     public async update({ params, request, response }: HttpContextContract) {
         try {
             // Validar los datos de entrada
-            await request.validate({
+            const payload = await request.validate({
                 schema: schema.create({
-                    message: schema.string.optional({}, [
-                        rules.maxLength(300),
-                    ]),
-                    service_execute_id: schema.number.optional([
-                        rules.unsigned(),
-                    ]),
+                    message: schema.string.optional([
+                        rules.required(),
+                        rules.maxLength(254)]),
+                    service_execute_id: schema.number([
+                        rules.required()]),
                 }),
-            })
+            });
 
-            // Actualizar el mensaje de chat si la validación pasa
-            const chatMessage = await Chat.findOrFail(params.id);
-            chatMessage.merge(request.body());
-            await chatMessage.save();
-            return chatMessage;
+            // Actualizar el chat si la validación pasa
+            const chat = await Chat.findOrFail(params.id);
+            chat.merge(payload);
+            await chat.save();
+            return chat;
         } catch (error) {
-            return response.status(400).send(error.messages)
+            return response.status(400).send(error.messages);
         }
     }
 
     /**
-     * Elimina un mensaje de chat basado en el identificador.
-     */
+    * Elimina un chat basado en el identificador
+    */
     public async destroy({ params }: HttpContextContract) {
-        const chatMessage = await Chat.findOrFail(params.id);
-        return chatMessage.delete();
+        const chat = await Chat.findOrFail(params.id);
+        return chat.delete();
     }
 }
-

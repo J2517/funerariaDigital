@@ -11,6 +11,12 @@ export default class Comment extends BaseModel {
   @column()
   public service_execute_id:number
 
+  @column()
+  public serviceExecute_id: number;
+
+  @column()
+  public user_id: number;
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 

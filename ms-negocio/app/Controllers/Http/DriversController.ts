@@ -1,47 +1,74 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Driver from 'App/Models/Driver'
+import { schema } from '@ioc:Adonis/Core/Validator'
 
 export default class DriversController {
     /**
-    * Lista todos los conductores
-    */
-    public async index() {
+     * Lista todos los conductores
+     */
+    public async index(){
         return Driver.all();
     }
 
     /**
-    * Almacena la información de un conductor
-    */
-    public async store({ request }: HttpContextContract) {
-        const body = request.body();
-        const theDriver = await Driver.create(body);
-        return theDriver;
+     * Almacena la información de un conductor
+     */
+    public async store({ request, response }: HttpContextContract){
+        try {
+            // Validar los datos de entrada
+            const payload = await request.validate({
+                schema: schema.create({
+                    licencia: schema.string(),
+                    user_id: schema.number(),
+                    service_id: schema.number(),
+                }),
+            });
+
+            // Crear el conductor si la validación pasa
+            const driver = await Driver.create(payload);
+            return driver;
+        } catch (error) {
+            return response.status(400).send(error.messages);
+        }
     }
 
     /**
-    * Muestra la información de un solo conductor
-    */
+     * Muestra la información de un solo conductor
+     */
     public async show({ params }: HttpContextContract) {
         return Driver.findOrFail(params.id);
     }
 
     /**
-    * Actualiza la información de un conductor basado en el identificador y nuevos parámetros
-    */
-    public async update({ params, request }: HttpContextContract) {
-        const body = request.body();
-        const theDriver = await Driver.findOrFail(params.id);
-        theDriver.merge(body);
-        await theDriver.save();
-        return theDriver;
+     * Actualiza la información de un conductor basado en el identificador y nuevos parámetros
+     */
+    public async update({ params, request, response }: HttpContextContract) {
+        try {
+            // Validar los datos de entrada
+            const payload = await request.validate({
+                schema: schema.create({
+                    licencia: schema.string.optional(),
+                    user_id: schema.number.optional(),
+                    service_id: schema.number.optional(),
+                }),
+            });
+
+            // Actualizar el conductor si la validación pasa
+            const driver = await Driver.findOrFail(params.id);
+            driver.merge(payload);
+            await driver.save();
+            return driver;
+        } catch (error) {
+            return response.status(400).send(error.messages);
+        }
     }
 
     /**
-    * Elimina a un conductor basado en el identificador
-    */
+     * Elimina a un conductor basado en el identificador
+     */
     public async destroy({ params }: HttpContextContract) {
-        const theDriver = await Driver.findOrFail(params.id);
-        return theDriver.delete();
+        const driver = await Driver.findOrFail(params.id);
+        await driver.delete();
+        return { message: 'Driver deleted successfully' };
     }
 }
-
