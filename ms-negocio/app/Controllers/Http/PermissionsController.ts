@@ -4,79 +4,79 @@ import { schema, rules } from '@ioc:Adonis/Core/Validator'
 
 export default class PermissionsController {
     /**
-    * Lista todas las permisos
-    */
-    public async index() {
+     * Lista todas las permisos
+     */
+    public async index(){
         return Permission.all();
     }
 
     /**
-    * Almacena la información de un permiso
-    */
-    public async store({ request, response }: HttpContextContract) {
+     * Almacena la información de un permiso
+     */
+    public async store({ request, response }: HttpContextContract){
         try {
             // Validar los datos de entrada
-            await request.validate({
+            const payload = await request.validate({
                 schema: schema.create({
                     url: schema.string({ trim: true }, [
                         rules.required(),
-                        rules.maxLength(60),
+                        rules.maxLength(255),
                     ]),
                     method: schema.string({ trim: true }, [
                         rules.required(),
-                        rules.maxLength(200),
+                        rules.maxLength(255),
                     ]),
                 }),
-            })
+            });
 
             // Crear el permiso si la validación pasa
-            const thePermission = await Permission.create(request.body());
-            return thePermission;
+            const permission = await Permission.create(payload);
+            return permission;
         } catch (error) {
-            return response.status(400).send(error.messages)
+            return response.status(400).send(error.messages);
         }
     }
 
     /**
-    * Muestra la información de un solo permiso
-    */
+     * Muestra la información de un solo permiso
+     */
     public async show({ params }: HttpContextContract) {
         return Permission.findOrFail(params.id);
     }
 
     /**
-    * Actualiza la información de un permiso basado en el identificador y nuevos parámetros
-    */
+     * Actualiza la información de un permiso
+     */
     public async update({ params, request, response }: HttpContextContract) {
         try {
             // Validar los datos de entrada
-            await request.validate({
+            const payload = await request.validate({
                 schema: schema.create({
                     url: schema.string.optional({ trim: true }, [
-                        rules.maxLength(60),
+                        rules.maxLength(255),
                     ]),
                     method: schema.string.optional({ trim: true }, [
-                        rules.maxLength(200),
+                        rules.maxLength(255),
                     ]),
                 }),
-            })
+            });
 
             // Actualizar el permiso si la validación pasa
-            const thePermission = await Permission.findOrFail(params.id);
-            thePermission.merge(request.body());
-            await thePermission.save();
-            return thePermission;
+            const permission = await Permission.findOrFail(params.id);
+            permission.merge(payload);
+            await permission.save();
+            return permission;
         } catch (error) {
-            return response.status(400).send(error.messages)
+            return response.status(400).send(error.messages);
         }
     }
 
     /**
-    * Elimina un permiso basado en el identificador
-    */
+     * Elimina un permiso
+     */
     public async destroy({ params }: HttpContextContract) {
-        const thePermission = await Permission.findOrFail(params.id);
-        return thePermission.delete();
+        const permission = await Permission.findOrFail(params.id);
+        await permission.delete();
+        return { message: 'Permission deleted successfully' };
     }
 }
-

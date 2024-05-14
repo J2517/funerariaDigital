@@ -19,10 +19,12 @@ export default class BeneficiariesController {
             const payload = await request.validate({
                 schema: schema.create({
                     accountHolder_id: schema.number([
-                        rules.required(),
+                        rules.unsigned(),
+                        rules.required()
                     ]),
                     user_id: schema.number([
-                        rules.required(),
+                        rules.unsigned(),
+                        rules.required()
                     ]),
                 }),
             });
@@ -52,11 +54,9 @@ export default class BeneficiariesController {
             const payload = await request.validate({
                 schema: schema.create({
                     accountHolder_id: schema.number.optional([
-                        rules.required(),
-                    ]),
+                        rules.unsigned()]),
                     user_id: schema.number.optional([
-                        rules.required(),
-                    ]),
+                        rules.unsigned()]),
                 }),
             });
 

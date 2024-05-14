@@ -4,78 +4,77 @@ import { schema, rules } from '@ioc:Adonis/Core/Validator'
 
 export default class RolesController {
     /**
-    * Lista todos los roles
-    */
-    public async index() {
+     * Lista todos los roles
+     */
+    public async index(){
         return Role.all();
     }
 
     /**
-    * Almacena la información de un rol
-    */
-    public async store({ request, response }: HttpContextContract) {
+     * Almacena la información de un rol
+     */
+    public async store({ request, response }: HttpContextContract){
         try {
             // Validar los datos de entrada
-            await request.validate({
+            const payload = await request.validate({
                 schema: schema.create({
-                    name: schema.string({ trim: true }, [
+                    name: schema.string({}, [
                         rules.required(),
-                        rules.maxLength(255),
+                        rules.maxLength(255)
                     ]),
-                    description: schema.string({ trim: true }, [
-                        rules.required(),
-                        rules.maxLength(200),
-                    ]),
+                    description: schema.string.optional({}, [
+                        rules.maxLength(255)
+                    ])
                 }),
-            })
+            });
 
             // Crear el rol si la validación pasa
-            const theRole = await Role.create(request.body());
-            return theRole;
+            const role = await Role.create(payload);
+            return role;
         } catch (error) {
-            return response.status(400).send(error.messages)
+            return response.status(400).send(error.messages);
         }
     }
 
     /**
-    * Muestra la información de un solo rol
-    */
+     * Muestra la información de un solo rol
+     */
     public async show({ params }: HttpContextContract) {
         return Role.findOrFail(params.id);
     }
 
     /**
-    * Actualiza la información de un rol basado en el identificador y nuevos parámetros
-    */
+     * Actualiza la información de un rol basado en el identificador y nuevos parámetros
+     */
     public async update({ params, request, response }: HttpContextContract) {
         try {
             // Validar los datos de entrada
-            await request.validate({
+            const payload = await request.validate({
                 schema: schema.create({
-                    name: schema.string.optional({ trim: true }, [
-                        rules.maxLength(255),
+                    name: schema.string.optional({}, [
+                        rules.maxLength(255)
                     ]),
-                    description: schema.string.optional({ trim: true }, [
-                        rules.maxLength(200),
-                    ]),
+                    description: schema.string.optional({}, [
+                        rules.maxLength(255)
+                    ])
                 }),
-            })
+            });
 
             // Actualizar el rol si la validación pasa
-            const theRole = await Role.findOrFail(params.id);
-            theRole.merge(request.body());
-            await theRole.save();
-            return theRole;
+            const role = await Role.findOrFail(params.id);
+            role.merge(payload);
+            await role.save();
+            return role;
         } catch (error) {
-            return response.status(400).send(error.messages)
+            return response.status(400).send(error.messages);
         }
     }
 
     /**
-    * Elimina un rol basado en el identificador
-    */
+     * Elimina a un rol basado en el identificador
+     */
     public async destroy({ params }: HttpContextContract) {
-        const theRole = await Role.findOrFail(params.id);
-        return theRole.delete();
+        const role = await Role.findOrFail(params.id);
+        return role.delete();
     }
 }

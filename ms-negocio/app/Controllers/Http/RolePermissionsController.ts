@@ -4,51 +4,79 @@ import { schema, rules } from '@ioc:Adonis/Core/Validator'
 
 export default class RolePermissionsController {
     /**
-    * Lista todos los permisos asociados a un rol
-    */
-    public async index() {
+     * Lista todos los registros de RolePermission
+     */
+    public async index(){
         return RolePermission.all();
     }
 
     /**
-    * Almacena la relación entre un rol y un permiso
-    */
-    public async store({ request, response }: HttpContextContract) {
+     * Almacena la información de un registro de RolePermission
+     */
+    public async store({ request, response }: HttpContextContract){
         try {
             // Validar los datos de entrada
-            await request.validate({
+            const payload = await request.validate({
                 schema: schema.create({
                     role_id: schema.number([
-                        rules.required(),
                         rules.unsigned(),
+                        rules.required()
                     ]),
                     permission_id: schema.number([
-                        rules.required(),
                         rules.unsigned(),
+                      rules.required(),
                     ]),
                 }),
-            })
+            });
 
-            // Crear la relación si la validación pasa
-            const theRolePermission = await RolePermission.create(request.body());
-            return theRolePermission;
+            // Crear el registro de RolePermission si la validación pasa
+            const rolePermission = await RolePermission.create(payload);
+            return rolePermission;
         } catch (error) {
-            return response.status(400).send(error.messages)
+            return response.status(400).send(error.messages);
         }
     }
 
     /**
-    * Muestra la información de una relación rol-permiso
-    */
+     * Muestra la información de un solo registro de RolePermission
+     */
     public async show({ params }: HttpContextContract) {
         return RolePermission.findOrFail(params.id);
     }
 
     /**
-    * Elimina una relación rol-permiso basada en el identificador
-    */
-    public async destroy({ params }: HttpContextContract) {
-        const theRolePermission = await RolePermission.findOrFail(params.id);
-        return theRolePermission.delete();
+     * Actualiza la información de un registro de RolePermission basado en el identificador y nuevos parámetros
+     */
+    public async update({ params, request, response }: HttpContextContract) {
+        try {
+            // Validar los datos de entrada
+            const payload = await request.validate({
+                schema: schema.create({
+                    role_id: schema.number.optional([
+                        rules.unsigned()
+                    ]),
+                    permission_id: schema.number.optional([
+                        rules.unsigned()
+                    ]),
+                }),
+            });
+
+            // Actualizar el registro de RolePermission si la validación pasa
+            const rolePermission = await RolePermission.findOrFail(params.id);
+            rolePermission.merge(payload);
+            await rolePermission.save();
+            return rolePermission;
+        } catch (error) {
+            return response.status(400).send(error.messages);
+        }
+    }
+
+    /**
+     * Elimina un registro de RolePermission basado en el identificador
+     */
+    public async destroy({ params, response }: HttpContextContract) {
+        const rolePermission = await RolePermission.findOrFail(params.id);
+        await rolePermission.delete();
+        return response.status(204);
     }
 }

@@ -22,10 +22,12 @@ export default class CommentsController {
                         rules.required(),
                         rules.maxLength(60)]),
                     service_execute_id: schema.number([
-                        rules.required(),
+                        rules.unsigned(),
+                        rules.required()
                     ]),
                     user_id: schema.number([
-                        rules.required(),
+                        rules.unsigned(),
+                        rules.required()
                     ]),
                 }),
             });
@@ -54,9 +56,12 @@ export default class CommentsController {
             // Validar los datos de entrada
             const payload = await request.validate({
                 schema: schema.create({
-                    content: schema.string.optional(),
-                    service_execute_id: schema.number.optional(),
-                    user_id: schema.number.optional(),
+                    content: schema.string([
+                        rules.maxLength(600)]),
+                    service_execute_id: schema.number([
+                        rules.unsigned()]),
+                    user_id: schema.number([
+                        rules.unsigned()]),
                 }),
             });
 

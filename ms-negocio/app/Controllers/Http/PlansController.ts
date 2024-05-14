@@ -4,19 +4,19 @@ import { schema, rules } from '@ioc:Adonis/Core/Validator'
 
 export default class PlansController {
     /**
-    * Lista todos los planes
-    */
-    public async index() {
+     * Lista todos los planes
+     */
+    public async index(){
         return Plan.all();
     }
 
     /**
-    * Almacena la información de un plan
-    */
-    public async store({ request, response }: HttpContextContract) {
+     * Almacena la información de un plan
+     */
+    public async store({ request, response }: HttpContextContract){
         try {
             // Validar los datos de entrada
-            await request.validate({
+            const payload = await request.validate({
                 schema: schema.create({
                     name: schema.string({ trim: true }, [
                         rules.required(),
@@ -32,33 +32,33 @@ export default class PlansController {
                     ]),
                     duration: schema.number([
                         rules.required(),
-                        rules.range(1, Number.MAX_SAFE_INTEGER),
+                        rules.range(0, Number.MAX_SAFE_INTEGER),
                     ]),
                 }),
-            })
+            });
 
             // Crear el plan si la validación pasa
-            const thePlan = await Plan.create(request.body());
-            return thePlan;
+            const plan = await Plan.create(payload);
+            return plan;
         } catch (error) {
-            return response.status(400).send(error.messages)
+            return response.status(400).send(error.messages);
         }
     }
 
     /**
-    * Muestra la información de un solo plan
-    */
+     * Muestra la información de un solo plan
+     */
     public async show({ params }: HttpContextContract) {
         return Plan.findOrFail(params.id);
     }
 
     /**
-    * Actualiza la información de un plan basado en el identificador y nuevos parámetros
-    */
+     * Actualiza la información de un plan
+     */
     public async update({ params, request, response }: HttpContextContract) {
         try {
             // Validar los datos de entrada
-            await request.validate({
+            const payload = await request.validate({
                 schema: schema.create({
                     name: schema.string.optional({ trim: true }, [
                         rules.maxLength(255),
@@ -70,26 +70,27 @@ export default class PlansController {
                         rules.maxLength(255),
                     ]),
                     duration: schema.number.optional([
-                        rules.range(1, Number.MAX_SAFE_INTEGER),
+                        rules.range(0, Number.MAX_SAFE_INTEGER),
                     ]),
                 }),
-            })
+            });
 
             // Actualizar el plan si la validación pasa
-            const thePlan = await Plan.findOrFail(params.id);
-            thePlan.merge(request.body());
-            await thePlan.save();
-            return thePlan;
+            const plan = await Plan.findOrFail(params.id);
+            plan.merge(payload);
+            await plan.save();
+            return plan;
         } catch (error) {
-            return response.status(400).send(error.messages)
+            return response.status(400).send(error.messages);
         }
     }
 
     /**
-    * Elimina un plan basado en el identificador
-    */
+     * Elimina un plan
+     */
     public async destroy({ params }: HttpContextContract) {
-        const thePlan = await Plan.findOrFail(params.id);
-        return thePlan.delete();
+        const plan = await Plan.findOrFail(params.id);
+        await plan.delete();
+        return { message: 'Plan deleted successfully' };
     }
 }

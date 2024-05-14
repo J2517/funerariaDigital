@@ -1,6 +1,6 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Cremation from 'App/Models/Cremation'
-import { schema } from '@ioc:Adonis/Core/Validator'
+import { schema, rules } from '@ioc:Adonis/Core/Validator'
 
 export default class CremationsController {
     /**
@@ -18,11 +18,23 @@ export default class CremationsController {
             // Validar los datos de entrada
             const payload = await request.validate({
                 schema: schema.create({
-                    name_deceased: schema.string(),
-                    date: schema.date(),
-                    place: schema.string(),
-                    description: schema.string(),
-                    service_id: schema.number(),
+                    name_deceased: schema.string([
+                        rules.required(),
+                        rules.maxLength(25)]),
+                    date: schema.date({},[
+                        rules.required(),
+                        rules.after('today')]),
+                    place: schema.string([
+                        rules.required(),
+                        rules.maxLength(30)]
+                        ),
+                    description: schema.string([
+                        rules.required(),
+                        rules.maxLength(250)]
+                        ),
+                    service_id: schema.number([
+                        rules.unsigned(),
+                        rules.required()]),
                 }),
             });
 
@@ -49,11 +61,18 @@ export default class CremationsController {
             // Validar los datos de entrada
             const payload = await request.validate({
                 schema: schema.create({
-                    name_deceased: schema.string.optional(),
-                    date: schema.date.optional(),
-                    place: schema.string.optional(),
-                    description: schema.string.optional(),
-                    service_id: schema.number.optional(),
+                    name_deceased: schema.string([
+                        rules.maxLength(25)]),
+                    date: schema.date({},[
+                        rules.after('today')]),
+                    place: schema.string([
+                        rules.maxLength(30)]
+                        ),
+                    description: schema.string([
+                        rules.maxLength(250)]
+                        ),
+                    service_id: schema.number([
+                        rules.unsigned()]),
                 }),
             });
 

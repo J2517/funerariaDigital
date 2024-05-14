@@ -1,100 +1,98 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import User from 'App/Models/User'
-import Encryption from '@ioc:Adonis/Core/Encryption'
 import { schema, rules } from '@ioc:Adonis/Core/Validator'
 
 export default class UsersController {
     /**
-    * Lista todos los usuarios
-    */
+     * Lista todos los usuarios
+     */
     public async index(){
         return User.all();
     }
+
     /**
-    * Almacena la información de un usuario
-    */
+     * Almacena la información de un usuario
+     */
     public async store({ request, response }: HttpContextContract){
         try {
             // Validar los datos de entrada
-            await request.validate({
+            const payload = await request.validate({
                 schema: schema.create({
-                    name: schema.string({ trim: true }, [
+                    name: schema.string({}, [
                         rules.required(),
-                        rules.maxLength(60),
+                        rules.maxLength(255)
                     ]),
-                    email: schema.string({ trim: true }, [
+                    email: schema.string({}, [
                         rules.required(),
                         rules.email(),
-                        rules.maxLength(254),
+                        rules.maxLength(255)
                     ]),
-                    password: schema.string({ trim: true }, [
+                    password: schema.string({}, [
                         rules.required(),
-                        rules.maxLength(256),
+                        rules.maxLength(255)
                     ]),
+                    role_id: schema.number([
+                        rules.required(),
+                        rules.unsigned()
+                    ])
                 }),
-            })
+            });
 
-            // Encriptar la contraseña antes de almacenarla
-            const body = request.body();
-            body.password = Encryption.encrypt(body.password);
-
-            // Crear el usuario si la validación pasa
-            const theUser = await User.create(body);
-            return theUser;
+            // Almacenar el usuario si la validación pasa
+            const user = await User.create(payload);
+            return user;
         } catch (error) {
-            return response.status(400).send(error.messages)
+            return response.status(400).send(error.messages);
         }
     }
+
     /**
-    * Muestra la información de un solo usuario
-    */
+     * Muestra la información de un solo usuario
+     */
     public async show({ params }: HttpContextContract) {
         return User.findOrFail(params.id);
     }
+
     /**
-    * Actualiza la información de un usuario basado
-    * en el identificador y nuevos parámetros
-    */
+     * Actualiza la información de un usuario basado en el identificador y nuevos parámetros
+     */
     public async update({ params, request, response }: HttpContextContract) {
         try {
             // Validar los datos de entrada
-            await request.validate({
+            const payload = await request.validate({
                 schema: schema.create({
-                    name: schema.string.optional({ trim: true }, [
-                        rules.maxLength(60),
+                    name: schema.string.optional({}, [
+                        rules.maxLength(255)
                     ]),
-                    email: schema.string.optional({ trim: true }, [
+                    email: schema.string.optional({}, [
                         rules.email(),
-                        rules.maxLength(254),
+                        rules.maxLength(255)
                     ]),
-                    password: schema.string.optional({ trim: true }, [
-                        rules.maxLength(256),
+                    password: schema.string.optional({}, [
+                        rules.maxLength(255)
                     ]),
+                    role_id: schema.number.optional([
+                        rules.unsigned()
+                    ])
                 }),
-            })
-
-            // Encriptar la nueva contraseña antes de almacenarla
-            const body = request.body();
-            if (body.password) {
-                body.password = Encryption.encrypt(body.password);
-            }
+            });
 
             // Actualizar el usuario si la validación pasa
-            const theUser = await User.findOrFail(params.id);
-            theUser.name = body.name || theUser.name;
-            theUser.email = body.email || theUser.email;
-            theUser.password = body.password || theUser.password;
-            await theUser.save();
-            return theUser;
+            const user = await User.findOrFail(params.id);
+            user.merge(payload);
+            await user.save();
+            return user;
         } catch (error) {
-            return response.status(400).send(error.messages)
+            return response.status(400).send(error.messages);
         }
     }
+
     /**
-    * Elimina a un usuario basado en el identificador
-    */
+     * Elimina un usuario basado en el identificador
+     */
     public async destroy({ params }: HttpContextContract) {
-        const theUser = await User.findOrFail(params.id);
-        return theUser.delete();
+        const user = await User.findOrFail(params.id);
+        await user.delete();
+        return { message: 'User deleted successfully' };
     }
 }

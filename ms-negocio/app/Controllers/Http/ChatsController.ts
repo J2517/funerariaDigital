@@ -22,7 +22,8 @@ export default class ChatsController {
                         rules.required(),
                         rules.maxLength(254)]),
                     service_execute_id: schema.number([
-                        rules.required(),
+                        rules.unsigned(),
+                        rules.required()
                     ]),
                 }),
             });
@@ -52,10 +53,9 @@ export default class ChatsController {
             const payload = await request.validate({
                 schema: schema.create({
                     message: schema.string.optional([
-                        rules.required(),
                         rules.maxLength(254)]),
                     service_execute_id: schema.number([
-                        rules.required()]),
+                        rules.unsigned()]),
                 }),
             });
 

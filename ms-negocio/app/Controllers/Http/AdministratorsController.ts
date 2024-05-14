@@ -19,7 +19,8 @@ export default class AdministratorsController {
             const payload = await request.validate({
                 schema: schema.create({
                     user_id: schema.number([
-                        rules.required(),
+                        rules.unsigned(),
+                        rules.required()
                     ]),
                 }),
             });
@@ -49,8 +50,7 @@ export default class AdministratorsController {
             const payload = await request.validate({
                 schema: schema.create({
                     user_id: schema.number.optional([
-                        rules.required(),
-                    ]),
+                        rules.unsigned()]),
                 }),
             });
 

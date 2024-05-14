@@ -4,93 +4,111 @@ import { schema, rules } from '@ioc:Adonis/Core/Validator'
 
 export default class PaymentsController {
     /**
-     * Lista todos los pagos.
+     * Lista todos los pagos
      */
-    public async index() {
+    public async index(){
         return Payment.all();
     }
 
     /**
-     * Almacena un nuevo pago.
+     * Almacena la información de un pago
      */
-    public async store({ request, response }: HttpContextContract) {
+    public async store({ request, response }: HttpContextContract){
         try {
             // Validar los datos de entrada
-            await request.validate({
+            const payload = await request.validate({
                 schema: schema.create({
                     amount: schema.number([
                         rules.required(),
+                        rules.range(1, Number.MAX_SAFE_INTEGER),
                     ]),
-                    method: schema.string({}, [
+                    method: schema.string({ trim: true }, [
                         rules.required(),
+                        rules.maxLength(255),
                     ]),
-                    reference: schema.string({}, [
+                    reference: schema.string({ trim: true }, [
                         rules.required(),
+                        rules.maxLength(255),
                     ]),
-                    description: schema.string.optional(),
-                    date: schema.date({
-                        format: 'yyyy-MM-dd HH:mm:ss'
-                    }, [
-                        rules.required(),
+                    description: schema.string.optional({ trim: true }, [
+                        rules.maxLength(255),
                     ]),
-                    subscription_id: schema.number([
+                    date: schema.date({},[
                         rules.required(),
+                        rules.after('today')]
+                    ),
+                    user_id: schema.number([
                         rules.unsigned(),
-                    ]),
+                        rules.required()]),
+                    subscription_id: schema.number([
+                        rules.unsigned(),
+                        rules.required()]),
                 }),
-            })
+            });
 
             // Crear el pago si la validación pasa
-            const payment = await Payment.create(request.body());
+            const payment = await Payment.create(payload);
             return payment;
         } catch (error) {
-            return response.status(400).send(error.messages)
+            return response.status(400).send(error.messages);
         }
     }
 
     /**
-     * Muestra un solo pago.
+     * Muestra la información de un solo pago
      */
     public async show({ params }: HttpContextContract) {
         return Payment.findOrFail(params.id);
     }
 
     /**
-     * Actualiza un pago basado en el identificador y nuevos parámetros.
+     * Actualiza la información de un pago
      */
     public async update({ params, request, response }: HttpContextContract) {
         try {
             // Validar los datos de entrada
-            await request.validate({
+            const payload = await request.validate({
                 schema: schema.create({
-                    amount: schema.number.optional(),
-                    method: schema.string.optional(),
-                    reference: schema.string.optional(),
-                    description: schema.string.optional(),
-                    date: schema.date.optional({
-                        format: 'yyyy-MM-dd HH:mm:ss'
-                    }),
+                    amount: schema.number.optional([
+                        rules.range(1, Number.MAX_SAFE_INTEGER),
+                    ]),
+                    method: schema.string.optional({ trim: true }, [
+                        rules.maxLength(255),
+                    ]),
+                    reference: schema.string.optional({ trim: true }, [
+                        rules.maxLength(255),
+                    ]),
+                    description: schema.string.optional({ trim: true }, [
+                        rules.maxLength(255),
+                    ]),
+                    date: schema.date.optional({}, [
+                        rules.after('today'),
+                    ]),
+                    user_id: schema.number.optional([
+                        rules.unsigned(),
+                    ]),
                     subscription_id: schema.number.optional([
                         rules.unsigned(),
                     ]),
                 }),
-            })
+            });
 
             // Actualizar el pago si la validación pasa
             const payment = await Payment.findOrFail(params.id);
-            payment.merge(request.body());
+            payment.merge(payload);
             await payment.save();
             return payment;
         } catch (error) {
-            return response.status(400).send(error.messages)
+            return response.status(400).send(error.messages);
         }
     }
 
     /**
-     * Elimina un pago basado en el identificador.
+     * Elimina un pago
      */
     public async destroy({ params }: HttpContextContract) {
         const payment = await Payment.findOrFail(params.id);
-        return payment.delete();
+        await payment.delete();
+        return { message: 'Payment deleted successfully' };
     }
 }

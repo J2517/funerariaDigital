@@ -4,51 +4,79 @@ import { schema, rules } from '@ioc:Adonis/Core/Validator'
 
 export default class PlanServicesController {
     /**
-    * Lista todos los servicios asociados a un plan
-    */
-    public async index() {
+     * Lista todos los registros de PlanService
+     */
+    public async index(){
         return PlanService.all();
     }
 
     /**
-    * Almacena la relación entre un plan y un servicio
-    */
-    public async store({ request, response }: HttpContextContract) {
+     * Almacena la información de un registro de PlanService
+     */
+    public async store({ request, response }: HttpContextContract){
         try {
             // Validar los datos de entrada
-            await request.validate({
+            const payload = await request.validate({
                 schema: schema.create({
                     plan_id: schema.number([
-                        rules.required(),
                         rules.unsigned(),
+                        rules.required()
                     ]),
                     service_id: schema.number([
-                        rules.required(),
                         rules.unsigned(),
+                        rules.required()
                     ]),
                 }),
-            })
+            });
 
-            // Crear la relación si la validación pasa
-            const thePlanService = await PlanService.create(request.body());
-            return thePlanService;
+            // Crear el registro de PlanService si la validación pasa
+            const planService = await PlanService.create(payload);
+            return planService;
         } catch (error) {
-            return response.status(400).send(error.messages)
+            return response.status(400).send(error.messages);
         }
     }
 
     /**
-    * Muestra la información de una relación plan-servicio
-    */
+     * Muestra la información de un solo registro de PlanService
+     */
     public async show({ params }: HttpContextContract) {
         return PlanService.findOrFail(params.id);
     }
 
     /**
-    * Elimina una relación plan-servicio basada en el identificador
-    */
-    public async destroy({ params }: HttpContextContract) {
-        const thePlanService = await PlanService.findOrFail(params.id);
-        return thePlanService.delete();
+     * Actualiza la información de un registro de PlanService basado en el identificador y nuevos parámetros
+     */
+    public async update({ params, request, response }: HttpContextContract) {
+        try {
+            // Validar los datos de entrada
+            const payload = await request.validate({
+                schema: schema.create({
+                    plan_id: schema.number.optional([
+                        rules.unsigned(),
+                    ]),
+                    service_id: schema.number.optional([
+                        rules.unsigned(),
+                    ]),
+                }),
+            });
+
+            // Actualizar el registro de PlanService si la validación pasa
+            const planService = await PlanService.findOrFail(params.id);
+            planService.merge(payload);
+            await planService.save();
+            return planService;
+        } catch (error) {
+            return response.status(400).send(error.messages);
+        }
+    }
+
+    /**
+     * Elimina un registro de PlanService basado en el identificador
+     */
+    public async destroy({ params, response }: HttpContextContract) {
+        const planService = await PlanService.findOrFail(params.id);
+        await planService.delete();
+        return response.status(204);
     }
 }

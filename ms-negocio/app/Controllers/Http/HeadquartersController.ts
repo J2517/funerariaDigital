@@ -1,93 +1,117 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import Headquarters from 'App/Models/Headquarter'
+import Headquarter from 'App/Models/Headquarter'
 import { schema, rules } from '@ioc:Adonis/Core/Validator'
 
 export default class HeadquartersController {
     /**
-     * Lista todas las sedes.
+     * Lista todas las sedes
      */
-    public async index() {
-        return Headquarters.all();
+    public async index(){
+        return Headquarter.all();
     }
 
     /**
-     * Almacena una nueva sede.
+     * Almacena la información de una sede
      */
-    public async store({ request, response }: HttpContextContract) {
+    public async store({ request, response }: HttpContextContract){
         try {
             // Validar los datos de entrada
-            await request.validate({
+            const payload = await request.validate({
                 schema: schema.create({
-                    name: schema.string({}, [
+                    name: schema.string({ trim: true }, [
                         rules.required(),
+                        rules.maxLength(255),
                     ]),
-                    address: schema.string({}, [
+                    city: schema.string({ trim: true }, [
                         rules.required(),
+                        rules.maxLength(255),
                     ]),
-                    telephone: schema.string({}, [
+                    department: schema.string({ trim: true }, [
                         rules.required(),
+                        rules.maxLength(255),
                     ]),
-                    email: schema.string({}, [
+                    telephone: schema.string({ trim: true }, [
+                        rules.required(),
+                        rules.maxLength(20),
+                    ]),
+                    email: schema.string({ trim: true }, [
                         rules.required(),
                         rules.email(),
+                        rules.maxLength(255),
                     ]),
-                    description: schema.string.optional(),
+                    description: schema.string.optional({ trim: true }, [
+                        rules.maxLength(255),
+                    ]),
                     beneficiary_id: schema.number([
                         rules.required(),
-                        rules.unsigned(),
+                        rules.range(1, Number.MAX_SAFE_INTEGER),
                     ]),
                 }),
-            })
+            });
 
             // Crear la sede si la validación pasa
-            const headquarter = await Headquarters.create(request.body());
+            const headquarter = await Headquarter.create(payload);
             return headquarter;
         } catch (error) {
-            return response.status(400).send(error.messages)
+            return response.status(400).send(error.messages);
         }
     }
 
     /**
-     * Muestra una sola sede.
+     * Muestra la información de una sola sede
      */
     public async show({ params }: HttpContextContract) {
-        return Headquarters.findOrFail(params.id);
+        return Headquarter.findOrFail(params.id);
     }
 
     /**
-     * Actualiza una sede basada en el identificador y nuevos parámetros.
+     * Actualiza la información de una sede basada en el identificador y nuevos parámetros
      */
     public async update({ params, request, response }: HttpContextContract) {
         try {
             // Validar los datos de entrada
-            await request.validate({
+            const payload = await request.validate({
                 schema: schema.create({
-                    name: schema.string.optional(),
-                    address: schema.string.optional(),
-                    telephone: schema.string.optional(),
-                    email: schema.string.optional(),
-                    description: schema.string.optional(),
+                    name: schema.string.optional({ trim: true }, [
+                        rules.maxLength(255),
+                    ]),
+                    city: schema.string.optional({ trim: true }, [
+                        rules.maxLength(255),
+                    ]),
+                    department: schema.string.optional({ trim: true }, [
+                        rules.maxLength(255),
+                    ]),
+                    telephone: schema.string.optional({ trim: true }, [
+                        rules.maxLength(20),
+                    ]),
+                    email: schema.string.optional({ trim: true }, [
+                        rules.email(),
+                        rules.maxLength(255),
+                    ]),
+                    description: schema.string.optional({ trim: true }, [
+                        rules.maxLength(255),
+                    ]),
                     beneficiary_id: schema.number.optional([
-                        rules.unsigned(),
+                        rules.range(1, Number.MAX_SAFE_INTEGER),
                     ]),
                 }),
-            })
+            });
 
             // Actualizar la sede si la validación pasa
-            const headquarter = await Headquarters.findOrFail(params.id);
-            headquarter.merge(request.body());
+            const headquarter = await Headquarter.findOrFail(params.id);
+            headquarter.merge(payload);
             await headquarter.save();
             return headquarter;
         } catch (error) {
-            return response.status(400).send(error.messages)
+            return response.status(400).send(error.messages);
         }
     }
 
     /**
-     * Elimina una sede basada en el identificador.
+     * Elimina una sede basada en el identificador
      */
     public async destroy({ params }: HttpContextContract) {
-        const headquarter = await Headquarters.findOrFail(params.id);
+        const headquarter = await Headquarter.findOrFail(params.id);
         return headquarter.delete();
     }
 }

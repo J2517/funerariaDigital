@@ -1,6 +1,6 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Customer from 'App/Models/Customer'
-import { schema } from '@ioc:Adonis/Core/Validator'
+import { schema, rules } from '@ioc:Adonis/Core/Validator'
 
 export default class CustomersController {
     /**
@@ -18,8 +18,14 @@ export default class CustomersController {
             // Validar los datos de entrada
             const payload = await request.validate({
                 schema: schema.create({
-                    type_customer: schema.string(),
-                    userId: schema.number(),
+                    type_customer: schema.string([
+                        rules.required(),
+                        rules.maxLength(60)
+                    ]),
+                    user_id: schema.number([
+                        rules.required(),
+                        rules.unsigned(),
+                    ]),
                 }),
             });
 
@@ -46,8 +52,11 @@ export default class CustomersController {
             // Validar los datos de entrada
             const payload = await request.validate({
                 schema: schema.create({
-                    type_customer: schema.string.optional(),
-                    userId: schema.number.optional(),
+                    type_customer: schema.string([
+                        rules.maxLength(30)]),
+                    user_id: schema.number.optional([
+                        rules.unsigned()
+                    ]),
                 }),
             });
 
@@ -62,7 +71,7 @@ export default class CustomersController {
     }
 
     /**
-     * Elimina a un cliente basado en el identificador
+     * Elimina un cliente basado en el identificador
      */
     public async destroy({ params }: HttpContextContract) {
         const customer = await Customer.findOrFail(params.id);
@@ -70,6 +79,3 @@ export default class CustomersController {
         return { message: 'Customer deleted successfully' };
     }
 }
-
-
-

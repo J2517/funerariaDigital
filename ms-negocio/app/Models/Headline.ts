@@ -10,7 +10,7 @@ export default class Headline extends BaseModel {
   public tipoPlan: string;
 
   @column()
-  public userId: number;
+  public user_id: number;
 
   @hasMany(() => Beneficiary, {
     foreignKey: "accountHolder_id",
