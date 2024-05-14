@@ -9,7 +9,7 @@ import Swal from "sweetalert2";
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit {
-  campus:Campus;
+  campus:Campus[];
   constructor(private service:CampusService) {
     this.campus=[];
   }

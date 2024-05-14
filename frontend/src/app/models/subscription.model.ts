@@ -1,4 +1,4 @@
-import {Customer} from "./customer.model";
+import {Client} from "./client.model";
 import {Plan} from "./plan.model";
 
 export class Subscription {
@@ -6,6 +6,6 @@ export class Subscription {
   start_date: Date;
   end_date: Date;
   status: number;
-  customer: Customer;
+  client: Client;
   plan: Plan;
 }

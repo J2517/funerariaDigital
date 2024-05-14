@@ -9,7 +9,7 @@ import Swal from "sweetalert2";
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit {
-  subscription:Subscription;
+  subscription:Subscription[];
   constructor(private service:SubscriptionService) {
     this.subscription=[];
   }
