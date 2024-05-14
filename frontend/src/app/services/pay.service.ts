@@ -23,6 +23,6 @@ export class PayService {
     return this.http.post<Pay>(`${environment.url_ms_negocio}/pay`, newPay);
   }
   update(thePay: Pay): Observable<Pay> {
-    return this.http.put<Pay>(`${environment.url_ms_negocio}/campus/${thePay.id}`, thePay);
+    return this.http.put<Pay>(`${environment.url_ms_negocio}/pay/${thePay.id}`, thePay);
   }
 }

@@ -8,15 +8,20 @@ import { environment } from "src/environments/environment";
   providedIn: "root",
 })
 export class PermissionService {
-  constructor(private http: HttpClient) {}
-  list(): Observable<Permission[]> {
-    return this.http.get<Permission[]>(
-      `${environment.url_ms_negocio}/permissions`
-    );
+  constructor(private http: HttpClient) { }
+  list(): Observable<Permission[]> { // Esto es como una promesa
+    return this.http.get<Permission[]>(`${environment.url_ms_negocio}/permission`);
   }
-  delete(id: number) {
-    return this.http.delete<Permission>(
-      `${environment.url_ms_negocio}/permissions/${id}`
-    );
+  delete(id:number){
+    return this.http.delete<Permission>(`${environment.url_ms_negocio}/permission/${id}`);
+  }
+  view(id:number):Observable<Permission> {
+    return this.http.get<Permission>(`${environment.url_ms_negocio}/permission/${id}`);
+  }
+  create(newPermission: Permission): Observable<Permission> {
+    return this.http.post<Permission>(`${environment.url_ms_negocio}/permission`, newPermission);
+  }
+  update(thePermission: Permission): Observable<Permission> {
+    return this.http.put<Permission>(`${environment.url_ms_negocio}/permission/${thePermission.id}`, thePermission);
   }
 }
