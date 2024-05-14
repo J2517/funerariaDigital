@@ -13,14 +13,14 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <tr class="col-1">ID</tr>
-                        <tr class="col-2">Ubicación</tr>
-                        <tr class="col-3">Costo</tr>
-                        <tr class="col-4">Ocupada</tr>
+                        <th class="col-1">ID</th>
+                        <th class="col-2">Ubicación</th>
+                        <th class="col-3">Costo</th>
+                        <th class="col-4">Ocupada</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngfor="let actual of theaters">
+                    <tr *ngfor="let actual of graves">
                         <td>{{actual.id}}</td>
                         <td>{{actual.ubicacion}}</td>
                         <td>{{actual.costo}}</td>
@@ -32,6 +32,7 @@
                         </td>
                     </tr>
                 </tbody>
+            </table>
         </div>
       </div>
     </div>

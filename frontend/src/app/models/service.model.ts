@@ -2,8 +2,8 @@ import { Driver } from "./driver.model";
 
 export class Service {
   id?: number;
-  nombre: string;
-  descripción: string;
-  costo: number;
+  name: string;
+  description: string;
+  price: number;
   drivers?: Driver[];
 }
