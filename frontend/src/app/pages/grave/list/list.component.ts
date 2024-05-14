@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss']
 })
-export class ListComponent implements OnInit {
+export class ListComponentGrave implements OnInit {
   grave:Grave[];
   constructor(private service:GraveService) {
     this.grave=[];
