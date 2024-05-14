@@ -3,5 +3,5 @@ export class Beneficiary {
   name: string;
   email: string;
   password: string;
-  accountHolder_id?: number;
+  headLine_id?: number;
 }

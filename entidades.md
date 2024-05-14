@@ -138,7 +138,7 @@ Entidades para la creación de ms-negocio
  - description
  - price
 
-- ejecución de Servicio (service execution):
+- ejecución de Servicio (service-execution):
 
  - id
  - date
