@@ -2,7 +2,7 @@ import { DateTime } from "luxon";
 import { BaseModel, HasMany, column, hasMany } from "@ioc:Adonis/Lucid/Orm";
 import Payment from "./Payment";
 
-export default class Subcription extends BaseModel {
+export default class Subscription extends BaseModel {
   @column({ isPrimary: true })
   public id: number;
 
