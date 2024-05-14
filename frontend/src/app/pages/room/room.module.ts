@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ListComponent } from './list/list.component';
 import { ManageComponent } from './manage/manage.component';
 import {RoomRoutingModule} from "./room-routing.module";
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -10,9 +11,10 @@ import {RoomRoutingModule} from "./room-routing.module";
     ListComponent,
     ManageComponent
   ],
-  imports: [
-    CommonModule,
-    RoomRoutingModule
-  ]
+    imports: [
+        CommonModule,
+        RoomRoutingModule,
+        ReactiveFormsModule
+    ]
 })
 export class RoomModule { }

@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { DriverRoutingModule } from './driver-routing.module';
 import { ListComponent } from './list/list.component';
 import { ManageComponent } from './manage/manage.component';
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -11,9 +12,10 @@ import { ManageComponent } from './manage/manage.component';
     ListComponent,
     ManageComponent
   ],
-  imports: [
-    CommonModule,
-    DriverRoutingModule
-  ]
+    imports: [
+        CommonModule,
+        DriverRoutingModule,
+        ReactiveFormsModule
+    ]
 })
 export class DriverModule { }
