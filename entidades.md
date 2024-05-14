@@ -2,6 +2,7 @@ Entidades para la creación de ms-negocio
 
 ## Jackeline
 
+<<<<<<< HEAD
 - usuario - user  
 
   - idUsuario- user
@@ -21,33 +22,71 @@ Entidades para la creación de ms-negocio
   - detalles-
 
 - permiso- permission
+=======
+- usuario (user):
 
-  - idPermiso
+  - id
+  - name
+  - email
+  - password
+  - role_id
+
+- rol (role):
+
+  - id
+  - name
+  - description
+
+- permiso (permission):
+>>>>>>> d2ccd1f8b74c6f1850c56548b182ebc571e70887
+
+  - id
   - url
   - method
 
+<<<<<<< HEAD
 - cliente - se extiende de usuario- customer
+=======
+- cliente (customer)- se extiende de usuario:
+>>>>>>> d2ccd1f8b74c6f1850c56548b182ebc571e70887
 
-  -idCliente
-  -tipoCliente
+  - id
+  - type_customer
+  - user_id
 
+<<<<<<< HEAD
 - beneficiario - se extiende de cliente- beneficiary
+=======
+- beneficiario (beneficiary) - se extiende de cliente:
+>>>>>>> d2ccd1f8b74c6f1850c56548b182ebc571e70887
 
-  - idBeneficiario
-  - idTitular
+  - id
+  - accountHolder_id
+  - user_id
 
+<<<<<<< HEAD
 - titular - se extiende de cliente- headline
+=======
+- titular (headline) - se extiende de cliente:
+>>>>>>> d2ccd1f8b74c6f1850c56548b182ebc571e70887
 
-  - idTitular
+  - id
   - tipoPlan
+  - user_id
 
+<<<<<<< HEAD
 - conductor - se extiende de usuario- driver
+=======
+- conductor (driver) - se extiende de usuario:
+>>>>>>> d2ccd1f8b74c6f1850c56548b182ebc571e70887
 
-  - idConductor (fk de idUsuario)
-  - idServicio
+  - id
+  - licencia
+  - user_id
 
 ## Daniel
 
+<<<<<<< HEAD
 comentario- comment
 chat- chat
 mensajes- message
@@ -55,58 +94,125 @@ sede- headquarter
 sala- room
 pago- payment
 suscripción- subscription
+=======
+- comentario (comment):
+
+ - id
+ - content
+ - service_execute_id
+ - user_id
+ 
+- chat (chat):
+
+ - id
+ - message
+ - service_execute_id
+ 
+- mensaje (message):
+
+ - id 
+ - content
+ - user_id
+ 
+- sede (headquarter):
+
+ - name
+ - address
+ - telephone
+ - email
+ - description
+ - beneficiary_id
+ 
+- sala (room):
+
+ - id
+ - name
+ - capacity
+ - status
+ - description
+  
+
+- pago (payment):
+
+ - id
+ - amount
+ - method
+ - reference
+ - description
+ - date
+ - beneficiary_id
+ 
+- suscripción (subscription):
+
+  - id
+  - start_date
+  - end_date
+  - customer_id
+  - plan_id
+
+>>>>>>> d2ccd1f8b74c6f1850c56548b182ebc571e70887
 
 ## Juan Manuel
 
 - administrador (administrator):
 
-- idAdministrador (PK)
-- nombres
-- apellidos
-- email
-- password
-- celular
+ - id
+ - user_id
 
 - plan (plan):
 
-- idPlan (PK)
-- nombre
-- descripción
-- costo
-- duración
+ - id
+ - name
+ - price
+ - description
+ - duration
 
 - servicio (service):
 
-- idServicio (PK)
-- nombre
-- descripción
-- costo
+ - id
+ - name
+ - description
+ - price
+ - duration
+ - status
+ - type
 
 - traslado (transfer):
 
-- idTraslado (PK)
-- origen
-- destino
-- fecha
-- costo
+ - id
+ - origin
+ - destination
+ - date
+ - description
+ - price
 
 - ejecución de Servicio (service-execution):
 
-- idEjecucionServicio (PK)
-- idServicio (FK)
-- fechaInicio
-- fechaFin
-- estado
+ - id
+ - date
+ - description
+ - price
+ - service_id
+ - user_id
+
 
 - sepultura (grave):
 
-- idSepultura (PK)
-- ubicación
-- costo
-- ocupada (booleano)
+ - id 
+ - code
+ - descrption
+ - price
+ - row
+ - column
+ - level
+ - zone
+ - capacity
+  
 
 - cremación (cremation):
 
-- idCremacion (PK)
-- fecha
-- costo
+ - id 
+ - name_deceased
+ - date
+ - place
+ - description
