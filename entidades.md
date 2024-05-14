@@ -2,27 +2,6 @@ Entidades para la creación de ms-negocio
 
 ## Jackeline
 
-<<<<<<< HEAD
-- usuario - user  
-
-  - idUsuario- user
-  - email
-  - password
-  - nombres- name
-  - apellidos- lastName
-  - celular- number
-  - ciudadResidencia- city
-  - direccion- address
-  - idRol fk- role
-
-- rol - role
-
-  - idRol- idrole
-  - nombre- name
-  - detalles-
-
-- permiso- permission
-=======
 - usuario (user):
 
   - id
@@ -38,47 +17,30 @@ Entidades para la creación de ms-negocio
   - description
 
 - permiso (permission):
->>>>>>> d2ccd1f8b74c6f1850c56548b182ebc571e70887
 
   - id
   - url
   - method
 
-<<<<<<< HEAD
-- cliente - se extiende de usuario- customer
-=======
 - cliente (customer)- se extiende de usuario:
->>>>>>> d2ccd1f8b74c6f1850c56548b182ebc571e70887
 
   - id
   - type_customer
   - user_id
 
-<<<<<<< HEAD
-- beneficiario - se extiende de cliente- beneficiary
-=======
 - beneficiario (beneficiary) - se extiende de cliente:
->>>>>>> d2ccd1f8b74c6f1850c56548b182ebc571e70887
 
   - id
   - accountHolder_id
   - user_id
 
-<<<<<<< HEAD
-- titular - se extiende de cliente- headline
-=======
 - titular (headline) - se extiende de cliente:
->>>>>>> d2ccd1f8b74c6f1850c56548b182ebc571e70887
 
   - id
   - tipoPlan
   - user_id
 
-<<<<<<< HEAD
-- conductor - se extiende de usuario- driver
-=======
 - conductor (driver) - se extiende de usuario:
->>>>>>> d2ccd1f8b74c6f1850c56548b182ebc571e70887
 
   - id
   - licencia
@@ -86,15 +48,6 @@ Entidades para la creación de ms-negocio
 
 ## Daniel
 
-<<<<<<< HEAD
-comentario- comment
-chat- chat
-mensajes- message
-sede- headquarter
-sala- room
-pago- payment
-suscripción- subscription
-=======
 - comentario (comment):
 
  - id
@@ -150,7 +103,6 @@ suscripción- subscription
   - customer_id
   - plan_id
 
->>>>>>> d2ccd1f8b74c6f1850c56548b182ebc571e70887
 
 ## Juan Manuel
 
