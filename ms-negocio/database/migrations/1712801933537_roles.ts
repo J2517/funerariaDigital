@@ -1,19 +1,19 @@
-import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm';
-import { DateTime } from 'luxon';
+import BaseSchema from '@ioc:Adonis/Lucid/Schema';
 
-export default class Role extends BaseModel {
-  @column({ isPrimary: true })
-  public id: number;
+export default class Roles extends BaseSchema {
+  protected tableName = 'roles';
 
-  @column()
-  public name: string;
+  public async up () {
+    this.schema.createTable(this.tableName, (table) => {
+      table.increments('id').primary();
+      table.string('name', 255).notNullable();
+      table.string('description', 255).notNullable();
+      table.dateTime('created_at').notNullable().defaultTo(this.now());
+      table.dateTime('updated_at').notNullable().defaultTo(this.now());
+    });
+  }
 
-  @column()
-  public description: string;
-
-  @column.dateTime({ autoCreate: true })
-  public createdAt: DateTime;
-
-  @column.dateTime({ autoCreate: true, autoUpdate: true })
-  public updatedAt: DateTime;
+  public async down () {
+    this.schema.dropTable(this.tableName);
+  }
 }

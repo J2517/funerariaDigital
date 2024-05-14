@@ -7,7 +7,7 @@ export default class extends BaseSchema {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id');
       table.string('url', 60).notNullable();
-      table.string('method', 10).notNullable(); // Cambiado a 10 caracteres según tu especificación
+      table.string('method', 10).notNullable(); 
       table.timestamps(true, true);
     });
   }
