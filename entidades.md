@@ -2,111 +2,169 @@ Entidades para la creación de ms-negocio
 
 ## Jackeline
 
-- usuario
+- usuario (user):
 
-  - idUsuario
+  - id
+  - name
   - email
   - password
-  - nombres
-  - apellidos
-  - celular
-  - ciudadResidencia
-  - direccion
-  - idRol fk
+  - role_id
 
-- rol
+- rol (role):
 
-  - idRol
-  - nombre
-  - detalles
+  - id
+  - name
+  - description
 
-- permiso
+- permiso (permission):
 
-  - idPermiso
+  - id
   - url
   - method
 
-- cliente - se extiende de usuario
+- cliente (customer)- se extiende de usuario:
 
-  -idCliente
-  -tipoCliente
+  - id
+  - type_customer
+  - user_id
 
-- beneficiario - se extiende de cliente
+- beneficiario (beneficiary) - se extiende de cliente:
 
-  - idBeneficiario
-  - idTitular
+  - id
+  - accountHolder_id
+  - user_id
 
-- titular - se extiende de cliente
+- titular (headline) - se extiende de cliente:
 
-  - idTitular
+  - id
   - tipoPlan
+  - user_id
 
-- conductor - se extiende de usuario
+- conductor (driver) - se extiende de usuario:
 
-  - idConductor (fk de idUsuario)
-  - idServicio
+  - id
+  - licencia
+  - user_id
 
 ## Daniel
 
-comentario
-chat
-mensajes
-sede
-sala
-pago
-suscripción
+- comentario (comment):
+
+ - id
+ - content
+ - service_execute_id
+ - user_id
+ 
+- chat (chat):
+
+ - id
+ - message
+ - service_execute_id
+ 
+- mensaje (message):
+
+ - id 
+ - content
+ - user_id
+ 
+- sede (headquarter):
+
+ - name
+ - address
+ - telephone
+ - email
+ - description
+ - beneficiary_id
+ 
+- sala (room):
+
+ - id
+ - name
+ - capacity
+ - status
+ - description
+  
+
+- pago (payment):
+
+ - id
+ - amount
+ - method
+ - reference
+ - description
+ - date
+ - beneficiary_id
+ 
+- suscripción (subscription):
+
+  - id
+  - start_date
+  - end_date
+  - customer_id
+  - plan_id
+
 
 ## Juan Manuel
 
 - administrador (administrator):
 
-- idAdministrador (PK)
-- nombres
-- apellidos
-- email
-- password
-- celular
+ - id
+ - user_id
 
 - plan (plan):
 
-- idPlan (PK)
-- nombre
-- descripción
-- costo
-- duración
+ - id
+ - name
+ - price
+ - description
+ - duration
 
 - servicio (service):
 
-- idServicio (PK)
-- nombre
-- descripción
-- costo
+ - id
+ - name
+ - description
+ - price
+ - duration
+ - status
+ - type
 
 - traslado (transfer):
 
-- idTraslado (PK)
-- origen
-- destino
-- fecha
-- costo
+ - id
+ - origin
+ - destination
+ - date
+ - description
+ - price
 
 - ejecución de Servicio (service execution):
 
-- idEjecucionServicio (PK)
-- idServicio (FK)
-- fechaInicio
-- fechaFin
-- estado
+ - id
+ - date
+ - description
+ - price
+ - service_id
+ - user_id
+
 
 - sepultura (grave):
 
-- idSepultura (PK)
-- ubicación
-- costo
-- ocupada (booleano)
+ - id 
+ - code
+ - descrption
+ - price
+ - row
+ - column
+ - level
+ - zone
+ - capacity
+  
 
 - cremación (cremation):
 
-- idCremacion (PK)
-- fecha
-- costo
+ - id 
+ - name_deceased
+ - date
+ - place
+ - description
