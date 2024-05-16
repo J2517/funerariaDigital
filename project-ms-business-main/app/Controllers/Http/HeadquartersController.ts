@@ -50,4 +50,20 @@ export default class HeadquartersController {
       `${Env.get("API_MAP_NATIONAL")}/?c_digo_dane_del_municipio=${city}`,
     );
   }
+
+  //Obtener las ciudades de la API
+  static async getCity() {
+    try {
+      const response = await axios.get(Env.get("API_MAP_NATIONAL"));
+      return response.data;
+    } catch (error) {
+      return error;
+    }
+  }
+
+  //public async exitsCity(city: string) {
+  //  const cities = await HeadquartersController.getCity();
+  //  return cities.includes(city);
+  //  //return axios.get(${Env.get("API_MAP_NATIONAL")}/?Department=${city});
+  //}
 }
