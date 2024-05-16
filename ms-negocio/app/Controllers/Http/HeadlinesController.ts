@@ -32,7 +32,11 @@ export default class HeadlinesController {
             const headline = await Headline.create(payload);
             return headline;
         } catch (error) {
+<<<<<<< HEAD
             console.error(error); // Imprimir el objeto error completo en la consola
+=======
+            console.log(error);
+>>>>>>> de2377a85288e2675aac302b1161fd043a75663a
             return response.status(400).send(error.messages);
         }
     }
