@@ -1,13 +1,20 @@
 import BaseSchema from "@ioc:Adonis/Lucid/Schema";
 
 export default class extends BaseSchema {
-  protected tableName = "headlines";
+  protected tableName = "owners";
 
   public async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments("id");
-      table.string("tipo_plan").notNullable();
-      table.integer("user_id").unsigned().references("users.id").onDelete("CASCADE");
+      table
+        .integer("customer_id")
+        .unsigned()
+        .references("customers.id")
+        .onDelete("CASCADE")
+        .onUpdate("CASCADE");
+      table.date("start_date");
+      table.date("end_date");
+
       table.timestamp("created_at", { useTz: true });
       table.timestamp("updated_at", { useTz: true });
     });
@@ -17,4 +24,3 @@ export default class extends BaseSchema {
     this.schema.dropTable(this.tableName);
   }
 }
-

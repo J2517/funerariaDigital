@@ -18,14 +18,8 @@ export default class RolePermissionsController {
             // Validar los datos de entrada
             const payload = await request.validate({
                 schema: schema.create({
-                    role_id: schema.number([
-                        rules.unsigned(),
-                        rules.required()
-                    ]),
-                    permission_id: schema.number([
-                        rules.unsigned(),
-                      rules.required(),
-                    ]),
+                    role_id: schema.number(),
+                    permission_id: schema.number(),
                 }),
             });
 
@@ -33,6 +27,7 @@ export default class RolePermissionsController {
             const rolePermission = await RolePermission.create(payload);
             return rolePermission;
         } catch (error) {
+            console.error(error);
             return response.status(400).send(error.messages);
         }
     }
@@ -67,6 +62,7 @@ export default class RolePermissionsController {
             await rolePermission.save();
             return rolePermission;
         } catch (error) {
+            console.error(error);
             return response.status(400).send(error.messages);
         }
     }
