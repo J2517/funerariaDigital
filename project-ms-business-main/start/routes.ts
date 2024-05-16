@@ -43,3 +43,5 @@ import "./routes/driver";
 import "./routes/service_execution";
 import "./routes/payment";
 import "./routes/subscription";
+import "./routes/camera";
+import "./routes/transmission"
