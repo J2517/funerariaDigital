@@ -18,12 +18,6 @@ export default class SubscriptionsController {
             // Validar los datos de entrada
             const payload = await request.validate({
                 schema: schema.create({
-                    start_date: schema.date({},[
-                        rules.required(),
-                        rules.after('today')]),
-                    end_date: schema.date({},[
-                        rules.required(),
-                        rules.after('today')]),
                     customer_id: schema.number([
                         rules.required(),
                         rules.unsigned()
@@ -34,11 +28,12 @@ export default class SubscriptionsController {
                     ])
                 }),
             });
-
+            
             // Almacenar la suscripción si la validación pasa
             const subscription = await Subscription.create(payload);
             return subscription;
         } catch (error) {
+            console.log(error);
             return response.status(400).send(error.messages);
         }
     }

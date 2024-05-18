@@ -33,6 +33,7 @@ export default class BeneficiariesController {
             const beneficiary = await Beneficiary.create(payload);
             return beneficiary;
         } catch (error) {
+            console.log(error);
             return response.status(400).send(error.messages);
         }
     }
