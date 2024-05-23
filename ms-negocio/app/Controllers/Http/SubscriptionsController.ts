@@ -34,12 +34,11 @@ export default class SubscriptionsController {
                     ])
                 }),
             });
-
+            
             // Almacenar la suscripción si la validación pasa
             const subscription = await Subscription.create(payload);
             return subscription;
         } catch (error) {
-            console.error(error);
             return response.status(400).send(error.messages);
         }
     }
