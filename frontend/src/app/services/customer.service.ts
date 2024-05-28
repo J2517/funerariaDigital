@@ -8,20 +8,23 @@ import { environment } from "src/environments/environment";
   providedIn: "root",
 })
 export class CustomerService {
-  constructor(private http: HttpClient) { }
+  baseUrl: string;
+  constructor(private http: HttpClient) {
+    this.baseUrl = `${environment.url_ms_business}/customers`;
+  }
   list(): Observable<Customer[]> { // Esto es como una promesa
-    return this.http.get<Customer[]>(`${environment.url_ms_negocio}/customer`);
+    return this.http.get<Customer[]>(this.baseUrl);
   }
   delete(id:number){
-    return this.http.delete<Customer>(`${environment.url_ms_negocio}/customer/${id}`);
+    return this.http.delete<Customer>(`${this.baseUrl}/${id}`);
   }
   view(id:number):Observable<Customer> {
-    return this.http.get<Customer>(`${environment.url_ms_negocio}/customer/${id}`);
+    return this.http.get<Customer>(`${this.baseUrl}/${id}`);
   }
   create(newCustomer: Customer): Observable<Customer> {
-    return this.http.post<Customer>(`${environment.url_ms_negocio}/customer`, newCustomer);
+    return this.http.post<Customer>(this.baseUrl, newCustomer);
   }
   update(theCustomer: Customer): Observable<Customer> {
-    return this.http.put<Customer>(`${environment.url_ms_negocio}/customer/${theCustomer.id}`, theCustomer);
+    return this.http.put<Customer>(`${this.baseUrl}/${theCustomer.id}`, theCustomer);
   }
 }

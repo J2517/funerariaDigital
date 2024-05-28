@@ -8,21 +8,23 @@ import {Room} from "../models/room.model";
   providedIn: 'root'
 })
 export class RoomService {
-
-  constructor(private http: HttpClient) { }
+  baseUrl: string;
+  constructor(private http: HttpClient) {
+    this.baseUrl = `${environment.url_ms_business}/rooms`;
+  }
   list(): Observable<Room[]> { // Esto es como una promesa
-    return this.http.get<Room[]>(`${environment.url_ms_negocio}/room`);
+    return this.http.get<Room[]>(this.baseUrl);
   }
   delete(id:number){
-    return this.http.delete<Room>(`${environment.url_ms_negocio}/room/${id}`);
+    return this.http.delete<Room>(`${this.baseUrl}/${id}`);
   }
   view(id:number):Observable<Room> {
-    return this.http.get<Room>(`${environment.url_ms_negocio}/room/${id}`);
+    return this.http.get<Room>(`${this.baseUrl}/${id}`);
   }
   create(newRoom: Room): Observable<Room> {
-    return this.http.post<Room>(`${environment.url_ms_negocio}/room`, newRoom);
+    return this.http.post<Room>(this.baseUrl, newRoom);
   }
   update(theRoom: Room): Observable<Room> {
-    return this.http.put<Room>(`${environment.url_ms_negocio}/room/${theRoom.id}`, theRoom);
+    return this.http.put<Room>(`${this.baseUrl}/${theRoom.id}`, theRoom);
   }
 }

@@ -8,21 +8,23 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class TransferService {
-
-  constructor(private http: HttpClient) { }
+  baseUrl: string;
+  constructor(private http: HttpClient) {
+    this.baseUrl = `${environment.url_ms_business}/transfers`;
+  }
   list(): Observable<Transfer[]> { // Esto es como una promesa
-    return this.http.get<Transfer[]>(`${environment.url_ms_negocio}/transfer`);
+    return this.http.get<Transfer[]>(this.baseUrl);
   }
   delete(id:number){
-    return this.http.delete<Transfer>(`${environment.url_ms_negocio}/transfer/${id}`);
+    return this.http.delete<Transfer>(`${this.baseUrl}/${id}`);
   }
   view(id:number):Observable<Transfer> {
-    return this.http.get<Transfer>(`${environment.url_ms_negocio}/transfer/${id}`);
+    return this.http.get<Transfer>(`${this.baseUrl}/${id}`);
   }
   create(newTransfer: Transfer): Observable<Transfer> {
-    return this.http.post<Transfer>(`${environment.url_ms_negocio}/transfer`, newTransfer);
+    return this.http.post<Transfer>(this.baseUrl, newTransfer);
   }
   update(theTransfer: Transfer): Observable<Transfer> {
-    return this.http.put<Transfer>(`${environment.url_ms_negocio}/transfer/${theTransfer.id}`, theTransfer);
+    return this.http.put<Transfer>(`${this.baseUrl}/${theTransfer.id}`, theTransfer);
   }
 }

@@ -8,20 +8,28 @@ import { Observable } from "rxjs";
   providedIn: "root",
 })
 export class BeneficiaryService {
-  constructor(private http: HttpClient) { }
-  list(): Observable<Beneficiary[]> { // Esto es como una promesa
-    return this.http.get<Beneficiary[]>(`${environment.url_ms_negocio}/beneficiary`);
+  baseUrl: string;
+  constructor(private http: HttpClient) {
+    this.baseUrl = `${environment.url_ms_business}/beneficiaries`;
   }
-  delete(id:number){
-    return this.http.delete<Beneficiary>(`${environment.url_ms_negocio}/beneficiary/${id}`);
+  list(): Observable<Beneficiary[]> { // Esto es como una promesa
+    return this.http.get<Beneficiary[]>(this.baseUrl);
   }
   view(id:number):Observable<Beneficiary> {
-    return this.http.get<Beneficiary>(`${environment.url_ms_negocio}/beneficiary/${id}`);
+    return this.http.get<Beneficiary>(`${this.baseUrl}/${id}`);
   }
   create(newBeneficiary: Beneficiary): Observable<Beneficiary> {
-    return this.http.post<Beneficiary>(`${environment.url_ms_negocio}/beneficiary`, newBeneficiary);
+    return this.http.post<Beneficiary>(this.baseUrl, newBeneficiary);
   }
   update(theBeneficiary: Beneficiary): Observable<Beneficiary> {
-    return this.http.put<Beneficiary>(`${environment.url_ms_negocio}/beneficiary/${theBeneficiary.id}`, theBeneficiary);
+    return this.http.put<Beneficiary>(`${this.baseUrl}/${theBeneficiary.id}`, theBeneficiary);
+  }
+  getBeneficiariesByOwner(id: string): Observable<Beneficiary[]> {
+    return this.http.get<Beneficiary[]>(
+      `${environment.url_ms_business}/owners/${id}/beneficiaries`,
+    );
+  }
+  delete(id: string): Observable<Beneficiary> {
+    return this.http.delete<Beneficiary>(`${this.baseUrl}/${id}`);
   }
 }

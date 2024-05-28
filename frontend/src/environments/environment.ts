@@ -4,9 +4,9 @@
 
 export const environment = {
   production: false,
-  url_ms_negocio: "http://127.0.0.1:3333",
+  url_ms_security: "http://localhost:8181",
+  url_ms_business: "http://localhost:3333",
 };
-
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.

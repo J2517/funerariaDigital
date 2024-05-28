@@ -8,20 +8,23 @@ import { environment } from "src/environments/environment";
   providedIn: "root",
 })
 export class HeadlineService {
-  constructor(private http: HttpClient) { }
+  baseUrl: string;
+  constructor(private http: HttpClient) {
+    this.baseUrl = `${environment.url_ms_business}/owners`;
+  }
   list(): Observable<Headline[]> { // Esto es como una promesa
-    return this.http.get<Headline[]>(`${environment.url_ms_negocio}/headline`);
+    return this.http.get<Headline[]>(this.baseUrl);
   }
   delete(id:number){
-    return this.http.delete<Headline>(`${environment.url_ms_negocio}/headline/${id}`);
+    return this.http.delete<Headline>(`${this.baseUrl}/${id}`);
   }
   view(id:number):Observable<Headline> {
-    return this.http.get<Headline>(`${environment.url_ms_negocio}/headline/${id}`);
+    return this.http.get<Headline>(`${this.baseUrl}/${id}`);
   }
   create(newHeadline: Headline): Observable<Headline> {
-    return this.http.post<Headline>(`${environment.url_ms_negocio}/headline`, newHeadline);
+    return this.http.post<Headline>(this.baseUrl, newHeadline);
   }
   update(theHeadline: Headline): Observable<Headline> {
-    return this.http.put<Headline>(`${environment.url_ms_negocio}/headline/${theHeadline.id}`, theHeadline);
+    return this.http.put<Headline>(`${this.baseUrl}/${theHeadline.id}`, theHeadline);
   }
 }

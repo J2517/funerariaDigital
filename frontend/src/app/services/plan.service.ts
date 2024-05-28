@@ -8,21 +8,23 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class PlanService {
-
-  constructor(private http: HttpClient) { }
+  baseUrl: string;
+  constructor(private http: HttpClient) {
+    this.baseUrl = `${environment.url_ms_business}/plans`;
+  }
   list(): Observable<Plan[]> { // Esto es como una promesa
-    return this.http.get<Plan[]>(`${environment.url_ms_negocio}/plan`);
+    return this.http.get<Plan[]>(this.baseUrl);
   }
   delete(id:number){
-    return this.http.delete<Plan>(`${environment.url_ms_negocio}/plan/${id}`);
+    return this.http.delete<Plan>(`${this.baseUrl}/${id}`);
   }
   view(id:number):Observable<Plan> {
-    return this.http.get<Plan>(`${environment.url_ms_negocio}/plan/${id}`);
+    return this.http.get<Plan>(`${this.baseUrl}/${id}`);
   }
   create(newPlan: Plan): Observable<Plan> {
-    return this.http.post<Plan>(`${environment.url_ms_negocio}/plan`, newPlan);
+    return this.http.post<Plan>(this.baseUrl, newPlan);
   }
   update(thePlan: Plan): Observable<Plan> {
-    return this.http.put<Plan>(`${environment.url_ms_negocio}/plan/${thePlan.id}`, thePlan);
+    return this.http.put<Plan>(`${this.baseUrl}/${thePlan.id}`, thePlan);
   }
 }

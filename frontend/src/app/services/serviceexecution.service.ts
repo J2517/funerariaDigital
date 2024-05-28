@@ -8,21 +8,26 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class ServiceexecutionService {
-
-  constructor(private http: HttpClient) { }
+  baseUrl: string;
+  constructor(private http: HttpClient) {
+    this.baseUrl = `${environment.url_ms_business}/serviceexecutions`;
+  }
   list(): Observable<Serviceexecution[]> { // Esto es como una promesa
-    return this.http.get<Serviceexecution[]>(`${environment.url_ms_negocio}/serviceexecution`);
+    return this.http.get<Serviceexecution[]>(this.baseUrl);
   }
   delete(id:number){
-    return this.http.delete<Serviceexecution>(`${environment.url_ms_negocio}/serviceexecution/${id}`);
+    return this.http.delete<Serviceexecution>(`${this.baseUrl}/${id}`);
   }
   view(id:number):Observable<Serviceexecution> {
-    return this.http.get<Serviceexecution>(`${environment.url_ms_negocio}/serviceexecution/${id}`);
+    return this.http.get<Serviceexecution>(`${this.baseUrl}/${id}`);
   }
   create(newServiceexecution: Serviceexecution): Observable<Serviceexecution> {
-    return this.http.post<Serviceexecution>(`${environment.url_ms_negocio}/serviceexecution`, newServiceexecution);
+    return this.http.post<Serviceexecution>(this.baseUrl, newServiceexecution);
   }
   update(theServiceexecution: Serviceexecution): Observable<Serviceexecution> {
-    return this.http.put<Serviceexecution>(`${environment.url_ms_negocio}/serviceexecution/${theServiceexecution.id}`, theServiceexecution);
+    return this.http.put<Serviceexecution>(`${this.baseUrl}/${theServiceexecution.id}`, theServiceexecution);
+  }
+  getServiceexecutionByCustomer(id: number): Observable<Serviceexecution[]> {
+    return this.http.get<Serviceexecution[]>(`${environment.url_ms_business}/customer/${id}`);
   }
 }

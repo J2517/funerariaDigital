@@ -8,21 +8,31 @@ import {Chat} from "../models/chat.model";
   providedIn: 'root'
 })
 export class ChatService {
-
-  constructor(private http: HttpClient) { }
+  baseUrl: string;
+  constructor(private http: HttpClient) {
+    this.baseUrl = `${environment.url_ms_business}/chats`;
+  }
   list(): Observable<Chat[]> { // Esto es como una promesa
-    return this.http.get<Chat[]>(`${environment.url_ms_negocio}/chat`);
+    return this.http.get<Chat[]>(this.baseUrl);
   }
   delete(id:number){
-    return this.http.delete<Chat>(`${environment.url_ms_negocio}/chat/${id}`);
+    return this.http.delete<Chat>(`${this.baseUrl}/${id}`);
   }
   view(id:number):Observable<Chat> {
-    return this.http.get<Chat>(`${environment.url_ms_negocio}/chat/${id}`);
+    return this.http.get<Chat>(`${this.baseUrl}/${id}`);
   }
   create(newChat: Chat): Observable<Chat> {
-    return this.http.post<Chat>(`${environment.url_ms_negocio}/chat`, newChat);
+    return this.http.post<Chat>(this.baseUrl, newChat);
   }
   update(theChat: Chat): Observable<Chat> {
-    return this.http.put<Chat>(`${environment.url_ms_negocio}/chat/${theChat.id}`, theChat);
+    return this.http.put<Chat>(`${this.baseUrl}/${theChat.id}`, theChat);
+  }
+  getChatsByServiceAndCustomer(
+    idCustomer: string,
+    idService: string,
+  ): Observable<Chat[]> {
+    return this.http.get<Chat[]>(
+      `${environment.url_ms_business}/customers/${idCustomer}/service_executions/${idService}/chats`,
+    );
   }
 }

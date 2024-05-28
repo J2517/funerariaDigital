@@ -8,21 +8,26 @@ import {Payment} from "../models/payment.model";
   providedIn: 'root'
 })
 export class PaymentService {
-
-  constructor(private http: HttpClient) { }
-  list(): Observable<Payment[]> { // Esto es como una promesa
-    return this.http.get<Payment[]>(`${environment.url_ms_negocio}/payment`);
+  baseUrl: string;
+  constructor(private http: HttpClient) {
+    this.baseUrl = `${environment.url_ms_business}/payments`;
+  }
+  list(): Observable<Payment[]> {
+    return this.http.get<Payment[]>(this.baseUrl);
   }
   delete(id:number){
-    return this.http.delete<Payment>(`${environment.url_ms_negocio}/payment/${id}`);
+    return this.http.delete<Payment>(`${this.baseUrl}/${id}`);
   }
   view(id:number):Observable<Payment> {
-    return this.http.get<Payment>(`${environment.url_ms_negocio}/payment/${id}`);
+    return this.http.get<Payment>(`${this.baseUrl}/${id}`);
   }
   create(newPayment: Payment): Observable<Payment> {
-    return this.http.post<Payment>(`${environment.url_ms_negocio}/payment`, newPayment);
+    return this.http.post<Payment>(this.baseUrl, newPayment);
   }
   update(thePayment: Payment): Observable<Payment> {
-    return this.http.put<Payment>(`${environment.url_ms_negocio}/payment/${thePayment.id}`, thePayment);
+    return this.http.put<Payment>(`${this.baseUrl}/${thePayment.id}`, thePayment);
+  }
+  getPaymentsBySubscription(id: string): Observable<Payment[]> {
+    return this.http.get<Payment[]>(`${environment.url_ms_business}/subscriptions/${id}/payments`);
   }
 }

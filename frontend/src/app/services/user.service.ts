@@ -8,20 +8,23 @@ import { environment } from "src/environments/environment";
   providedIn: "root",
 })
 export class UserService {
-  constructor(private http: HttpClient) { }
+  baseUrl: string;
+  constructor(private http: HttpClient) {
+    this.baseUrl = `${environment.url_ms_security}/users`;
+  }
   list(): Observable<User[]> { // Esto es como una promesa
-    return this.http.get<User[]>(`${environment.url_ms_negocio}/user`);
+    return this.http.get<User[]>(this.baseUrl);
   }
   delete(id:number){
-    return this.http.delete<User>(`${environment.url_ms_negocio}/user/${id}`);
+    return this.http.delete<User>(`${this.baseUrl}/${id}`);
   }
   view(id:number):Observable<User> {
-    return this.http.get<User>(`${environment.url_ms_negocio}/user/${id}`);
+    return this.http.get<User>(`${this.baseUrl}/${id}`);
   }
   create(newUser: User): Observable<User> {
-    return this.http.post<User>(`${environment.url_ms_negocio}/user`, newUser);
+    return this.http.post<User>(this.baseUrl, newUser);
   }
   update(theUser: User): Observable<User> {
-    return this.http.put<User>(`${environment.url_ms_negocio}/user/${theUser.id}`, theUser);
+    return this.http.put<User>(`${this.baseUrl}/${theUser.id}`, theUser);
   }
 }

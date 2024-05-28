@@ -8,20 +8,23 @@ import { environment } from "src/environments/environment";
   providedIn: "root",
 })
 export class RoleService {
-  constructor(private http: HttpClient) { }
-  list(): Observable<Role[]> { // Esto es como una promesa
-    return this.http.get<Role[]>(`${environment.url_ms_negocio}/role`);
+  baseUrl: string;
+  constructor(private http: HttpClient) {
+    this.baseUrl = `${environment.url_ms_business}/roles`;
+  }
+  list(): Observable<Role[]> {
+    return this.http.get<Role[]>(this.baseUrl);
   }
   delete(id:number){
-    return this.http.delete<Role>(`${environment.url_ms_negocio}/role/${id}`);
+    return this.http.delete<Role>(`${this.baseUrl}/${id}`);
   }
   view(id:number):Observable<Role> {
-    return this.http.get<Role>(`${environment.url_ms_negocio}/role/${id}`);
+    return this.http.get<Role>(`${this.baseUrl}/${id}`);
   }
   create(newRole: Role): Observable<Role> {
-    return this.http.post<Role>(`${environment.url_ms_negocio}/role`, newRole);
+    return this.http.post<Role>(this.baseUrl, newRole);
   }
   update(theRole: Role): Observable<Role> {
-    return this.http.put<Role>(`${environment.url_ms_negocio}/role/${theRole.id}`, theRole);
+    return this.http.put<Role>(`${this.baseUrl}/${theRole.id}`, theRole);
   }
 }
