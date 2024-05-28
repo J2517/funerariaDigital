@@ -24,12 +24,12 @@ export class BeneficiaryService {
   update(theBeneficiary: Beneficiary): Observable<Beneficiary> {
     return this.http.put<Beneficiary>(`${this.baseUrl}/${theBeneficiary.id}`, theBeneficiary);
   }
-  getBeneficiariesByOwner(id: string): Observable<Beneficiary[]> {
+  getBeneficiariesByOwner(id: number): Observable<Beneficiary[]> {
     return this.http.get<Beneficiary[]>(
       `${environment.url_ms_business}/owners/${id}/beneficiaries`,
     );
   }
-  delete(id: string): Observable<Beneficiary> {
+  delete(id: number): Observable<Beneficiary> {
     return this.http.delete<Beneficiary>(`${this.baseUrl}/${id}`);
   }
 }

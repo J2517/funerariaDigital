@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {ServiceexecutionService} from "../../../services/serviceexecution.service";
-import {Serviceexecution} from "../../../models/serviceexecution.model";
-import Swal from "sweetalert2";
+import { Router } from '@angular/router';
+import { Serviceexecution } from 'src/app/models/serviceexecution.model';
+import { ServiceexecutionService } from 'src/app/services/serviceexecution.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-list',
@@ -9,39 +10,59 @@ import Swal from "sweetalert2";
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit {
-  serviceExecution:Serviceexecution[];
-  constructor(private service:ServiceexecutionService) {
-    this.serviceExecution=[];
+  serviceexecutions: Serviceexecution[];
+  constructor(
+    private service: ServiceexecutionService,
+    private router: Router,
+  ) {
+    this.serviceexecutions = [];
   }
 
   ngOnInit(): void {
-    this.list()
+    this.list();
   }
-  list (){
-    this.service.list().subscribe(data => {
-      this.serviceExecution=data;
-    })
+
+  list() {
+    this.service.list().subscribe((data) => {
+      console.log(data);
+      this.serviceexecutions = data;
+    });
   }
+
+  create() {
+    this.router.navigate(["serviceexecutions/create"]);
+  }
+
+  view(id: number) {
+    this.router.navigate(["serviceexecutions/view", id]);
+  }
+
+  update(id: number) {
+    this.router.navigate(["serviceexecutions/update", id]);
+  }
+
   delete(id: number) {
     Swal.fire({
-      title: "Eliminar registro",
-      text: "Está seguro que quiere eliminar el registro?",
-      icon: "warning",
+      title: '¿Estás seguro de eliminar el registro?',
+      text: "Esta acción no se puede revertir!",
+      icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Si, eliminar",
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, eliminar!',
+      cancelButtonText: 'No, cancelar'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.service.delete(id).subscribe((data) => {
+        this.service.delete(id).subscribe(() => {
           Swal.fire(
-            "Eliminado!",
-            "El registro ha sido eliminado correctamente",
-            "success"
+            'Eliminado!',
+            'El registro ha sido eliminado.',
+            'success'
           );
           this.ngOnInit();
         });
       }
     });
   }
+
 }

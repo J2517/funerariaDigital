@@ -1,9 +1,9 @@
-import { Beneficiary } from "./beneficiary.model";
-
 export class Headline {
-  id?: number;
+  id: number;
+  customer_id: number;
   name: string;
   email: string;
-  password: string;
-  beneficiaries?: Beneficiary[];
+  document: string;
+  start_date: string;
+  end_date: string;
 }

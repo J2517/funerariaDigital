@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import Swal from "sweetalert2";
-import {PaymentService} from "../../../services/payment.service";
-import {Payment} from "../../../models/payment.model";
+import { ActivatedRoute, Router } from '@angular/router';
+import { Payment } from 'src/app/models/payment.model';
+import { PaymentService } from 'src/app/services/payment.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-list',
@@ -9,35 +10,72 @@ import {Payment} from "../../../models/payment.model";
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit {
-  pay:Payment[];
-  constructor(private service:PaymentService) {
-    this.pay=[];
+
+  payments: Payment[];
+  subscriptionId: string;
+  customerId: string;
+
+  constructor(
+    private service: PaymentService,
+    private parent: ActivatedRoute,
+    private router: Router,
+  ) {
+    this.payments = [];
   }
 
   ngOnInit(): void {
-    this.list()
+    this.list();
   }
-  list (){
-    this.service.list().subscribe(data => {
-      this.pay=data;
-    })
+
+  list() {
+    const id = this.parent.snapshot.params.id;
+    if (id) {
+      this.subscriptionId = id;
+      console.log(id);
+      this.service.getPaymentsBySubscription(id).subscribe((data: Payment[]) => {
+        console.log(data);
+        this.payments = data;
+      });
+    } else {
+      this.service.list().subscribe((data: Payment[]) => {
+        this.payments = data;
+      });
+    }
   }
+
+  create() {
+    console.log(this.parent.snapshot.paramMap.get('idcustomer'));
+
+    console.log('create de payment')
+    // necesito esta ruta // http://localhost:4200/#/customers/1/subscriptions/1/payments/create
+    this.router.navigate(['customers', this.parent.snapshot.paramMap.get('idcustomer'), 'subscriptions', this.parent.snapshot.paramMap.get('id'), 'payments', 'create']);
+  }
+
+  view(id: number) {
+    this.router.navigate(['customers', this.parent.snapshot.paramMap.get('idcustomer'), 'subscriptions', this.parent.snapshot.paramMap.get('id'), 'payments', 'view', id]);
+  }
+
+  update(id: number) {
+    this.router.navigate(['customers', this.parent.snapshot.paramMap.get('idcustomer'), 'subscriptions', this.parent.snapshot.paramMap.get('id'), 'payments', 'update', id]);
+  }
+
   delete(id: number) {
     Swal.fire({
-      title: "Eliminar registro",
-      text: "Está seguro que quiere eliminar el registro?",
-      icon: "warning",
+      title: '¿Estás seguro?',
+      text: 'No podrás revertir esto',
+      icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Si, eliminar",
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.service.delete(id).subscribe((data) => {
+        this.service.delete(id).subscribe(() => {
           Swal.fire(
-            "Eliminado!",
-            "El registro ha sido eliminado correctamente",
-            "success"
+            'Eliminado',
+            'El registro ha sido eliminado',
+            'success'
           );
           this.ngOnInit();
         });

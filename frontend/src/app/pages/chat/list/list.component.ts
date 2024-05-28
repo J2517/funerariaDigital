@@ -1,44 +1,73 @@
-import { Component, OnInit } from '@angular/core';
-import {ChatService} from "../../../services/chat.service";
-import {Chat} from "../../../models/chat.model";
+import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
+import { Chat } from "src/app/models/chat.model";
+import { ChatService } from "src/app/services/chat.service";
 import Swal from "sweetalert2";
 
 @Component({
-  selector: 'app-list',
-  templateUrl: './list.component.html',
-  styleUrls: ['./list.component.scss']
+  selector: "app-list",
+  templateUrl: "./list.component.html",
+  styleUrls: ["./list.component.scss"],
 })
 export class ListComponent implements OnInit {
-  chat:Chat[];
-  constructor(private service:ChatService) {
-    this.chat=[];
+  chats: Chat[];
+  customerId: string;
+  constructor(
+    private service: ChatService,
+    private parent: ActivatedRoute,
+    private router: Router,
+  ) {
+    this.chats = [];
   }
 
   ngOnInit(): void {
-    this.list()
+    this.list();
   }
-  list (){
-    this.service.list().subscribe(data => {
-      this.chat=data;
-    })
+
+  list() {
+    console.log(this.parent.snapshot.params);
+    const id = this.parent.snapshot.params.id;
+    if (id) {
+      console.log(id);
+      this.customerId = this.parent.snapshot.params.idCustomer;
+      this.service
+        .getChatsByServiceAndCustomer(this.customerId, id)
+        .subscribe((data: Chat[]) => {
+          this.chats = data;
+        });
+    } else {
+      this.service.list().subscribe((data: Chat[]) => {
+        this.chats = data;
+      });
+    }
   }
+
+  create() {
+    this.router.navigate(["chats/create"]);
+  }
+
+  view(id: number) {
+    this.router.navigate(["chats/view", id]);
+  }
+
+  update(id: number) {
+    this.router.navigate(["chats/update", id]);
+  }
+
   delete(id: number) {
     Swal.fire({
-      title: "Eliminar registro",
-      text: "Está seguro que quiere eliminar el registro?",
+      title: "¿Estás seguro?",
+      text: "No podrás revertir esto",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Si, eliminar",
+      confirmButtonText: "Sí, eliminar",
+      cancelButtonText: "Cancelar",
     }).then((result) => {
       if (result.isConfirmed) {
-        this.service.delete(id).subscribe((data) => {
-          Swal.fire(
-            "Eliminado!",
-            "El registro ha sido eliminado correctamente",
-            "success"
-          );
+        this.service.delete(id).subscribe(() => {
+          Swal.fire("Eliminado!", "El registro ha sido eliminado.", "success");
           this.ngOnInit();
         });
       }

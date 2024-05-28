@@ -1,8 +1,13 @@
+import { Customer } from "./customer.model";
+
 export class Subscription {
   id?: number;
+  customer_id?: number;
+  customer?: Customer;
+  plan_id?: number;
   start_date: Date;
   end_date: Date;
-  status: number;
-  client_id: number;
-  plan_id: number;
+  monthly_fee: number;
+  is_paid: boolean;
+
 }

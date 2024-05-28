@@ -1,5 +1,5 @@
 export class Chat {
-  id?:number;
-  serviceExecution_id?:number;
-  message_id?:number;
+  id?: number;
+  status: boolean;
+  service_execution_id: number;
 }

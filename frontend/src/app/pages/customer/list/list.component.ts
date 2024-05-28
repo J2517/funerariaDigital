@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 import { Customer } from "src/app/models/customer.model";
 import { CustomerService } from "src/app/services/customer.service";
 import Swal from "sweetalert2";
@@ -9,38 +10,51 @@ import Swal from "sweetalert2";
   styleUrls: ["./list.component.scss"],
 })
 export class ListComponent implements OnInit {
-  client: Customer[];
-
-  constructor(private service: CustomerService) {
-    this.client = [];
+  customers: Customer[];
+  constructor(
+    private service: CustomerService,
+    private router: Router,
+  ) {
+    this.customers = [];
   }
 
   ngOnInit(): void {
     this.list();
   }
+
   list() {
     this.service.list().subscribe((data) => {
-      this.client = data;
+      console.log(data);
+      this.customers = data;
     });
   }
+
+  create() {
+    this.router.navigate(["customers/create"]);
+  }
+
+  view(id: number) {
+    this.router.navigate(["customers/view", id]);
+  }
+
+  update(id: number) {
+    this.router.navigate(["customers/update", id]);
+  }
+
   delete(id: number) {
     Swal.fire({
-      title: "Eliminar registro",
-      text: "¿Está seguro que quiere eliminar el registro?",
+      title: "¿Estás seguro de eliminar el registro?",
+      text: "Esta acción no se puede revertir!",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Si, eliminar",
+      confirmButtonText: "Sí, eliminar!",
       cancelButtonText: "No, cancelar",
     }).then((result) => {
       if (result.isConfirmed) {
-        this.service.delete(id).subscribe((data) => {
-          Swal.fire(
-            "Eliminado!",
-            "El registro ha sido eliminada correctamente",
-            "success"
-          );
+        this.service.delete(id).subscribe(() => {
+          Swal.fire("Eliminado!", "El registro ha sido eliminado.", "success");
           this.ngOnInit();
         });
       }

@@ -1,7 +1,5 @@
 export class Serviceexecution {
-    id?: number;
-    idService: number;
-    startDate: Date;
-    endDate: Date;
-    state: string;
+  id?: number;
+  customer_id?: number;
+  service_id?: number;
 }
