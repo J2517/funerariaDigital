@@ -50,10 +50,19 @@ export default class relocationsController {
     return await relocation.delete();
   }
 
-  public async exitsCity(city: string) {
-    return axios.get(
-      // ? es un query parameter que se le pasa a la url
-      `${Env.get("API_MAP_NATIONAL")}/?c_digo_dane_del_municipio=${city}`,
-    ).then((res) => res.data.length === 0);
+//Obtener las ciudades de la API
+static async getCity() {
+  try {
+    const response = await axios.get(Env.get("API_MAP_NATIONAL"));
+    return response.data;
+  } catch (error) {
+    return error;
   }
+}
+
+public async exitsCity(city: string) {
+  const cities = await relocationsController.getCity();
+  return cities.includes(city);
+  //return axios.get(`${Env.get("API_MAP_NATIONAL")}/?Department=${city}`);
+}
 }

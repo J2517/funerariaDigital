@@ -22,7 +22,7 @@ export default class HeadquartersController {
   }
 
   public async create({ request }: HttpContextContract) {
-    if (await this.exitsCity(request.input("city"))) {
+    if (await this.existsCity(request.input("city"))) {
       return { message: "The city does not exist" };
     }
 
@@ -31,7 +31,7 @@ export default class HeadquartersController {
   }
 
   public async update({ request, params }: HttpContextContract) {
-    if (await this.exitsCity(request.input("city"))) {
+    if (await this.existsCity(request.input("city"))) {
       return { message: "The city does not exist" };
     }
     const data = request.body();
@@ -46,10 +46,21 @@ export default class HeadquartersController {
     return await headquarter.delete();
   }
 
-  public async exitsCity(city: string) {
-    return axios.get(
-      // ? es un query parameter que se le pasa a la url
-      `${Env.get("API_MAP_NATIONAL")}/?c_digo_dane_del_municipio=${city}`,
-    ).then((res) => res.data.length === 0);
+  //Obtener las ciudades de la API
+  static async getDepartmentsAndCities() {
+    try {
+      const response = await axios.get(Env.get("API_SODA_COLOMBIA"));
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching departments and cities:", error);
+      return [];
+    }
+  }
+
+  public async existsCity(city: string) {
+    const data = await HeadquartersController.getDepartmentsAndCities();
+    return data.some(
+      (item) => item.municipio.toLowerCase() === city.toLowerCase()
+    );
   }
 }
