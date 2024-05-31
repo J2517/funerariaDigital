@@ -5,4 +5,5 @@ Route.group(() => {
     Route.post("/payments", "PaymentsController.create");
     Route.put("/payments/:id", "PaymentsController.update");
     Route.delete("/payments/:id", "PaymentsController.delete");
+    Route.post('/create-payment', 'PaymentController.createPayment')
 })
