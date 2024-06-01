@@ -43,7 +43,7 @@ export class ManageComponent implements OnInit {
 
     if (this.parent.snapshot.params.id) {
       this.subscription.id = this.parent.snapshot.params.id;
-      this.getSubscription(this.subscription.id.toString());
+      this.getSubscription(this.subscription.id);
     }
   }
 

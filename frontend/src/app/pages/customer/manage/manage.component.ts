@@ -90,7 +90,7 @@ export class ManageComponent implements OnInit {
       email: this.customer.email,
       document: this.customer.document,
       phone: this.customer.phone,
-      gender: this.customer.gender,
+      gender: this.customer.gender
     };
     const user = {
       id: this.customer.user_id,
