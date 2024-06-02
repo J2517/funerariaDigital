@@ -21,7 +21,6 @@
             <thead>
             <tr>
               <th class="col-1">id</th>
-              <th class="col-3">user id</th>
               <th class="col-3">name</th>
               <th class="col-3">email</th>
               <th class="col-3">document</th>
@@ -33,7 +32,6 @@
             <tbody>
             <tr *ngFor="let customer of customers; index as i">
               <td>{{ customer.id }}</td>
-              <td>{{ i + 1 }}</td>
               <td>{{ customer.name }}</td>
               <td>{{ customer.email }}</td>
               <td>{{ customer.document }}</td>
