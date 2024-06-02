@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Grave } from '../models/grave.model';
+import { Grave } from '../models/sepulture.model';
 import { environment } from '../../environments/environment';
 
 @Injectable({

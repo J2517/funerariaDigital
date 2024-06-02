@@ -1,8 +1,9 @@
-export class Transfer {
+export class Relocation {
     id?: number;
-    idTraslate: number;
     origin: string;
     destination: string;
     date: Date;
     price: number;
+    is_available: boolean;
+    service_id?: number;
 }

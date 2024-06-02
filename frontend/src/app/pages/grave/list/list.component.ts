@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {GraveService} from "../../../services/grave.service";
-import {Grave} from "../../../models/grave.model";
+import {Grave} from "../../../models/sepulture.model";
 import Swal from "sweetalert2";
 
 @Component({

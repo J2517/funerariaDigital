@@ -26,10 +26,9 @@ export class ManageComponent implements OnInit {
     this.administrator = {
       id: 0,
       name: "",
-      lastName: "",
       email: "",
-      password: "",
-      number: ""
+      responsibility: "",
+      salary: 0,
     };
   }
   configFormGroup() {

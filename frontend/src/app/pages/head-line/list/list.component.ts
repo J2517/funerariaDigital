@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { Headline } from "src/app/models/headline.model";
+import { Headline } from "src/app/models/owner.model";
 import { HeadlineService } from "src/app/services/head-line.service";
 import Swal from "sweetalert2";
 

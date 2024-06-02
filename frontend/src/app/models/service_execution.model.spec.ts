@@ -1,4 +1,4 @@
-import { Serviceexecution } from './serviceexecution.model';
+import { Serviceexecution } from './service_execution.model';
 
 describe('Serviceexecution', () => {
   it('should create an instance', () => {

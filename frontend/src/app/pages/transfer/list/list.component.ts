@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {TransferService} from "../../../services/transfer.service";
-import {Transfer} from "../../../models/transfer.model";
+import {Transfer} from "../../../models/relocation.model";
 import Swal from "sweetalert2";
 
 @Component({
