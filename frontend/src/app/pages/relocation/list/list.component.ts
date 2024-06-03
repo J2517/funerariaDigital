@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {TransferService} from "../../../services/transfer.service";
-import {Transfer} from "../../../models/relocation.model";
+import {RelocationService} from "../../../services/relocation.service";
+import {Relocation} from "../../../models/relocation.model";
 import Swal from "sweetalert2";
 
 @Component({
@@ -9,9 +9,9 @@ import Swal from "sweetalert2";
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit {
-  transfer:Transfer[];
-  constructor(private service:TransferService) {
-    this.transfer=[];
+  relocation:Relocation[];
+  constructor(private service:RelocationService) {
+    this.relocation=[];
   }
 
   ngOnInit(): void {
@@ -19,7 +19,7 @@ export class ListComponent implements OnInit {
   }
   list (){
     this.service.list().subscribe(data => {
-      this.transfer=data;
+      this.relocation=data;
     })
   }
   delete(id: number) {

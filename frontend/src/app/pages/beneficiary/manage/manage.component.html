@@ -1,5 +1,4 @@
-<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
-</div>
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8"></div>
 <!-- Page content -->
 <div class="container-fluid mt--7">
   <!-- Table -->
@@ -7,87 +6,48 @@
     <div class="col">
       <div class="card shadow">
         <div class="card-header bg-transparent">
-          <h3 *ngIf="mode==1" class="mb-0">Visualización</h3>
-          <h3 *ngIf="mode==2" class="mb-0">Crear</h3>
-          <h3 *ngIf="mode==3" class="mb-0">Actualizar</h3>
+          <h3 *ngIf="mode == 1" class="mb-0">Visualización</h3>
+          <h3 *ngIf="mode == 2" class="mb-0">Crear</h3>
+          <h3 *ngIf="mode == 3" class="mb-0">Actualizar</h3>
         </div>
         <div class="card-body">
-          <!-- Poner etiqueta from -->
           <form class="form" [formGroup]="theFormGroup">
             <div class="container">
               <div class="row">
-                <div class="col-4">
-                  Id:
-                </div>
+                <div class="col-4">Id:</div>
+                <div class="col-8">{{ beneficiary.id }}</div>
+              </div>
+              <div class="row">
+                <div class="col-4">Propietario:</div>
                 <div class="col-8">
-                  {{beneficiary.id}}
+                  <select class="form-control" [(ngModel)]="beneficiary.owner_id" [disabled]="mode == 1" formControlName="owner_id">
+                    <option *ngFor="let owner of owners" [value]="owner.id">{{ owner.name }}</option>
+                  </select>
                 </div>
               </div>
               <div class="row">
-                <div class="col-4">
-                  Nombre:
-                </div>
+                <div class="col-4">Cliente:</div>
                 <div class="col-8">
-                  <input type="text" class="from-control" [(ngModel)]="beneficiary.name"
-                         [disabled]="mode==1" formController="name">
-                  <div
-                    *ngIf="getTheFormGroup.location.errors && (getTheFormGroup.location.dirty || getTheFormGroup.location.touched)">
-                    <strong *ngIf="getTheFormGroup.location.errors.required"
-                            class="msnError">Requerido</strong>
-                    <strong *ngIf="getTheFormGroup.location.errors.minlength"
-                            class="msnError">Invalido</strong>
-                  </div>
+                  <select class="form-control" [(ngModel)]="beneficiary.customer_id" [disabled]="mode == 1" formControlName="customer_id">
+                    <option *ngFor="let customer of customers" [value]="customer.id">{{ customer.name }}</option>
+                  </select>
                 </div>
               </div>
               <div class="row">
-                <div class="col-4">
-                  email:
-                </div>
+                <div class="col-4">Edad:</div>
                 <div class="col-8">
-                  <input type="text" class="from-control" [(ngModel)]="beneficiary.email"
-                         [disabled]="mode==1" formController="email">
-                  <div
-                    *ngIf="getTheFormGroup.location.errors && (getTheFormGroup.location.dirty || getTheFormGroup.location.touched || trySend)">
-                    <strong *ngIf="getTheFormGroup.location.errors.required" class="msnError">Requerido</strong>
-                    <strong *ngIf="getTheFormGroup.location.errors.minlength" class="msnError">Requerido</strong>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-4">
-                  Contraseña:
-                </div>
-                <div class="col-8">
-                  <input type="text" class="from-control" [(ngModel)]="beneficiary.password"
-                         [disabled]="mode==1" formController="password">
-                  <div
-                    *ngIf="getTheFormGroup.location.errors && (getTheFormGroup.location.dirty || getTheFormGroup.location.touched || trySend)">
-                    <strong *ngIf="getTheFormGroup.location.errors.required" class="msnError">Requerido</strong>
-                    <strong *ngIf="getTheFormGroup.location.errors.minlength" class="msnError">Requerido</strong>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-4">
-                  Titular:
-                </div>
-                <div class="col-8">
-                  <input type="text" class="from-control" [(ngModel)]="beneficiary.headLine_id"
-                         [disabled]="mode==1" formController="headLine">
-                  <div
-                    *ngIf="getTheFormGroup.location.errors && (getTheFormGroup.location.dirty || getTheFormGroup.location.touched || trySend)">
-                    <strong *ngIf="getTheFormGroup.location.errors.required" class="msnError">Requerido</strong>
-                    <strong *ngIf="getTheFormGroup.location.errors.minlength" class="msnError">Requerido</strong>
+                  <input type="text" class="form-control" [(ngModel)]="beneficiary.age" [disabled]="mode == 1" formControlName="age">
+                  <div *ngIf="theFormGroup.get('age').errors && (theFormGroup.get('age').dirty || theFormGroup.get('age').touched || trySend)">
+                    <strong *ngIf="theFormGroup.get('age').errors.required" class="msnError">Requerido</strong>
+                    <strong *ngIf="theFormGroup.get('age').errors.minlength" class="msnError">Requerido</strong>
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-4"></div>
                 <div class="col-8">
-                  <button *ngIf="mode==2" class="btn btn-primary btn-block"
-                          (click)="create()">Crear</button>
-                  <button *ngIf="mode==3" class="btn btn-primary btn-block"
-                          (click)="update()">Actualizar</button>
+                  <button *ngIf="mode == 2" class="btn btn-primary btn-block" (click)="create()">Crear</button>
+                  <button *ngIf="mode == 3" class="btn btn-primary btn-block" (click)="update()">Actualizar</button>
                 </div>
               </div>
             </div>

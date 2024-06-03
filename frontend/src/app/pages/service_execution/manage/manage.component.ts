@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import {FormGroup, FormsModule} from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
-import { Serviceexecution } from "src/app/models/serviceexecution.model";
+import { Serviceexecution } from "src/app/models/service_execution.model";
 import { ServiceexecutionService } from "src/app/services/serviceexecution.service";
 
 @Component({

@@ -24,19 +24,27 @@
             <thead>
             <tr>
               <th class="col-1">Id</th>
-              <th class="col-3">Fecha de Inicio</th>
-              <th class="col-3">Fecha de Fin</th>
-              <th class="col-3">Monto Mensual</th>
-              <th class="col-3">Pagó</th>
+              <th class="col-3">Id Cliente</th>
+              <th class="col-3">Nombre</th>
+              <th class="col-3">Plan</th>
+              <th class="col-3">Inicio</th>
+              <th class="col-3">Final</th>
+              <th class="col-3">Monto</th>
+              <th class="col-3">Pagado</th>
               <th class="col-5">Opciones</th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let sub of subscription">
               <td>{{ sub.id }}</td>
+              <td>{{ sub.customer_id }}</td>
+              <td>{{ sub.customer.name }}</td>
+              <td>{{ sub.plan_id }}</td>
               <td>{{ sub.start_date | date: 'dd/MM/yyyy' }}</td>
               <td>{{ sub.end_date |date: 'dd/MM/yyyy'}}</td>
               <td>{{ sub.monthly_fee }}</td>
+              <td>{{ sub.is_paid }}</td>
+
               <td>
                 <span *ngIf="sub.is_paid == 1" class="text-success">✔</span>
                 <span *ngIf="sub.is_paid != 1" class="text-danger">✖</span>

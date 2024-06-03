@@ -23,7 +23,6 @@ export class ManageComponent implements OnInit {
   ) {
     this.mode = 1;
     this.customer = {
-      user_id: 1,
       name: "juan",
       email: "example@example.com",
       document: "12345678",
@@ -93,7 +92,6 @@ export class ManageComponent implements OnInit {
       gender: this.customer.gender
     };
     const user = {
-      id: this.customer.user_id,
       name: this.customer.name,
       email: this.customer.email,
       password: "123456",

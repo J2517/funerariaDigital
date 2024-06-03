@@ -23,16 +23,21 @@
             <tr>
               <th scope="col-1">Id</th>
               <th scope="col-3">Nombre</th>
-              <th scope="col-4">ubicacion</th>
-              <th scope="col-4">Ciudad</th>
+              <th scope="col-4">Dirección</th>
+              <th scope="col-5">Correo</th>
+              <th scope="col-6">Ciudad</th>
+              <th scope="col-7">Telefono</th>
+              <th scope="col-8">Opciones</th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let actual of campus">
               <td>{{actual.id}}</td>
               <td>{{actual.name}}</td>
-              <td>{{actual.location}}</td>
+              <td>{{actual.adress}}</td>
+              <td>{{actual.email}}</td>
               <td>{{actual.city}}</td>
+              <td>{{actual.phone}}</td>
               <td>
                 <button type="button" class="btn btn-primary">Ver</button>
                 <button type="button" class="btn btn-warning">Actualizar</button>

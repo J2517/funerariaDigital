@@ -81,7 +81,7 @@ export const AdminLayoutRoutes: Routes = [
   {
     path: "account-holder",
     loadChildren: () =>
-      import("../../pages/head-line/head-line.module").then(
+      import("../../pages/owners/head-line.module").then(
         (m) => m.HeadLineModule
       ),
   },

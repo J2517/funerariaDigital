@@ -11,10 +11,13 @@ import Swal from "sweetalert2";
   styleUrls: ["./manage.component.scss"],
 })
 export class ManageComponent implements OnInit {
-  mode: number; //1->vizualizar, 2->Crear, 3->Actualizar
+  mode: number; // 1 -> Visualizar, 2 -> Crear, 3 -> Actualizar
   beneficiary: Beneficiary;
   theFormGroup: FormGroup;
   trySend: boolean;
+  owners: any[] = [];
+  customers: any[] = [];
+
   constructor(
     private activateRoute: ActivatedRoute,
     private service: BeneficiaryService,
@@ -25,28 +28,26 @@ export class ManageComponent implements OnInit {
     this.mode = 1;
     this.beneficiary = {
       id: 0,
-      name: "",
-      email: "",
-      password: "",
-      headLine_id: 0
+      owner_id: 0,
+      customer_id: 0,
+      age: "",
     };
   }
+
   configFormGroup() {
     this.theFormGroup = this.theFormBuilder.group({
-      //Primer elemento es el valor por defecto
-      //Segundo elemento es la validación
-      name: ["", [Validators.required, Validators.minLength(2)]],
-      email: ["", [Validators.required, Validators.minLength(2)]],
-      password: ["", [Validators.required, Validators.minLength(4)]]
+      owner_id: ["", [Validators.required]],
+      customer_id: ["", [Validators.required]],
+      age: ["", [Validators.required, Validators.minLength(1)]],
     });
-    this.configFormGroup();
   }
+
   get getTheFormGroup() {
     return this.theFormGroup.controls;
   }
+
   ngOnInit(): void {
     const currentUrl = this.activateRoute.snapshot.url.join("/");
-
     if (currentUrl.includes("view")) {
       this.mode = 1;
     } else if (currentUrl.includes("create")) {
@@ -54,19 +55,45 @@ export class ManageComponent implements OnInit {
     } else if (currentUrl.includes("update")) {
       this.mode = 3;
     }
+
     if (this.activateRoute.snapshot.params.id) {
       this.beneficiary.id = this.activateRoute.snapshot.params.id;
       this.getBeneficiary(this.beneficiary.id);
     }
 
+    this.loadOwners();
+    this.loadCustomers();
+    this.configFormGroup();
+
     console.log("MODO -> " + this.mode);
   }
+
   getBeneficiary(id: number) {
     this.service.view(id).subscribe((data) => {
       this.beneficiary = data;
       console.log("BENEFICIARIO ->" + JSON.stringify(this.beneficiary));
+      this.theFormGroup.patchValue(this.beneficiary);
     });
   }
+
+  loadOwners() {
+    // Aquí iría el servicio para cargar los propietarios
+    // Reemplazar el siguiente código de ejemplo con el llamado real al servicio
+    this.owners = [
+      { id: 1, name: 'Owner 1' },
+      { id: 2, name: 'Owner 2' }
+    ];
+  }
+
+  loadCustomers() {
+    // Aquí iría el servicio para cargar los clientes
+    // Reemplazar el siguiente código de ejemplo con el llamado real al servicio
+    this.customers = [
+      { id: 1, name: 'Customer 1' },
+      { id: 2, name: 'Customer 2' }
+    ];
+  }
+
   create() {
     if (this.theFormGroup.invalid) {
       this.trySend = true;
@@ -82,6 +109,7 @@ export class ManageComponent implements OnInit {
       this.router.navigate(["beneficiary/list"]);
     });
   }
+
   update() {
     if (this.theFormGroup.invalid) {
       this.trySend = true;
@@ -98,7 +126,8 @@ export class ManageComponent implements OnInit {
         "Beneficiario actualizado con éxito",
         "success"
       );
-      this.router.navigate(["beneficiaries/list"]);
+      this.router.navigate(["beneficiary/list"]);
     });
   }
 }
+

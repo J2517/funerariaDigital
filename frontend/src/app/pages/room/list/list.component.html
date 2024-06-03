@@ -22,10 +22,12 @@
             <thead>
             <tr>
               <th scope="col-1">Id</th>
-              <th scope="col-3">Nombre</th>
-              <th scope="col-4">Capacidad</th>
-              <th scope="col-4">Disponible</th>
-              <th scope="col-4">Sede</th>
+              <th scope="col-2">Nombre</th>
+              <th scope="col-3">Capacidad</th>
+              <th scope="col-4">Instalaciones</th>
+              <th scope="col-5">Disponible</th>
+              <th scope="col-6">Sede</th>
+              <th scope="col-7">Opciones</th>
 
 
             </tr>
@@ -33,10 +35,10 @@
             <tbody>
             <tr *ngFor="let actual of hall">
               <td>{{actual.id}}</td>
-              <td>{{actual.name}}</td>
-              <td>{{actual.capacity}}</td>
-              <td>{{actual.disponibility}}</td>
-              <td>{{actual.campus_id}}</td>
+              <td>{{actual.room_name}}</td>
+              <td>{{actual.room_capacity}}</td>
+              <td>{{actual.facilities}}</td>
+              <td>{{actual.headquearter_id}}</td>
               <td>
                 <button type="button" class="btn btn-primary">Ver</button>
                 <button type="button" class="btn btn-warning">Actualizar</button>
