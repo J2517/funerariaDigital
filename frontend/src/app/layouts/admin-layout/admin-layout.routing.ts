@@ -13,6 +13,11 @@ export const AdminLayoutRoutes: Routes = [
   { path: "icons", component: IconsComponent },
   { path: "maps", component: MapsComponent },
   {
+    path: "administrator",
+    loadChildren: () =>
+      import("../../pages/administrator/administrator.module").then((m) => m.AdministratorModule),
+  },
+  {
     path: "comment",
     loadChildren: () =>
       import("../../pages/comment/comment.module").then((m) => m.CommentModule),
