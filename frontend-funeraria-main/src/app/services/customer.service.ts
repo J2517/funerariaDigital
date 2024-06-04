@@ -13,6 +13,10 @@ export class CustomerService {
     this.baseUrl = `${environment.url_ms_business}/customers`;
   }
 
+  list(): Observable<Customer[]> {
+    return this.http.get<Customer[]>(this.baseUrl);
+  }
+
   getCustomers(): Observable<Customer[]> {
     return this.http.get<Customer[]>(this.baseUrl);
   }
