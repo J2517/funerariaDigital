@@ -1,8 +1,8 @@
 export class Headquarter {
   id?: number;
   name: string;
-  location: string;
+  adress: string;
   email: string;
   city: string;
-  hall_id?: number;
+  phone: string;
 }

@@ -1,6 +1,7 @@
 export class Message {
   id?: number;
-  information: string;
+  sender: string;
+  content: string;
   user_id?: number;
   chat_id?: number;
 }

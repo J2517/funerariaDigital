@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {ListComponent} from "../comment/list/list.component";
-import {ManageComponent} from "../comment/manage/manage.component";
+import {ListComponent} from "../administrator/list/list.component";
+import {ManageComponent} from "../administrator/manage/manage.component";
 
 const routes: Routes = [
   {

@@ -22,17 +22,29 @@
                 <thead>
                     <tr>
                         <th class="col-1">ID</th>
-                        <th class="col-2">Ubicación</th>
-                        <th class="col-3">Costo</th>
-                        <th class="col-4">Ocupada</th>
+                        <th class="col-2">Nombre</th>
+                        <th class="col-3">Descripción</th>
+                        <th class="col-4">Cementerio</th>
+                        <th class="col-5">Tipo</th>
+                        <th class="col-6">Precio</th>
+                        <th class="col-7">Ocupada</th>
+                        <th class="col-8">Servicio id</th>
+                        <th class="col-9">Sala id</th>
+                        <th class="col-10">Opcioness</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngfor="let actual of grave">
+                    <tr *ngfor="let actual of sepulture">
                         <td>{{actual.id}}</td>
-                        <td>{{actual.location}}</td>
+                        <td>{{actual.sepulture_name}}</td>
+                        <td>{{actual.description}}</td>
+                        <td>{{actual.cemetery_name}}</td>
+                        <td>{{actual.sepulture_type}}</td>
                         <td>{{actual.price}}</td>
-                        <td>{{actual.busy}}</td>
+                        <td>{{actual.is_available}}</td>
+                        <td>{{actual.service_id}}</td>
+                        <td>{{actual.room_id}}</td>
+
                         <td>
                             <button type="button" class="btn btn-primary">Ver</button>
                             <button type="button" class="btn btn-primary">Editar</button>

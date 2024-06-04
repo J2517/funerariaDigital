@@ -22,15 +22,22 @@
                 <thead>
                     <tr>
                         <th class="col-1">ID</th>
-                        <th class="col-2">Fecha</th>
-                        <th class="col-3">Costo</th>
+                        <th class="col-2">Lugar</th>
+                        <th class="col-3">Fecha</th>
+                        <th class="col-4">Costo</th>
+                        <th class="col-5">Disponible</th>
+                        <th class="col-6">Opciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngfor="let actual of cremation">
                         <td>{{actual.id}}</td>
-                        <td>{{actual.fecha}}</td>
-                        <td>{{actual.costo}}</td>
+                        <td>{{actual.location}}</td>
+                        <td>{{actual.date}}</td>
+                        <td>{{actual.price}}</td>
+                        <td>{{actual.is_available}}</td>
+                        <td>{{actual.service_id}}</td>
+                        <td>{{actual.room_id}}</td>
                         <td>
                             <button type="button" class="btn btn-primary">Ver</button>
                             <button type="button" class="btn btn-primary">Editar</button>

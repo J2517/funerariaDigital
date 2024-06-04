@@ -22,15 +22,18 @@
             <thead>
             <tr>
               <th scope="col-1">Id</th>
-              <th scope="col-3">Informacion</th>
+              <th scope="col-3">Remitente</th>
+              <th scope="col-4">Contenido</th>
               <th scope="col-4">Usuario</th>
-              <th scope="col-4">Chat</th>
+              <th scope="col-5">Chat</th>
+              <th scope="col-6">Opciones</th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let actual of message">
               <td>{{actual.id}}</td>
-              <td>{{actual.information}}</td>
+              <td>{{actual.sender}}</td>
+              <td>{{actual.content}}</td>
               <td>{{actual.user_id}}</td>
               <td>{{actual.chat_id}}</td>
               <td>

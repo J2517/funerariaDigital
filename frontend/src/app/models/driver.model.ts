@@ -1,4 +1,7 @@
 export class Driver {
   id?: number;
-  serviceId?: number;
+  name: string;
+  email: string;
+  document: string;
+  phone: string;
 }

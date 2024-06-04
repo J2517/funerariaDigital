@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {GraveService} from "../../../services/grave.service";
-import {Grave} from "../../../models/grave.model";
+import {SepultureService} from "../../../services/sepulture.service";
+import {Sepulture} from "../../../models/sepulture.model";
 import Swal from "sweetalert2";
 
 @Component({
@@ -9,9 +9,9 @@ import Swal from "sweetalert2";
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit {
-  grave:Grave[];
-  constructor(private service:GraveService) {
-    this.grave=[];
+  sepulture:Sepulture[];
+  constructor(private service:SepultureService) {
+    this.sepulture=[];
   }
 
   ngOnInit(): void {
@@ -19,7 +19,7 @@ export class ListComponent implements OnInit {
   }
   list (){
     this.service.list().subscribe(data => {
-      this.grave=data;
+      this.sepulture=data;
     })
   }
   delete(id: number) {

@@ -27,6 +27,7 @@
               <th class="col-3">Monto</th>
               <th class="col-3">Metodo de pago</th>
               <th class="col-3">Fecha</th>
+              <th class="col-5">Suscripción</th>
               <th class="col-5">Opciones</th>
             </tr>
             </thead>
@@ -36,6 +37,7 @@
               <td>{{ pay.amount }}</td>
               <td>{{pay.payment_method}}</td>
               <td>{{ pay.payment_date |date: 'dd/MM/yyyy'}}</td>
+              <td>{{ pay.subscription_id }}</td>
               <td>
                 <button type="button" class="btn btn-primary" (click)="view(pay.id)">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye"

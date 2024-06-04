@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { Headline } from "src/app/models/headline.model";
-import { HeadlineService } from "src/app/services/head-line.service";
+import { Owner } from "src/app/models/owner.model";
+import { OwnerService } from "src/app/services/owner.service";
 import Swal from "sweetalert2";
 
 @Component({
@@ -10,12 +10,12 @@ import Swal from "sweetalert2";
   styleUrls: ["./list.component.scss"],
 })
 export class ListComponent implements OnInit {
-  headlines: Headline[];
+  Owners: Owner[];
   constructor(
-    private service: HeadlineService,
+    private service: OwnerService,
     private route: Router,
   ) {
-    this.headlines = [];
+    this.Owners = [];
   }
 
   ngOnInit(): void {
@@ -23,8 +23,8 @@ export class ListComponent implements OnInit {
   }
 
   list() {
-    this.service.list().subscribe((data: Headline[]) => {
-      this.headlines = data;
+    this.service.list().subscribe((data: Owner[]) => {
+      this.Owners = data;
     });
   }
 

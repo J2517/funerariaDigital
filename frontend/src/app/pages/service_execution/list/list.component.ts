@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Serviceexecution } from 'src/app/models/serviceexecution.model';
+import { Serviceexecution } from 'src/app/models/service_execution.model';
 import { ServiceexecutionService } from 'src/app/services/serviceexecution.service';
 import Swal from 'sweetalert2';
 

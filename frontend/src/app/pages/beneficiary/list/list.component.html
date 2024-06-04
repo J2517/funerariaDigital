@@ -26,19 +26,17 @@
             <thead>
             <tr>
               <th class="col-1">ID</th>
-              <th class="col-3">name</th>
-              <th class="col-3">email</th>
-              <th class="col-3">document</th>
-              <th class="col-3">age</th>
+              <th class="col-2">Titular</th>
+              <th class="col-3">Nombre</th>
+              <th class="col-4">edad</th>
               <th class="col-5">Opciones</th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let ben of beneficiaries">
               <td>{{ ben.id }}</td>
-              <td>{{ ben.name }}</td>
-              <td>{{ ben.email }}</td>
-              <td>{{ ben.document }}</td>
+              <td>{{ ben.owner.id }}</td>
+              <td>{{ ben.customer.id }}</td>
               <td>{{ ben.age }}</td>
               <td>
                 <button

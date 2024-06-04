@@ -9,7 +9,7 @@ import Swal from "sweetalert2";
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit {
-  administrator:Administrator[];
+  administrator:Administrator[] = [];
   constructor(private service:AdministratorService) {
     this.administrator=[];
   }

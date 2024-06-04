@@ -24,16 +24,20 @@
             <thead>
             <tr>
               <th class="col-1">Id</th>
-              <th class="col-3">Calificacion</th>
-              <th class="col-3">Comentario</th>
-              <th class="col-5">Opciones</th>
+              <th class="col-2">Usuario</th>
+              <th class="col-3">rating</th>
+              <th class="col-4">Comentario</th>
+              <th class="col-5">Servicio ejecutado</th>
+              <th class="col-6">Opciones</th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let comment of comments">
               <td>{{comment.id }}</td>
+              <td>{{comment.user.id }}</td>
               <td>{{comment.rating }}</td>
               <td>{{comment.comment}}</td>
+              <td>{{comment.service_execution.id}}</td>
               <td>
                 <button type="button" class="btn btn-primary" (click)="view(comment.id)">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye"
