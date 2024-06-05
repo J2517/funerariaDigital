@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 import { Driver } from "src/app/models/driver.model";
 import { DriverService } from "src/app/services/driver.service";
 import Swal from "sweetalert2";
@@ -11,7 +12,7 @@ import Swal from "sweetalert2";
 export class ListComponent implements OnInit {
   driver: Driver[];
 
-  constructor(private service: DriverService) {
+  constructor(private service: DriverService, private router: Router) {
     this.driver = [];
   }
 
@@ -46,5 +47,16 @@ export class ListComponent implements OnInit {
         });
       }
     });
+  }
+  view(id: number) {
+    this.router.navigate(["/driver/view", id]);
+  }
+
+  update(id: number) {
+    this.router.navigate(["/driver/update", id]);
+  }
+
+  create() {
+    this.router.navigate(["driver/create"]);
   }
 }

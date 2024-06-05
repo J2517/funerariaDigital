@@ -11,10 +11,7 @@ import Swal from "sweetalert2";
 })
 export class ListComponent implements OnInit {
   customers: Customer[];
-  constructor(
-    private service: CustomerService,
-    private router: Router,
-  ) {
+  constructor(private service: CustomerService, private router: Router) {
     this.customers = [];
   }
 
@@ -23,7 +20,7 @@ export class ListComponent implements OnInit {
   }
 
   list() {
-    this.service.getCustomers().subscribe((data) => {
+    this.service.list().subscribe((data) => {
       console.log(data);
       this.customers = data;
     });

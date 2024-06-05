@@ -1,26 +1,27 @@
-import { Component, OnInit } from '@angular/core';
-import {CremationService} from "../../../services/cremation.service";
-import {Cremation} from "../../../models/cremation.model";
+import { Component, OnInit } from "@angular/core";
+import { CremationService } from "../../../services/cremation.service";
+import { Cremation } from "../../../models/cremation.model";
 import Swal from "sweetalert2";
+import { Router } from "@angular/router";
 
 @Component({
-  selector: 'app-list',
-  templateUrl: './list.component.html',
-  styleUrls: ['./list.component.scss']
+  selector: "app-list",
+  templateUrl: "./list.component.html",
+  styleUrls: ["./list.component.scss"],
 })
 export class ListComponent implements OnInit {
-  cremation:Cremation[];
-  constructor(private service:CremationService) {
-    this.cremation=[];
+  cremation: Cremation[];
+  constructor(private service: CremationService, private router: Router) {
+    this.cremation = [];
   }
 
   ngOnInit(): void {
-    this.list()
+    this.list();
   }
-  list (){
-    this.service.list().subscribe(data => {
-      this.cremation=data;
-    })
+  list() {
+    this.service.list().subscribe((data) => {
+      this.cremation = data;
+    });
   }
   delete(id: number) {
     Swal.fire({
@@ -43,5 +44,16 @@ export class ListComponent implements OnInit {
         });
       }
     });
+  }
+  view(id: number) {
+    this.router.navigate(["/cremation/view", id]); // cremation/view/+id
+  }
+
+  update(id: number) {
+    this.router.navigate(["/cremation/update", id]);
+  }
+
+  create() {
+    this.router.navigate(["cremation/create"]);
   }
 }

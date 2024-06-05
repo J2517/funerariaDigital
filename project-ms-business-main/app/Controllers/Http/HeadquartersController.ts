@@ -58,6 +58,7 @@ export default class HeadquartersController {
   }
 
   public async existsCity(city: string) {
+    
     const data = await HeadquartersController.getDepartmentsAndCities();
     return data.some(
       (item) => item.municipio.toLowerCase() === city.toLowerCase()

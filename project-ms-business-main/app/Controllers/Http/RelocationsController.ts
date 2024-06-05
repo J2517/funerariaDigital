@@ -50,19 +50,19 @@ export default class relocationsController {
     return await relocation.delete();
   }
 
-//Obtener las ciudades de la API
-static async getCity() {
-  try {
-    const response = await axios.get(Env.get("API_MAP_NATIONAL"));
-    return response.data;
-  } catch (error) {
-    return error;
+  //Obtener las ciudades de la API
+  static async getCity() {
+    try {
+      const response = await axios.get(Env.get("API_SODA_COLOMBIA"));
+      return response.data;
+    } catch (error) {
+      return error;
+    }
   }
-}
 
-public async exitsCity(city: string) {
-  const cities = await relocationsController.getCity();
-  return cities.includes(city);
-  //return axios.get(`${Env.get("API_MAP_NATIONAL")}/?Department=${city}`);
-}
+  public async exitsCity(city: string) {
+    const cities = await relocationsController.getCity();
+    return cities.includes(city);
+    //return axios.get(`${Env.get("API_MAP_NATIONAL")}/?Department=${city}`);
+  }
 }

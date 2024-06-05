@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 import { Role } from "src/app/models/role.model";
 import { RoleService } from "src/app/services/role.service";
 import Swal from "sweetalert2";
@@ -10,7 +11,7 @@ import Swal from "sweetalert2";
 })
 export class ListComponent implements OnInit {
   role: Role[];
-  constructor(private service: RoleService) {
+  constructor(private service: RoleService, private router: Router) {
     this.role = [];
   }
 
@@ -45,5 +46,16 @@ export class ListComponent implements OnInit {
         });
       }
     });
+  }
+  view(id: number) {
+    this.router.navigate(["/role/view", id]);
+  }
+
+  update(id: number) {
+    this.router.navigate(["/role/update", id]);
+  }
+
+  create() {
+    this.router.navigate(["role/create"]);
   }
 }

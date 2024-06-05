@@ -25,7 +25,7 @@ export const AdminLayoutRoutes: Routes = [
       ),
   },
   {
-    path: "services",
+    path: "services", //no sirve
     loadChildren: () =>
       import("../../pages/services/services.module").then(
         (m) => m.ServicesModule,

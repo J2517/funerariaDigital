@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 import { Permission } from "src/app/models/permission.model";
 import { PermissionService } from "src/app/services/permission.service";
 import Swal from "sweetalert2";
@@ -11,7 +12,7 @@ import Swal from "sweetalert2";
 export class ListComponent implements OnInit {
   permission: Permission[];
 
-  constructor(private service: PermissionService) {
+  constructor(private service: PermissionService, private router: Router) {
     this.permission = [];
   }
 
@@ -46,5 +47,16 @@ export class ListComponent implements OnInit {
         });
       }
     });
+  }
+  view(id: number) {
+    this.router.navigate(["/permission/view", id]);
+  }
+
+  update(id: number) {
+    this.router.navigate(["/permission/update", id]);
+  }
+
+  create() {
+    this.router.navigate(["permission/create"]);
   }
 }

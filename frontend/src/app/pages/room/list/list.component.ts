@@ -1,26 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 import Swal from "sweetalert2";
-import {RoomService} from "../../../services/room.service";
-import {Room} from "../../../models/room.model";
+import { RoomService } from "../../../services/room.service";
+import { Room } from "../../../models/room.model";
+import { Router } from "@angular/router";
 
 @Component({
-  selector: 'app-list',
-  templateUrl: './list.component.html',
-  styleUrls: ['./list.component.scss']
+  selector: "app-list",
+  templateUrl: "./list.component.html",
+  styleUrls: ["./list.component.scss"],
 })
 export class ListComponent implements OnInit {
-  hall:Room[];
-  constructor(private service:RoomService) {
-    this.hall=[];
+  hall: Room[];
+  constructor(private service: RoomService, private router: Router) {
+    this.hall = [];
   }
 
   ngOnInit(): void {
-    this.list()
+    this.list();
   }
-  list (){
-    this.service.list().subscribe(data => {
-      this.hall=data;
-    })
+  list() {
+    this.service.list().subscribe((data) => {
+      this.hall = data;
+    });
   }
   delete(id: number) {
     Swal.fire({
@@ -44,5 +45,15 @@ export class ListComponent implements OnInit {
       }
     });
   }
+  view(id: number) {
+    this.router.navigate(["/hall/view", id]); // room/view/+id
+  }
 
+  update(id: number) {
+    this.router.navigate(["/hall/update", id]);
+  }
+
+  create() {
+    this.router.navigate(["hall/create"]);
+  }
 }
