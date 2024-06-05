@@ -1,26 +1,27 @@
-import { Component, OnInit } from '@angular/core';
-import {PlanService} from "../../../services/plan.service";
-import {Plan} from "../../../models/plan.model";
+import { Component, OnInit } from "@angular/core";
+import { PlanService } from "../../../services/plan.service";
+import { Plan } from "../../../models/plan.model";
 import Swal from "sweetalert2";
+import { Router } from "@angular/router";
 
 @Component({
-  selector: 'app-list',
-  templateUrl: './list.component.html',
-  styleUrls: ['./list.component.scss']
+  selector: "app-list",
+  templateUrl: "./list.component.html",
+  styleUrls: ["./list.component.scss"],
 })
 export class ListComponent implements OnInit {
-  plan:Plan[];
-  constructor(private service:PlanService) {
-    this.plan=[];
+  plan: Plan[];
+  constructor(private service: PlanService, private router: Router) {
+    this.plan = [];
   }
 
   ngOnInit(): void {
-    this.list()
+    this.list();
   }
-  list (){
-    this.service.list().subscribe(data => {
-      this.plan=data;
-    })
+  list() {
+    this.service.list().subscribe((data) => {
+      this.plan = data;
+    });
   }
   delete(id: number) {
     Swal.fire({
@@ -43,5 +44,16 @@ export class ListComponent implements OnInit {
         });
       }
     });
+  }
+  view(id: number) {
+    this.router.navigate(["/plan/view", id]); // plan/view/+id
+  }
+
+  update(id: number) {
+    this.router.navigate(["/plan/update", id]);
+  }
+
+  create() {
+    this.router.navigate(["plan/create"]);
   }
 }

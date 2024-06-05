@@ -13,37 +13,36 @@
             </div>
             <div class="col-6"></div>
             <div class="col-3">
-              <button type="button" class="btn btn-success" (click)="list()">Crear</button>
+              <button type="button" class="btn btn-success" (click)="create()">Crear</button>
             </div>
           </div>
         </div>
         <div class="card-body">
           <table class="table">
             <thead>
-            <tr>
-              <th scope="col-1">Id</th>
-              <th scope="col-3">Traslado</th>
-              <th scope="col-4">Origen</th>
-              <th scope="col-4">Destino</th>
-              <th scope="col-4">Fecha</th>
-              <th scope="col-4">Valor</th>
-            </tr>
+              <tr>
+                <th scope="col-1">Id</th>
+                <th scope="col-3">Traslado</th>
+                <th scope="col-4">Origen</th>
+                <th scope="col-4">Destino</th>
+                <th scope="col-4">Fecha</th>
+                <th scope="col-4">Valor</th>
+              </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let actual of relocation">
-              <td>{{actual.id}}</td>
-              <td>{{actual.idTraslate}}</td>
-              <td>{{actual.origin}}</td>
-              <td>{{actual.destination}}</td>
-              <td>{{actual.date}}</td>
-              <td>{{actual.price}}</td>
-              <td>
-                <button type="button" class="btn btn-primary">Ver</button>
-                <button type="button" class="btn btn-warning">Actualizar</button>
-                <button type="button" class="btn btn-danger"
-                        (click)="delete(actual.id)">Eliminar</button>
-              </td>
-            </tr>
+              <tr *ngFor="let actual of relocation">
+                <td>{{actual.id}}</td>
+                <td>{{actual.idTraslate}}</td>
+                <td>{{actual.origin}}</td>
+                <td>{{actual.destination}}</td>
+                <td>{{actual.date}}</td>
+                <td>{{actual.price}}</td>
+                <td>
+                  <button type="button" class="btn btn-primary" (click)="view(actual.id)">Ver</button>
+                  <button type="button" class="btn btn-warning" (click)="update(actual.id)">Actualizar</button>
+                  <button type="button" class="btn btn-danger" (click)="delete(actual.id)">Eliminar</button>
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>

@@ -1,26 +1,27 @@
-import { Component, OnInit } from '@angular/core';
-import {HeadquarterService} from "../../../services/head-quarter.service";
-import {Headquarter} from "../../../models/headquarter.model";
+import { Component, OnInit } from "@angular/core";
+import { HeadquarterService } from "../../../services/head-quarter.service";
+import { Headquarter } from "../../../models/headquarter.model";
 import Swal from "sweetalert2";
+import { Router } from "@angular/router";
 
 @Component({
-  selector: 'app-list',
-  templateUrl: './list.component.html',
-  styleUrls: ['./list.component.scss']
+  selector: "app-list",
+  templateUrl: "./list.component.html",
+  styleUrls: ["./list.component.scss"],
 })
 export class ListComponent implements OnInit {
-  campus:Headquarter[];
-  constructor(private service:HeadquarterService) {
-    this.campus=[];
+  campus: Headquarter[];
+  constructor(private service: HeadquarterService, private router: Router) {
+    this.campus = [];
   }
 
   ngOnInit(): void {
-    this.list()
+    this.list();
   }
-  list (){
-    this.service.list().subscribe(data => {
-      this.campus=data;
-    })
+  list() {
+    this.service.list().subscribe((data) => {
+      this.campus = data;
+    });
   }
   delete(id: number) {
     Swal.fire({
@@ -45,4 +46,15 @@ export class ListComponent implements OnInit {
     });
   }
 
+  view(id: number) {
+    this.router.navigate(["/campus/view", id]); // head-quarter/view/+id
+  }
+
+  update(id: number) {
+    this.router.navigate(["/campus/update", id]);
+  }
+
+  create() {
+    this.router.navigate(["campus/create"]);
+  }
 }
