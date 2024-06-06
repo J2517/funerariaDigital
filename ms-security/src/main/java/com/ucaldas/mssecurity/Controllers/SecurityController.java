@@ -75,7 +75,7 @@ public class SecurityController {
             // Generar token JWT
             String token = this.theJwtService.generateToken(theUserSession.getUser());
 
-            // Actualizar la sesión
+            // Actualizar la sesióncm
             theUserSession.setToken(token);
             theSessionRepository.save(theUserSession);
 
