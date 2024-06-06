@@ -8,26 +8,21 @@ import {environment} from "../../environments/environment";
   providedIn: 'root'
 })
 export class CommentService {
-  baseUrl: string;
-  constructor(private http: HttpClient) {
-    this.baseUrl = `${environment.url_ms_business}/comments`;
-  }
+
+  constructor(private http: HttpClient) { }
   list(): Observable<Comment[]> { // Esto es como una promesa
-    return this.http.get<Comment[]>(this.baseUrl);
+    return this.http.get<Comment[]>(`${environment.url_ms_negocio}/comment`);
   }
-  delete(id:number){
-    return this.http.delete<Comment>(`${this.baseUrl}/${id}`);
+  delete(id:string){
+    return this.http.delete<Comment>(`${environment.url_ms_negocio}/comment/${id}`);
   }
-  view(id:number):Observable<Comment> {
-    return this.http.get<Comment>(`${this.baseUrl}/${id}`);
+  view(id:string):Observable<Comment> {
+    return this.http.get<Comment>(`${environment.url_ms_negocio}/comment/${id}`);
   }
   create(newComment: Comment): Observable<Comment> {
-    return this.http.post<Comment>(this.baseUrl, newComment);
+    return this.http.post<Comment>(`${environment.url_ms_negocio}/comment`, newComment);
   }
   update(theComment: Comment): Observable<Comment> {
-    return this.http.put<Comment>(`${this.baseUrl}/${theComment.id}`, theComment);
-  }
-  getCommentsByServiceExecution(id: string): Observable<Comment[]> {
-    return this.http.get<Comment[]>(`${environment.url_ms_business}/service_executions/${id}/comments`);
+    return this.http.put<Comment>(`${environment.url_ms_negocio}/campus/${theComment.id}`, theComment);
   }
 }

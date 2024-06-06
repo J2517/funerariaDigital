@@ -8,26 +8,21 @@ import {Subscription} from "../models/subscription.model";
   providedIn: 'root'
 })
 export class SubscriptionService {
-  baseUrl: string;
-  constructor(private http: HttpClient) {
-    this.baseUrl = `${environment.url_ms_business}/subscriptions`;
-  }
+
+  constructor(private http: HttpClient) { }
   list(): Observable<Subscription[]> { // Esto es como una promesa
-    return this.http.get<Subscription[]>(this.baseUrl);
+    return this.http.get<Subscription[]>(`${environment.url_ms_negocio}/subscription`);
   }
-  delete(id:number){
-    return this.http.delete<Subscription>(`${this.baseUrl}/${id}`);
+  delete(id:string){
+    return this.http.delete<Subscription>(`${environment.url_ms_negocio}/subscription/${id}`);
   }
-  view(id:number):Observable<Subscription> {
-    return this.http.get<Subscription>(`${this.baseUrl}/${id}`);
+  view(id:string):Observable<Subscription> {
+    return this.http.get<Subscription>(`${environment.url_ms_negocio}/subscription/${id}`);
   }
   create(newSubscription: Subscription): Observable<Subscription> {
-    return this.http.post<Subscription>(this.baseUrl, newSubscription);
+    return this.http.post<Subscription>(`${environment.url_ms_negocio}/subscription`, newSubscription);
   }
   update(theSubscription: Subscription): Observable<Subscription> {
-    return this.http.put<Subscription>(`${this.baseUrl}/${theSubscription.id}`, theSubscription);
-  }
-  getSubscriptionsByCustomer(id: string): Observable<Subscription[]> {
-    return this.http.get<Subscription[]>(`${environment.url_ms_business}/customers/${id}/subscriptions`);
+    return this.http.put<Subscription>(`${environment.url_ms_negocio}/subscription/${theSubscription.id}`, theSubscription);
   }
 }

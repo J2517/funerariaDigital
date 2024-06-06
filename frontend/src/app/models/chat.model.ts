@@ -1,5 +1,17 @@
+import {ServiceExecution} from "./service-execution.model";
+import {ListComponent} from "../pages/message/list/list.component"
+
 export class Chat {
-  id?: number;
-  status: boolean;
-  service_execution_id?: number;
+  id?:string;
+  execution:ServiceExecution;
+  message:ListComponent;
+
+  public sendMessage(): void{
+  }
+
+  public receiveMessage(): void{
+  }
+
+  public moderateMessage(): void{
+  }
 }
