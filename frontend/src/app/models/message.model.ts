@@ -1,8 +1,7 @@
-import {Usuario} from "./usuario.model";
-import {Chat} from "./chat.model";
 export class Message {
-  id?:string;
-  information:string;
-  usuario:Usuario;
-  chat:Chat;
+  id?: number;
+  sender: string;
+  content: string;
+  user_id?: number;
+  chat_id?: number;
 }

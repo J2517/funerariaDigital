@@ -8,21 +8,23 @@ import {Message} from "../models/message.model";
   providedIn: 'root'
 })
 export class MessageService {
-
-  constructor(private http: HttpClient) { }
+  baseUrl: string;
+  constructor(private http: HttpClient) {
+    this.baseUrl = `${environment.url_ms_business}/messages`;
+  }
   list(): Observable<Message[]> { // Esto es como una promesa
-    return this.http.get<Message[]>(`${environment.url_ms_negocio}/message`);
+    return this.http.get<Message[]>(this.baseUrl);
   }
-  delete(id:string){
-    return this.http.delete<Message>(`${environment.url_ms_negocio}/message/${id}`);
+  delete(id:number){
+    return this.http.delete<Message>(`${this.baseUrl}/${id}`);
   }
-  view(id:string):Observable<Message> {
-    return this.http.get<Message>(`${environment.url_ms_negocio}/message/${id}`);
+  view(id:number):Observable<Message> {
+    return this.http.get<Message>(`${this.baseUrl}/${id}`);
   }
   create(newMessage: Message): Observable<Message> {
-    return this.http.post<Message>(`${environment.url_ms_negocio}/message`, newMessage);
+    return this.http.post<Message>(this.baseUrl, newMessage);
   }
   update(theMessage: Message): Observable<Message> {
-    return this.http.put<Message>(`${environment.url_ms_negocio}/message/${theMessage.id}`, theMessage);
+    return this.http.put<Message>(`${this.baseUrl}/${theMessage.id}`, theMessage);
   }
 }
