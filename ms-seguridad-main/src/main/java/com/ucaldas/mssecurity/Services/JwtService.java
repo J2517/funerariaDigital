@@ -18,12 +18,17 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class JwtService {
-    @Value("${jwt.secret}") // Esta anotación se utiliza para inyectar el valor de la propiedad jwt.secret en la variable secret. de application.properties
-    private String secret; // Esta es la clave secreta que se utiliza para firmar el token. Debe mantenerse segura.
-    // El valor de la clave secreta se inyecta desde el archivo application.properties
-    @Value("${jwt.expiration}")
-    private Long expiration; // Tiempo de expiración del token en milisegundos.
-    private Key secretKey = Keys.secretKeyFor(SignatureAlgorithm.HS512);
+
+  @Value("${jwt.secret}")
+  // Esta anotación se utiliza para inyectar el valor de la propiedad jwt.secret
+  // en la variable secret. de application.properties
+  private String secret; // Esta es la clave secreta que se utiliza para firmar el token. Debe mantenerse
+                         // segura.
+  // El valor de la clave secreta se inyecta desde el archivo
+  // application.properties
+  @Value("${jwt.expiration}")
+  private Long expiration; // Tiempo de expiración del token en milisegundos.
+  private Key secretKey = Keys.secretKeyFor(SignatureAlgorithm.HS512);
 
   public String generateToken(User theUser) {
     Date now = new Date();
@@ -45,8 +50,7 @@ public class JwtService {
 
   public boolean validateToken(String token) {
     try {
-      Jws<Claims> claimsJws =
-          Jwts.parserBuilder().setSigningKey(secretKey).build().parseClaimsJws(token);
+      Jws<Claims> claimsJws = Jwts.parserBuilder().setSigningKey(secretKey).build().parseClaimsJws(token);
 
       // Verifica la expiración del token
       Date now = new Date();
@@ -66,8 +70,7 @@ public class JwtService {
 
   public User getUserFromToken(String token) {
     try {
-      Jws<Claims> claimsJws =
-          Jwts.parserBuilder().setSigningKey(secretKey).build().parseClaimsJws(token);
+      Jws<Claims> claimsJws = Jwts.parserBuilder().setSigningKey(secretKey).build().parseClaimsJws(token);
 
       Claims claims = claimsJws.getBody();
 
@@ -81,11 +84,10 @@ public class JwtService {
       return null;
     }
   }
-  
+
   // Obtiene la fecha de expiración de un token
   public LocalDateTime getExpiration(String token) {
-    Jws<Claims> claimsJws =
-        Jwts.parserBuilder().setSigningKey(secretKey).build().parseClaimsJws(token);
+    Jws<Claims> claimsJws = Jwts.parserBuilder().setSigningKey(secretKey).build().parseClaimsJws(token);
 
     return claimsJws
         .getBody()

@@ -17,9 +17,6 @@ export default class Driver extends BaseModel {
   @column()
   public phone: string;
 
-  @column.dateTime({ autoCreate: true })
-  public createdAt: DateTime;
-
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime;
 }

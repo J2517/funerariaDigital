@@ -42,7 +42,7 @@ export class ListComponent implements OnInit {
           );
           this.ngOnInit();
         });
-      }
+      } 
     });
   }
   view(id: number) {
