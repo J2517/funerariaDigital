@@ -13,6 +13,36 @@ export const AdminLayoutRoutes: Routes = [
   { path: "icons", component: IconsComponent },
   { path: "maps", component: MapsComponent },
   {
+    path: "service",
+    loadChildren: () =>
+      import("../../pages/service/service.module").then((m) => m.ServiceModule),
+  },
+  {
+    path: "service_execution",
+    loadChildren: () =>
+      import("../../pages/service_execution/service_execution.module").then((m) => m.Service_executionModule),
+  },
+  {
+    path: "sepulture",
+    loadChildren: () =>
+      import("../../pages/sepulture/sepulture.module").then((m) => m.SepultureModule),
+  },
+  {
+    path: "relocation",
+    loadChildren: () =>
+      import("../../pages/relocation/relocation.module").then((m) => m.RelocationModule),
+  },
+  {
+    path: "plan",
+    loadChildren: () =>
+      import("../../pages/plan/plan.module").then((m) => m.PlanModule),
+  },
+  {
+    path: "headquarter",
+    loadChildren: () =>
+      import("../../pages/headquarter/headquarter.module").then((m) => m.HeadquarterModule),
+  },
+  {
     path: "cremation",
     loadChildren: () =>
       import("../../pages/cremation/cremation.module").then((m) => m.CremationModule),
@@ -38,11 +68,6 @@ export const AdminLayoutRoutes: Routes = [
       import("../../pages/message/message.module").then((m) => m.MessageModule),
   },
   {
-    path: "head-quarter",
-    loadChildren: () =>
-      import("../../pages/head-quarter/head-quarter.module").then((m) => m.HeadQuarterModule),
-  },
-  {
     path: "room",
     loadChildren: () =>
       import("../../pages/room/room.module").then((m) => m.RoomModule),
@@ -55,9 +80,7 @@ export const AdminLayoutRoutes: Routes = [
   {
     path: "subscription",
     loadChildren: () =>
-      import("../../pages/subscription/subscription.module").then(
-        (m) => m.SubscriptionModule
-      ),
+      import("../../pages/subscription/subscription.module").then((m) => m.SubscriptionModule),
   },
   {
     path: "user",
@@ -72,9 +95,7 @@ export const AdminLayoutRoutes: Routes = [
   {
     path: "permission",
     loadChildren: () =>
-      import("../../pages/permission/permission.module").then(
-        (m) => m.PermissionModule
-      ),
+      import("../../pages/permission/permission.module").then((m) => m.PermissionModule),
   },
   {
     path: "customer",
@@ -84,16 +105,12 @@ export const AdminLayoutRoutes: Routes = [
   {
     path: "beneficiary",
     loadChildren: () =>
-      import("../../pages/beneficiary/beneficiary.module").then(
-        (m) => m.BeneficiaryModule
-      ),
+      import("../../pages/beneficiary/beneficiary.module").then((m) => m.BeneficiaryModule),
   },
   {
-    path: "owners",
+    path: "owner",
     loadChildren: () =>
-      import("../../pages/owners/head-line.module").then(
-        (m) => m.HeadLineModule
-      ),
+      import("../../pages/owner/owner.module").then((m) => m.OwnerModule),
   },
   {
     path: "driver",
