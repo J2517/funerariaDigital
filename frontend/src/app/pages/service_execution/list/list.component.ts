@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Serviceexecution } from 'src/app/models/service_execution.model';
-import { ServiceexecutionService } from 'src/app/services/serviceexecution.service';
+import { Service_execution } from 'src/app/models/service_execution.model';
+import { Service_executionService } from 'src/app/services/service_execution.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -10,12 +10,12 @@ import Swal from 'sweetalert2';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit {
-  serviceexecutions: Serviceexecution[];
+  service_executions: Service_execution[];
   constructor(
-    private service: ServiceexecutionService,
+    private service: Service_executionService,
     private router: Router,
   ) {
-    this.serviceexecutions = [];
+    this.service_executions = [];
   }
 
   ngOnInit(): void {
@@ -25,20 +25,20 @@ export class ListComponent implements OnInit {
   list() {
     this.service.list().subscribe((data) => {
       console.log(data);
-      this.serviceexecutions = data;
+      this.service_executions = data;
     });
   }
 
   create() {
-    this.router.navigate(["serviceexecutions/create"]);
+    this.router.navigate(["service_executions/create"]);
   }
 
   view(id: number) {
-    this.router.navigate(["serviceexecutions/view", id]);
+    this.router.navigate(["service_executions/view", id]);
   }
 
   update(id: number) {
-    this.router.navigate(["serviceexecutions/update", id]);
+    this.router.navigate(["service_executions/update", id]);
   }
 
   delete(id: number) {

@@ -1,4 +1,4 @@
-import { Serviceexecution } from "./service_execution.model";
+import { Service_execution } from "./service_execution.model";
 
 export class Comment {
   id?: number;
