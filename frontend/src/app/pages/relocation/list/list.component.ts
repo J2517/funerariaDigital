@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {RelocationService} from "../../../services/relocation.service";
 import {Relocation} from "../../../models/relocation.model";
 import Swal from "sweetalert2";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list',
@@ -10,7 +11,10 @@ import Swal from "sweetalert2";
 })
 export class ListComponent implements OnInit {
   relocation:Relocation[];
-  constructor(private service:RelocationService) {
+  constructor(
+    private service:RelocationService,
+    private route: Router
+  ) {
     this.relocation=[];
   }
 
@@ -43,5 +47,11 @@ export class ListComponent implements OnInit {
         });
       }
     });
+    
+  }
+
+  create() {
+    this.route.navigate(["owners/create"]);
   }
 }
+

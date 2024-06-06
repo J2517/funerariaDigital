@@ -13,6 +13,11 @@ export const AdminLayoutRoutes: Routes = [
   { path: "icons", component: IconsComponent },
   { path: "maps", component: MapsComponent },
   {
+    path: "cremation",
+    loadChildren: () =>
+      import("../../pages/cremation/cremation.module").then((m) => m.CremationModule),
+  },
+  {
     path: "administrator",
     loadChildren: () =>
       import("../../pages/administrator/administrator.module").then((m) => m.AdministratorModule),
@@ -33,17 +38,17 @@ export const AdminLayoutRoutes: Routes = [
       import("../../pages/message/message.module").then((m) => m.MessageModule),
   },
   {
-    path: "campus",
+    path: "head-quarter",
     loadChildren: () =>
       import("../../pages/head-quarter/head-quarter.module").then((m) => m.HeadQuarterModule),
   },
   {
-    path: "hall",
+    path: "room",
     loadChildren: () =>
       import("../../pages/room/room.module").then((m) => m.RoomModule),
   },
   {
-    path: "pay",
+    path: "payment",
     loadChildren: () =>
       import("../../pages/payment/payment.module").then((m) => m.PaymentModule),
   },
@@ -72,7 +77,7 @@ export const AdminLayoutRoutes: Routes = [
       ),
   },
   {
-    path: "client",
+    path: "customer",
     loadChildren: () =>
       import("../../pages/customer/customer.module").then((m) => m.CustomerModule),
   },
@@ -84,7 +89,7 @@ export const AdminLayoutRoutes: Routes = [
       ),
   },
   {
-    path: "account-holder",
+    path: "owners",
     loadChildren: () =>
       import("../../pages/owners/head-line.module").then(
         (m) => m.HeadLineModule
