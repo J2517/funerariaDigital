@@ -1,7 +1,7 @@
-import { Serviceexecution } from './service_execution.model';
+import { Service_execution } from './service_execution.model';
 
-describe('Serviceexecution', () => {
+describe('Service_execution', () => {
   it('should create an instance', () => {
-    expect(new Serviceexecution()).toBeTruthy();
+    expect(new Service_execution()).toBeTruthy();
   });
 });

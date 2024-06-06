@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import {FormGroup, FormsModule} from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
-import { Serviceexecution } from "src/app/models/service_execution.model";
-import { ServiceexecutionService } from "src/app/services/serviceexecution.service";
+import { Service_execution } from "src/app/models/service_execution.model";
+import { Service_executionService } from "src/app/services/service_execution.service";
 
 @Component({
   selector: "app-manage",
@@ -15,16 +15,16 @@ import { ServiceexecutionService } from "src/app/services/serviceexecution.servi
 })
 export class ManageComponent implements OnInit {
   mode: number;
-  serviceExecution: Serviceexecution;
+  service_Execution: Service_execution;
   FormGroup: FormGroup;
 
   constructor(
-    private service: ServiceexecutionService,
+    private service: Service_executionService,
     private parent: ActivatedRoute,
     private router: Router,
   ) {
     this.mode = 1;
-    this.serviceExecution = {
+    this.service_Execution = {
       id: 1,
       service_id: 1,
       customer_id: 1,
@@ -46,35 +46,35 @@ export class ManageComponent implements OnInit {
     }
 
     if (this.parent.snapshot.params.id) {
-      this.serviceExecution.id = this.parent.snapshot.params.id;
-      this.getServiceExecution(this.serviceExecution.id);
+      this.service_Execution.id = this.parent.snapshot.params.id;
+      this.getServiceExecution(this.service_Execution.id);
     }
   }
 
   getServiceExecution(id: number) {
-    this.service.view(id).subscribe((data: Serviceexecution) => {
-      this.serviceExecution = data;
+    this.service.view(id).subscribe((data: Service_execution) => {
+      this.service_Execution = data;
     });
   }
 
   create() {
-    this.service.create(this.serviceExecution).subscribe(() => {
-      this.router.navigate(["serviceexecutions/list"]);
+    this.service.create(this.service_Execution).subscribe(() => {
+      this.router.navigate(["service_executions/list"]);
     });
   }
 
   update() {
-    this.service.update(this.serviceExecution).subscribe(() => {
-      this.router.navigate(["serviceexecutions/list"]);
+    this.service.update(this.service_Execution).subscribe(() => {
+      this.router.navigate(["service_executions/list"]);
     });
   }
 
   chats() {
     this.router.navigate([
       "customers",
-      this.serviceExecution.customer_id,
-      "serviceexecutions",
-      this.serviceExecution.id,
+      this.service_Execution.customer_id,
+      "servicee_xecutions",
+      this.service_Execution.id,
       "chats",
     ]);
   }
@@ -82,9 +82,9 @@ export class ManageComponent implements OnInit {
   messages() {
     this.router.navigate([
       "customers",
-      this.serviceExecution.customer_id,
-      "serviceexecutions",
-      this.serviceExecution.id,
+      this.service_Execution.customer_id,
+      "service_executions",
+      this.service_Execution.id,
       "messages",
     ]);
   }

@@ -15,7 +15,7 @@
             <div class="row mb-2">
               <div class="col-4">Id:</div>
               <div class="col-8">
-                {{ serviceExecution.id }}
+                {{ service_Execution.id }}
               </div>
             </div>
             <div class="row mb-1">
@@ -24,7 +24,7 @@
                 <input
                   type="text"
                   class="form-control"
-                  [(ngModel)]="serviceExecution.customer_id"
+                  [(ngModel)]="service_Execution.customer_id"
                   [disabled]="mode == 1"
                 />
               </div>
@@ -35,7 +35,7 @@
                 <input
                   type="text"
                   class="form-control"
-                  [(ngModel)]="serviceExecution.service_id"
+                  [(ngModel)]="service_Execution.service_id"
                   [disabled]="mode == 1"
                 />
               </div>

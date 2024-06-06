@@ -30,16 +30,16 @@
             <tbody>
             <!-- theaters es el arreglo que está en list.component.ts -->
             <tr
-              *ngFor="let serviceexecution of serviceexecutions; index as i"
+              *ngFor="let service_execution of service_executions; index as i"
             >
-              <td>{{ serviceexecution.id }}</td>
-              <td>{{ serviceexecution.customer_id }}</td>
-              <td>{{ serviceexecution.service_id }}</td>
+              <td>{{ service_execution.id }}</td>
+              <td>{{ service_execution.customer_id }}</td>
+              <td>{{ service_execution.service_id }}</td>
               <td>
                 <button
                   type="button"
                   class="btn btn-primary"
-                  (click)="view(serviceexecution.id)"
+                  (click)="view(service_execution.id)"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -60,7 +60,7 @@
                 <button
                   type="button"
                   class="btn btn-warning"
-                  (click)="update(serviceexecution.id)"
+                  (click)="update(service_execution.id)"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -82,7 +82,7 @@
                 <button
                   type="button"
                   class="btn btn-danger"
-                  (click)="delete(serviceexecution.id)"
+                  (click)="delete(service_execution.id)"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
